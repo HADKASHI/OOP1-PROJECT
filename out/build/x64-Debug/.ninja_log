@@ -1,0 +1,73 @@
+# ninja log v5
+8448	8832	6962614430057938	oop1_project.exe	ca791f92f95e9878
+10	74	0	C:/Users/hadar/OneDrive - Hadassah Academic College/Desktop/oop1_project-basefiles/out/build/x64-Debug/CMakeFiles/cmake.verify_globs	5981a724c4e41681
+66	12029	6962532966015296	CMakeFiles/oop1_project.dir/src/Controller.cpp.obj	b70f33329b0cb7ad
+121	1404	6962528602793025	build.ninja	ba28ef2848b84e7a
+79	11243	6962532958161400	CMakeFiles/oop1_project.dir/src/Render.cpp.obj	871c75ad3448a2b3
+66	7142	6962561371688340	CMakeFiles/oop1_project.dir/src/Board.cpp.obj	cc5c612963da8dcb
+58	16278	6950106830156127	CMakeFiles/oop1_project.dir/src/BaseTile.cpp.obj	477982bbb351fed
+84	11173	6962532957375826	CMakeFiles/oop1_project.dir/src/main.cpp.obj	af9163a41da54057
+61	10571	6950914076083689	CMakeFiles/oop1_project.dir/src/Graphics.cpp.obj	ff2645cf5c4ca131
+67	10661	6950914076965391	CMakeFiles/oop1_project.dir/src/Menu.cpp.obj	509a35a43f82cc38
+115	14549	6951653800821573	CMakeFiles/oop1_project.dir/src/Editor.cpp.obj	b6132f258a2e2ca6
+77	8447	6962614427237757	CMakeFiles/oop1_project.dir/src/GameObject.cpp.obj	e4c421fdb37faf98
+54	6170	6951675170667066	CMakeFiles/oop1_project.dir/src/HUD.cpp.obj	ed686c09d811127
+59	8064	6962543105917916	CMakeFiles/oop1_project.dir/src/Ghost.cpp.obj	253d023919b3d018
+11	52	0	C:/Users/hadar/OneDrive - Hadassah Academic College/Desktop/oop1_project-basefiles/out/build/x64-Debug/CMakeFiles/cmake.verify_globs	5981a724c4e41681
+6	86	0	C:/Users/hadar/OneDrive - Hadassah Academic College/Desktop/oop1_project-basefiles/out/build/x64-Debug/CMakeFiles/cmake.verify_globs	5981a724c4e41681
+89	8923	6962633523675949	CMakeFiles/oop1_project.dir/src/Board.cpp.obj	cc5c612963da8dcb
+8924	9511	6962633528229504	oop1_project.exe	ca791f92f95e9878
+7	61	0	C:/Users/hadar/OneDrive - Hadassah Academic College/Desktop/oop1_project-basefiles/out/build/x64-Debug/CMakeFiles/cmake.verify_globs	5981a724c4e41681
+65	8815	6962633936542399	CMakeFiles/oop1_project.dir/src/Board.cpp.obj	cc5c612963da8dcb
+8816	9286	6962633939761843	oop1_project.exe	ca791f92f95e9878
+6	49	0	C:/Users/hadar/OneDrive - Hadassah Academic College/Desktop/oop1_project-basefiles/out/build/x64-Debug/CMakeFiles/cmake.verify_globs	5981a724c4e41681
+9	87	0	C:/Users/hadar/OneDrive - Hadassah Academic College/Desktop/oop1_project-basefiles/out/build/x64-Debug/CMakeFiles/cmake.verify_globs	5981a724c4e41681
+4	53	0	C:/Users/hadar/OneDrive - Hadassah Academic College/Desktop/oop1_project-basefiles/out/build/x64-Debug/CMakeFiles/cmake.verify_globs	5981a724c4e41681
+12	79	0	C:/Users/hadar/OneDrive - Hadassah Academic College/Desktop/oop1_project-basefiles/out/build/x64-Debug/CMakeFiles/cmake.verify_globs	5981a724c4e41681
+83	9183	6962636826290531	CMakeFiles/oop1_project.dir/src/Board.cpp.obj	cc5c612963da8dcb
+9184	9782	6962636830686484	oop1_project.exe	ca791f92f95e9878
+9	78	0	C:/Users/hadar/OneDrive - Hadassah Academic College/Desktop/oop1_project-basefiles/out/build/x64-Debug/CMakeFiles/cmake.verify_globs	5981a724c4e41681
+5	54	0	C:/Users/hadar/OneDrive - Hadassah Academic College/Desktop/oop1_project-basefiles/out/build/x64-Debug/CMakeFiles/cmake.verify_globs	5981a724c4e41681
+80	9506	6962889779254665	CMakeFiles/oop1_project.dir/src/main.cpp.obj	af9163a41da54057
+74	9516	6962889779426066	CMakeFiles/oop1_project.dir/src/Render.cpp.obj	871c75ad3448a2b3
+68	9664	6962889780827522	CMakeFiles/oop1_project.dir/src/Ghost.cpp.obj	253d023919b3d018
+62	10049	6962889784751203	CMakeFiles/oop1_project.dir/src/Controller.cpp.obj	b70f33329b0cb7ad
+5	69	0	C:/Users/hadar/OneDrive - Hadassah Academic College/Desktop/oop1_project-basefiles/out/build/x64-Debug/CMakeFiles/cmake.verify_globs	5981a724c4e41681
+72	8451	6962890148959925	CMakeFiles/oop1_project.dir/src/Board.cpp.obj	cc5c612963da8dcb
+8452	9185	6962890153670438	oop1_project.exe	ca791f92f95e9878
+5	56	0	C:/Users/hadar/OneDrive - Hadassah Academic College/Desktop/oop1_project-basefiles/out/build/x64-Debug/CMakeFiles/cmake.verify_globs	5981a724c4e41681
+7	90	0	C:/Users/hadar/OneDrive - Hadassah Academic College/Desktop/oop1_project-basefiles/out/build/x64-Debug/CMakeFiles/cmake.verify_globs	5981a724c4e41681
+93	6953	6962892097695246	CMakeFiles/oop1_project.dir/src/Ghost.cpp.obj	253d023919b3d018
+6954	7505	6962892101778005	oop1_project.exe	ca791f92f95e9878
+7	63	0	C:/Users/hadar/OneDrive - Hadassah Academic College/Desktop/oop1_project-basefiles/out/build/x64-Debug/CMakeFiles/cmake.verify_globs	5981a724c4e41681
+67	6364	6962893747847057	CMakeFiles/oop1_project.dir/src/Ghost.cpp.obj	253d023919b3d018
+6366	6810	6962893750829472	oop1_project.exe	ca791f92f95e9878
+4	47	0	C:/Users/hadar/OneDrive - Hadassah Academic College/Desktop/oop1_project-basefiles/out/build/x64-Debug/CMakeFiles/cmake.verify_globs	5981a724c4e41681
+51	6714	6962894890706000	CMakeFiles/oop1_project.dir/src/Ghost.cpp.obj	253d023919b3d018
+6716	7140	6962894893688565	oop1_project.exe	ca791f92f95e9878
+4	47	0	C:/Users/hadar/OneDrive - Hadassah Academic College/Desktop/oop1_project-basefiles/out/build/x64-Debug/CMakeFiles/cmake.verify_globs	5981a724c4e41681
+4	39	0	C:/Users/hadar/OneDrive - Hadassah Academic College/Desktop/oop1_project-basefiles/out/build/x64-Debug/CMakeFiles/cmake.verify_globs	5981a724c4e41681
+7	59	0	C:/Users/hadar/OneDrive - Hadassah Academic College/Desktop/oop1_project-basefiles/out/build/x64-Debug/CMakeFiles/cmake.verify_globs	5981a724c4e41681
+63	6725	6962897042199277	CMakeFiles/oop1_project.dir/src/Ghost.cpp.obj	253d023919b3d018
+6727	7131	6962897045025123	oop1_project.exe	ca791f92f95e9878
+5	46	0	C:/Users/hadar/OneDrive - Hadassah Academic College/Desktop/oop1_project-basefiles/out/build/x64-Debug/CMakeFiles/cmake.verify_globs	5981a724c4e41681
+3	39	0	C:/Users/hadar/OneDrive - Hadassah Academic College/Desktop/oop1_project-basefiles/out/build/x64-Debug/CMakeFiles/cmake.verify_globs	5981a724c4e41681
+5	58	0	C:/Users/hadar/OneDrive - Hadassah Academic College/Desktop/oop1_project-basefiles/out/build/x64-Debug/CMakeFiles/cmake.verify_globs	5981a724c4e41681
+60	6821	6962898976138560	CMakeFiles/oop1_project.dir/src/Ghost.cpp.obj	253d023919b3d018
+6823	7233	6962898979122470	oop1_project.exe	ca791f92f95e9878
+4	46	0	C:/Users/hadar/OneDrive - Hadassah Academic College/Desktop/oop1_project-basefiles/out/build/x64-Debug/CMakeFiles/cmake.verify_globs	5981a724c4e41681
+3	43	0	C:/Users/hadar/OneDrive - Hadassah Academic College/Desktop/oop1_project-basefiles/out/build/x64-Debug/CMakeFiles/cmake.verify_globs	5981a724c4e41681
+5	59	0	C:/Users/hadar/OneDrive - Hadassah Academic College/Desktop/oop1_project-basefiles/out/build/x64-Debug/CMakeFiles/cmake.verify_globs	5981a724c4e41681
+8	65	0	C:/Users/hadar/OneDrive - Hadassah Academic College/Desktop/oop1_project-basefiles/out/build/x64-Debug/CMakeFiles/cmake.verify_globs	5981a724c4e41681
+7	64	0	C:/Users/hadar/OneDrive - Hadassah Academic College/Desktop/oop1_project-basefiles/out/build/x64-Debug/CMakeFiles/cmake.verify_globs	5981a724c4e41681
+67	7023	6962901550643813	CMakeFiles/oop1_project.dir/src/Ghost.cpp.obj	253d023919b3d018
+7024	7561	6962901554723324	oop1_project.exe	ca791f92f95e9878
+3	41	0	C:/Users/hadar/OneDrive - Hadassah Academic College/Desktop/oop1_project-basefiles/out/build/x64-Debug/CMakeFiles/cmake.verify_globs	5981a724c4e41681
+6	55	0	C:/Users/hadar/OneDrive - Hadassah Academic College/Desktop/oop1_project-basefiles/out/build/x64-Debug/CMakeFiles/cmake.verify_globs	5981a724c4e41681
+71	10609	6962903215413412	CMakeFiles/oop1_project.dir/src/Ghost.cpp.obj	253d023919b3d018
+77	10647	6962903215725830	CMakeFiles/oop1_project.dir/src/Render.cpp.obj	871c75ad3448a2b3
+86	10758	6962903216821794	CMakeFiles/oop1_project.dir/src/main.cpp.obj	af9163a41da54057
+65	11230	6962903221534685	CMakeFiles/oop1_project.dir/src/Controller.cpp.obj	b70f33329b0cb7ad
+59	12421	6962903233451357	CMakeFiles/oop1_project.dir/src/Board.cpp.obj	cc5c612963da8dcb
+12422	12834	6962903236432350	oop1_project.exe	ca791f92f95e9878
+4	43	0	C:/Users/hadar/OneDrive - Hadassah Academic College/Desktop/oop1_project-basefiles/out/build/x64-Debug/CMakeFiles/cmake.verify_globs	5981a724c4e41681
