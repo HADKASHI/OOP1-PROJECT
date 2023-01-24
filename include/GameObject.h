@@ -1,6 +1,5 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include <Macros.h>
 
 class GameObject : public sf::RectangleShape
 {
@@ -13,53 +12,73 @@ private:
 //---------------------------------------------------
 class StaticObjects : public GameObject {
 public:
-	StaticObjects(float edgeSize, sf::Vector2f position, char c);
-	bool beenEaten() const { return m_beenEaten; }
-	void isEaten() { m_beenEaten = true; } 
-
-private:
-	bool m_beenEaten;
+	using GameObject::GameObject;
 };
 //---------------------------------------------------
 class MovingObjects : public GameObject 
 {
 public:
 	MovingObjects(float edgeSize, sf::Vector2f position, char c);
-	sf::Vector2f getDirection() const { return m_direction; }
-	void setDirection(sf::Vector2f direction) { m_direction = direction; }
-
-private:
-	sf::Vector2f m_direction;
 //	void move() = 0;
 };
 //---------------------------------------------------
 class Pacman: public MovingObjects
 {
 public:
-	Pacman(float edgeSize, sf::Vector2f position, char c);
+	Pacman(float edgeSize, sf::Vector2f position, char c, unsigned int score);
 	//using MovingObjects::MovingObjects;
-	void keyDirection(sf::Keyboard::Key key);
+	void setDirection(sf::Keyboard::Key key);
 	void update(sf::Time delta);
 	void notMoving(sf::Keyboard::Key key);
-	void addPoints(unsigned int points) { m_score += points; }
-	void gotEaten() { m_lives--; }
-	unsigned int getScore() const { return m_score; }
 	unsigned int getLives() const { return m_lives; }
+	unsigned int getScore() const { return m_score; }
+
 
 private:
-
+	sf::Vector2f m_direction;
 	bool m_isKeyPressed;
 	unsigned int m_lives;
 	unsigned int m_score;
 
-
 };
-
+//----------------------------------------------------
+class Ghost : public MovingObjects 
+{
+public:
+	using MovingObjects::MovingObjects;
+	//virtual void move() = 0;
+};
+//----------------------------------------------------
+class RedGhost : public Ghost
+{
+public:
+	using Ghost::Ghost;
+//	void move(Controller& controller) override;
+};
+//----------------------------------------------------
+class GreenGhost : public Ghost
+{
+public:
+	using Ghost::Ghost;
+	//	void move(Controller& controller) override;
+};//----------------------------------------------------
+class PinkGhost : public Ghost
+{
+public:
+	using Ghost::Ghost;
+	//	void move(Controller& controller) override;
+};//----------------------------------------------------
+class OrangeGhost : public Ghost
+{
+public:
+	using Ghost::Ghost;
+	//	void move(Controller& controller) override;
+};
 //----------------------------------------------------
 class Wall : public StaticObjects
 {
 public:
-	Wall(float edgeSize, sf::Vector2f position, char c, bool height = false, bool width = false);
+	Wall(float edgeSize, sf::Vector2f position, char c, bool height, bool width);
 };
 //----------------------------------------------------
 class Door : public StaticObjects
@@ -72,15 +91,13 @@ class Key : public StaticObjects
 {
 public:
 	using StaticObjects::StaticObjects;
-	unsigned int pointsReward() { return KEYSPOINTS; }
 };
 
-//-------------	---------------------------------------
+//----------------------------------------------------
 class Cookie : public StaticObjects
 {
 public:
 	Cookie(float edgeSize, sf::Vector2f position, char c);
-	unsigned int pointsReward() { return COOKIEPOINTS; }
 };
 
 //----------------------------------------------------
@@ -88,7 +105,6 @@ class Present : public StaticObjects
 {
 public:
 	using StaticObjects::StaticObjects;
-	unsigned int pointsReward() { return 5; }
 };
 //----------------------------------------------------
 
