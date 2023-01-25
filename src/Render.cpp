@@ -12,36 +12,33 @@ Render::Render(const sf::Vector2f& size):
 
 
 //game main loop
-void Render::gameLoop(HUD &hud, bool &finished)
+void Render::gameLoop(HUD& hud, bool& finished)
 {
     unsigned int score = 0;
     std::fstream file("Board.txt", std::fstream::in);
     unsigned int timeAsSecond, level = 1;
 
-    int cookies = 2;
-
-    while (m_window.isOpen() &&  !file.eof())
+    while (m_window.isOpen() && !file.eof())
     {
         timeAsSecond = initTimer(file);
         auto board = Board(file, getBoardSize(), getBoardPosition());
         auto pacman = Pacman(board.getTileSize(), board.getPacmanPosition(), 'a', score);
-
+        
         startLevel(pacman, board, hud, level, timeAsSecond);
 
         auto gameClock = sf::Clock();
         sf::Clock timer;
 
         while (pacman.getLives() > 0 &&
-               !finished &&
-               timeAsSecond - timer.getElapsedTime().asSeconds() > 0 &&
-               /*!board.noCookiesLeft()*/ cookies!= 0)
+            !finished &&
+            timeAsSecond - timer.getElapsedTime().asSeconds() > 0 &&
+            !board.noCookiesLeft())
         {
-
             m_window.clear(sf::Color(250, 211, 231));
             board.drawBoard(m_window);
-            hud.drawHUD(m_window, pacman.getLives(), 
-                        pacman.getScore(), level, 
-                        timeAsSecond - timer.getElapsedTime().asSeconds());
+            hud.drawHUD(m_window, pacman.getLives(),
+                pacman.getScore(), level,
+                timeAsSecond - timer.getElapsedTime().asSeconds());
             m_window.draw(pacman);
             m_window.display();
 
@@ -57,22 +54,24 @@ void Render::gameLoop(HUD &hud, bool &finished)
                 }
                 case sf::Event::KeyPressed:
                 {
-                    pacman.setDirection(event.key.code);
+                    pacman.keyDirection(event.key.code);
                     break;
                 }
                 case sf::Event::KeyReleased:
                     pacman.notMoving(event.key.code);
-                    cookies--;
                     break;
                 }
             }
             auto delta = gameClock.restart();
             pacman.update(delta);
-        }
+            board.update(pacman, delta);
+            if (PacmanState::instance().isFreeze())
+                timeAsSecond += TIMEBONUS;
+         }
 
         int endTime = timeAsSecond - timer.getElapsedTime().asSeconds();
 
-        if (cookies == 0 /*board.noCookiesLeft()*/ && !file.eof())
+        if (board.noCookiesLeft() && !file.eof())
         {
             TransitionSlide("Yay! you moved on to the next level",
                 60, sf::Color::Black, sf::Color::White);
@@ -97,10 +96,9 @@ void Render::gameLoop(HUD &hud, bool &finished)
     }
 }
 
-
 unsigned int Render::initTimer(std::fstream& file)
 {
-    int timer , temp;
+    int timer, temp;
     file >> timer;
     timer *= 60;
     file.ignore();
@@ -155,6 +153,7 @@ void Render::startLevel(Pacman& pacman, Board& board, HUD& hud, int level, int t
 
     for (int sec = 3; sec > 0; sec--)
     {
+        //Sound::getInstance().playCountdown();
         startLevelText.setString(std::to_string(sec));
         startLevelText.setOrigin(startLevelText.getLocalBounds().width / 2.f,
             startLevelText.getLocalBounds().height / 2.f);
@@ -168,7 +167,5 @@ void Render::startLevel(Pacman& pacman, Board& board, HUD& hud, int level, int t
         m_window.display();
         sf::sleep(sf::seconds(1));
     }
-    
+
 }
-
-

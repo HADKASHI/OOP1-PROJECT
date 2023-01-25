@@ -15,7 +15,7 @@ private:
 	void initLives();
 	void initTitles();
 	void initHudShow(sf::Text* text, float y, int color);
-	void drawChangeData(sf::Text *text, unsigned int number, sf::RenderWindow& window);
+	void drawChangeData(sf::Text* text, unsigned int number, sf::RenderWindow& window);
 	void drawLives(unsigned int lives, sf::RenderWindow& window);
 	void drawTime(sf::Text* text, unsigned int time, sf::RenderWindow& window);
 

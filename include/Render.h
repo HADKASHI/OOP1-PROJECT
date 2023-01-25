@@ -10,9 +10,9 @@ class HUD;
 class Render
 {
 public:
-	Render(const sf::Vector2f &size);
+	Render(const sf::Vector2f& size);
 	sf::RenderWindow* getP2Window() { return &m_window; }
-	void gameLoop(HUD &hud, bool &finished);
+	void gameLoop(HUD& hud, bool& finished);
 	void setIcon();
 	sf::Vector2f getBoardSize() { return { 15 * 40, 15 * 40 }; }
 	sf::Vector2f getBoardPosition() { return { 40.f + 20 * 15, 40.f + 20 * 15 }; }

@@ -91,7 +91,7 @@ void MainMenu::checkMouseOnButton(sf::RenderWindow* window, sf::Vector2f cursorL
         if (m_buttons[i].getGlobalBounds().contains(cursorLocation))
             m_buttons[i].setScale(2.0, 2.0);
 
-       
+
         m_buttons[i].setOrigin(m_buttons[i].getLocalBounds().width / 2.f,
             m_buttons[i].getLocalBounds().height / 2.f);
         window->draw(m_buttons[i]);

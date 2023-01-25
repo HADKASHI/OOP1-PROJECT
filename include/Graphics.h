@@ -12,7 +12,7 @@ public:
 	static Graphics& instance();
 	sf::Texture &getTexture(char c);
 	sf::Font& getFont() { return m_font;  }
-	sf::Texture& getPacmanTexture() { return m_textures[10]; }
+
 private:
 	Graphics();
 	void loadGraphics();
