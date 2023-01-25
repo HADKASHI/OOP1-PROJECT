@@ -3,23 +3,125 @@
 #include "Graphics.h"
 
 
-HUD::HUD(const sf::Vector2f& postion):
-	m_position(postion), m_size(180, 530), m_title("H U D", Graphics::instance().getFont())
+HUD::HUD(const sf::Vector2f& postion) :
+	m_position(postion), m_size(180, 600),
+	m_titles({ sf::Text("LEVEL", Graphics::instance().getFont()),
+		       sf::Text("LIVES", Graphics::instance().getFont()),
+		       sf::Text("SCORE", Graphics::instance().getFont()),
+		       sf::Text("TIME", Graphics::instance().getFont()) }),
+	m_level(" ", Graphics::instance().getFont()),
+	m_score(" ", Graphics::instance().getFont()),
+	m_time(" ", Graphics::instance().getFont()),
+	m_lives({ 25, 25 })
+	/*m_livesTexture(Graphics::instance().getPacmanTexture())*/ // fix graphics 
 {
-	m_title.setPosition({ m_position.x + 52, m_position.y + 6 });
-	m_title.setFillColor(sf::Color::Black);
-	m_title.setOutlineThickness(0.5);
-	m_title.setOutlineColor(sf::Color::White);
+	initBackGround();
+	initLives();
+	initTitles();
+	initHudShow(&m_level, 110, 120);
+	initHudShow(&m_score, 376, 120);
+	initHudShow(&m_time, 509, 120);
 }
 
-void HUD::drawHUD(sf::RenderWindow& window) const
-{
-	auto backGround = sf::RectangleShape(sf::Vector2f(m_size));
-	backGround.setPosition(sf::Vector2f(m_position));
-	backGround.setFillColor(sf::Color(190, 209, 240));
-	backGround.setOutlineColor(sf::Color(174, 192, 219));
-	backGround.setOutlineThickness(8);
-	window.draw(backGround);
 
-	window.draw(m_title);
+void HUD::initBackGround()
+{
+	m_backGround.setSize(sf::Vector2f(m_size));
+	m_backGround.setPosition(sf::Vector2f(m_position));
+	m_backGround.setOrigin(m_backGround.getSize() / 2.f);
+	m_backGround.setFillColor(sf::Color(250, 211, 231));
+}
+
+void HUD::initLives()
+{
+	m_livesTexture.loadFromFile("pacman.png");
+	m_lives.setTexture(&m_livesTexture);
+	m_lives.setFillColor(sf::Color(0, 0, 0, 120));
+}
+
+void HUD::initTitles()
+{
+	int y = 70;
+	for (int i = 0; i < m_titles.size(); i++)
+	{
+		initHudShow(&m_titles[i], y, 255);
+		y += 133;
+		m_titles[i].setStyle(sf::Text::Italic);
+	}
+}
+
+
+void HUD::initHudShow(sf::Text *text, float y, int color)
+{
+	text->setPosition({ m_position.x , 40 + y });
+	text->setOrigin(text->getLocalBounds().width / 2.f,
+		            text->getLocalBounds().height / 2.f);
+	text->setFillColor(sf::Color(0, 0, 0, color));
+
+}
+
+
+void HUD::drawHUD(sf::RenderWindow& window, unsigned int lives, unsigned int score, unsigned int level, unsigned int time)
+{
+	// Draw background
+	window.draw(m_backGround);
+
+	// Draw other text elements
+//	window.draw(m_title);
+	for(int i = 0 ; i < m_titles.size() ; i++)
+		window.draw(m_titles[i]);
+
+	// Update and draw other data
+	drawTime(&m_time, time, window);
+	drawChangeData(&m_level, level, window);
+	drawChangeData(&m_score, score, window);
+
+	// Draw lives
+	drawLives(lives, window);
+}
+
+
+void HUD::drawChangeData(sf::Text* text, unsigned int number, sf::RenderWindow& window)
+{
+	text->setString(std::to_string(number));
+	text->setOrigin(text->getLocalBounds().width / 2.f,
+		text->getLocalBounds().height / 2.f);
+	window.draw(*text);
+}
+
+void HUD::drawTime(sf::Text* text, unsigned int time, sf::RenderWindow& window)
+{
+	int min = (time / 60), sec = (time % 60);
+
+	if(min < 10 && sec < 10)
+		text->setString("0" + std::to_string(min) + ":0" + (std::to_string(sec)));
+	else if(min < 10)
+		text->setString("0" + std::to_string(min) + ":" + (std::to_string(sec)));
+	else if(sec < 10)
+		text->setString(std::to_string(min) + ":0" + (std::to_string(sec)));
+	else
+		text->setString(std::to_string(min) + ":" + (std::to_string(sec)));
+
+	if (min == 0 && sec <= 10)
+		text->setFillColor(sf::Color::Red);
+
+	text->setOrigin(text->getLocalBounds().width / 2.f,
+		text->getLocalBounds().height / 2.f);
+	window.draw(*text);
+
+}
+
+
+
+
+void HUD::drawLives(unsigned int lives, sf::RenderWindow& window)
+{
+	float xPosition = m_backGround.getPosition().x - 50;
+	for (int i = 0; i < lives; i++)
+	{
+		m_lives.setPosition({ xPosition ,290 });
+		xPosition += 50;
+		m_lives.setOrigin(m_lives.getSize() / 2.f);
+		window.draw(m_lives);
+	}
 }

@@ -11,18 +11,12 @@ GameObject::GameObject(float edgeSize, sf::Vector2f position, char c)
 
 
 MovingObjects::MovingObjects(float edgeSize, sf::Vector2f position, char c) :
-    GameObject(edgeSize, position, c), m_direction({ 0 , 0 })
+    GameObject(edgeSize, position, c)
 {
     setOrigin(getSize() / 2.f);
     setPosition({ getPosition().x + 0.5f * edgeSize,
         getPosition().y + 0.5f * edgeSize });
-
-    setScale({ 0.9f, 0.9f });
 }
-
-StaticObjects::StaticObjects(float edgeSize, sf::Vector2f position, char c) :
-    GameObject(edgeSize, position, c), m_beenEaten(false)
-{ }
 
 
 Cookie::Cookie(float edgeSize, sf::Vector2f position, char c):
@@ -45,11 +39,11 @@ Wall::Wall(float edgeSize, sf::Vector2f position, char c, bool height, bool widt
     setScale({float( 1 - 0.3 * width) , float(1 - 0.3 * height) });
 }
 
-Pacman :: Pacman(float edgeSize, sf::Vector2f position, char c):
-    MovingObjects(edgeSize, position, c), m_isKeyPressed(false), m_lives(LIVES), m_score(0) {}
+Pacman :: Pacman(float edgeSize, sf::Vector2f position, char c, unsigned int score):
+    MovingObjects(edgeSize, position, c), m_isKeyPressed(false), m_lives(3), m_score(score) {}
 
 
-void Pacman::keyDirection(sf::Keyboard::Key key)
+void Pacman::setDirection(sf::Keyboard::Key key)
 {
     if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && key != sf::Keyboard::Up) ||
         (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && key != sf::Keyboard::Down) ||
@@ -62,32 +56,32 @@ void Pacman::keyDirection(sf::Keyboard::Key key)
         {
         case sf::Keyboard::Left:
         {
-            setDirection(LEFT);
+            m_direction = { -1, 0 };
             setRotation(0);
-            setScale(-0.9f, 0.9f);
+            setScale(-1, 1);
             break;
         }
         case sf::Keyboard::Right:
         {
-            setDirection(RIGHT);
+            m_direction = { 1, 0 };
             setRotation(0);
-            setScale(0.9f, 0.9f);
+            setScale(1, 1);
             break;
         }
         case sf::Keyboard::Up:
         {
-            setDirection(UP);
-            setScale(0.9f, 0.9f);
+            m_direction = { 0, -1 };
+            setScale(1, 1);
             setRotation(270);
             break;
         }
         case sf::Keyboard::Down:
-            setDirection(DOWN);
-            setScale(0.9f, 0.9f);
+            m_direction = { 0, 1 };
+            setScale(1, 1);
             setRotation(90);
             break;
         case sf::Keyboard::Space:
-            setDirection({ 0, 0 });
+            m_direction = { 0, 0 };
             break;
         }
     }
@@ -97,40 +91,39 @@ void Pacman::keyDirection(sf::Keyboard::Key key)
 //---------------------------------------
 void Pacman::update(sf::Time delta)
 {
+    auto PacmanSpeed = 60.f;
+
     if(!m_isKeyPressed)
     {
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
         {
-            setDirection(LEFT);
+            m_direction = { -1, 0 };
             setRotation(0);
-            setScale(-0.9f, 0.9f);
+            setScale(-1, 1);
         }
         else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
         {
-            setDirection(RIGHT);
+            m_direction = { 1, 0 };
             setRotation(0);
-            setScale(0.9f, 0.9f);
+            setScale(1, 1);
         }
         else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
         {
-            setDirection(UP);
-            setScale(0.9f, 0.9f);
+            m_direction = { 0, -1 };
+            setScale(1, 1);
             setRotation(270);
         }
         else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
         {
-            setDirection(DOWN);
-            setScale(0.9f, 0.9f);
+            m_direction = { 0, 1 };
+            setScale(1, 1);
             setRotation(90);
         }
         else
-        {
-            setDirection({ 0 , 0 });
             return;
-        }
     }
 
-    move (getDirection() * delta.asSeconds() * PACMANSPEED);
+    move (m_direction * delta.asSeconds() * PacmanSpeed);
 }
 //--------------------------------------
 void Pacman::notMoving(sf::Keyboard::Key key)
@@ -141,3 +134,6 @@ void Pacman::notMoving(sf::Keyboard::Key key)
         key == sf::Keyboard::Right)
         m_isKeyPressed = false;
 }
+
+
+

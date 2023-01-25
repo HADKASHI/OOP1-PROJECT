@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 
 class Board;
+class Pacman;
 class HUD;
 
 //this class handles all the window presentation and rendering
@@ -10,12 +11,16 @@ class Render
 {
 public:
 	Render(const sf::Vector2f &size);
-	void gameLoop(Board &board, HUD &hud, bool &finished);
+	sf::RenderWindow* getP2Window() { return &m_window; }
+	void gameLoop(HUD &hud, bool &finished);
 	void setIcon();
 	sf::Vector2f getBoardSize() { return { 15 * 40, 15 * 40 }; }
 	sf::Vector2f getBoardPosition() { return { 40.f + 20 * 15, 40.f + 20 * 15 }; }
 
 private:
+	void TransitionSlide(const char* str, int fontSize, sf::Color textColor, sf::Color outLineColor);
+	void startLevel(Pacman& pacman, Board& board, HUD& hud, int level, int timeAsSec);
+	unsigned int initTimer(std::fstream& file);
 	sf::Vector2f m_size;
 	sf::RenderWindow m_window;
 };
