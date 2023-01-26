@@ -1,6 +1,7 @@
+#pragma once
 #include "Render.h"
-#include "HUD.h"
 #include "Board.h"
+#include "HUD.h"
 #include "Resources.h"
 #include <SFML/Graphics.hpp>
 #include <SFML/audio.hpp>
@@ -80,7 +81,7 @@ void Render::gameLoop(HUD& hud, bool& finished)
         else if (pacman.getLives() == 0 ||
             endTime <= 0)
         {
-            Resources::instance().playMusic(GAME_OVER, 100);
+            Resources::instance().playMusic(GAME_OVER);
             TransitionSlide("Game Over", 100, 2, sf::Color::Red, sf::Color::Black);
             break;
         }
@@ -122,7 +123,7 @@ void Render::setIcon()
 
 void Render::drawWindow(Board& board, HUD& hud, Pacman& pacman, int level, int time)
 {
-    m_window.clear(sf::Color(250, 211, 231));
+    m_window.clear(WINDOW_COLOR);
     board.drawBoard(m_window);
     hud.drawHUD(m_window, pacman.getLives(),
         pacman.getScore(), level,
@@ -168,7 +169,7 @@ void Render::startLevel(Pacman& pacman, Board& board, HUD& hud, int level, int t
         startLevelText.setString(std::to_string(sec));
         startLevelText.setOrigin(startLevelText.getLocalBounds().width / 2.f,
             startLevelText.getLocalBounds().height / 2.f);
-        m_window.clear(sf::Color(250, 211, 231));
+        m_window.clear(WINDOW_COLOR);
         board.drawBoard(m_window);
         hud.drawHUD(m_window, pacman.getLives(),
             pacman.getScore(), level, timeAsSec);

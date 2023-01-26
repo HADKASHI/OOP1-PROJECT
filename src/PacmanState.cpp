@@ -1,3 +1,4 @@
+#pragma once
 #include "PacmanState.h"
 #include "Ghost.h"
 #include "Resources.h"
@@ -17,23 +18,23 @@ void PacmanState::superState()
 void PacmanState::setTexture(Ghost& ghost)
 {
     if (m_superPacman)
-        ghost.setTexture(&Resources::instance().getTexture('f'));
+        ghost.setTexture(&Resources::instance().getTexture('f'), true);
 
     else if (m_freeze)
     {
-        ghost.setTexture(&Resources::instance().getTexture('F'));
+        ghost.setTexture(&Resources::instance().getTexture('F'), true);
     }
 
     else
     {
         if (std::string(typeid(ghost).name()) == "class RedGhost")
-            ghost.setTexture(&Resources::instance().getTexture('r'));
+            ghost.setTexture(&Resources::instance().getTexture('r'), true);
         else if (std::string(typeid(ghost).name()) == "class PinkGhost")
-            ghost.setTexture(&Resources::instance().getTexture('p'));
+            ghost.setTexture(&Resources::instance().getTexture('p'), true);
         else if (std::string(typeid(ghost).name()) == "class GreenGhost")
-            ghost.setTexture(&Resources::instance().getTexture('g'));
+            ghost.setTexture(&Resources::instance().getTexture('g'), true);
         else if (std::string(typeid(ghost).name()) == "class OrangeGhost")
-            ghost.setTexture(&Resources::instance().getTexture('o'));
+            ghost.setTexture(&Resources::instance().getTexture('o'), true);
     }
 }
 
@@ -72,7 +73,7 @@ void PacmanState::move(Ghost& ghost, sf::Time delta, sf::Vector2f targetPosition
         if (ghost.isStuck())
             alternateMove(ghost, delta);
         else
-            ghost.move(ghost.getAlternateDirection() * delta.asSeconds() * 50.f);
+            ghost.move(ghost.getAlternateDirection() * delta.asSeconds() * GHOST_SPEED);
     }
 
     //ghost got stucked in prev try so it alternating its movment
@@ -90,56 +91,22 @@ void PacmanState::move(Ghost& ghost, sf::Time delta, sf::Vector2f targetPosition
         else
             direction = minDistanceDirection(ghost, targetPosition);
 
-        if (direction != ghost.getDirection() * -1.f)
+        if (direction != ghost.getDirection() * -1.f && direction != ghost.getAlternateDirection() * -1.f 
+            && ghost.getMomentum() >= MOMENTUM)
         {
+            if (direction != ghost.getDirection())
+                ghost.stopMomentum();
+
             ghost.setDirection(direction);
+            ghost.setAlternateDirection(ghost.getDirection());
         }
 
-        ghost.move(ghost.getDirection() * delta.asSeconds() * 50.f);
+        ghost.move(ghost.getDirection() * delta.asSeconds() * GHOST_SPEED);
         ghost.notAlternating();
         ghost.freeToGo();
         ghost.gainMomentum();
-        if (ghost.getMomentum() >= 200)
-            ghost.setAlternateDirection(ghost.getDirection());
- 
     }
 }
-
-//void SuperState::move(Ghost& ghost, sf::Time delta, sf::Vector2f targetPosition)
-//{
-//    //ghost did NOT reached to its target location
-//    if (ghost.isAlternating() && !ghost.getGlobalBounds().contains(ghost.getAlternatePostion()))
-//    {
-//        if (ghost.isStuck())
-//            alternateMove(ghost, delta);
-//        else
-//            ghost.move(ghost.getAlternateDirection() * delta.asSeconds() * 50.f);
-//    }
-//
-//    //ghost got stucked in prev try so it alternating its movment
-//    else if (ghost.isStuck())
-//    {
-//        ghost.freeToGo();
-//        alternateMove(ghost, delta);
-//    }
-//
-//    else
-//    {
-//        auto direction = maxDistanceDirection(ghost, targetPosition);
-//        if (direction != ghost.getDirection() * -1.f)
-//        {
-//            ghost.setDirection(direction);
-//        }
-//
-//        ghost.move(ghost.getDirection() * delta.asSeconds() * 50.f);
-//        ghost.notAlternating();
-//        ghost.freeToGo();
-//        ghost.gainMomentum();
-//        if (ghost.getMomentum() >= 200)
-//            ghost.setAlternateDirection(ghost.getDirection());
-//
-//    }
-//}
 
 float distance(sf::Vector2f point1, sf::Vector2f point2)
 {
@@ -151,7 +118,7 @@ void PacmanState::alternateMove(Ghost &ghost, sf::Time delta)
     ghost.alternating();
     ghost.freeToGo();
 
-    if (ghost.getMomentum() > 200 || ghost.getMomentum() < 1)
+    if (ghost.getMomentum() > MOMENTUM || ghost.getMomentum() < 1)
         randMove(ghost, delta);
 
 
@@ -162,14 +129,14 @@ void PacmanState::alternateMove(Ghost &ghost, sf::Time delta)
             ghost.setAlternatePosition(sf::Vector2f({ ghost.getPosition().x + ghost.getSize().x * 1.2f, ghost.getPosition().y }));
             ghost.setAlternateDirection(RIGHT);
             ghost.setDirection(RIGHT);
-            ghost.move(ghost.getAlternateDirection() * delta.asSeconds() * 50.f);
+            ghost.move(ghost.getAlternateDirection() * delta.asSeconds() * GHOST_SPEED);
         }
         else
         {
             ghost.setAlternatePosition(sf::Vector2f({ ghost.getPosition().x - ghost.getSize().x * 1.2f, ghost.getPosition().y }));
             ghost.setAlternateDirection(LEFT);
             ghost.setDirection(LEFT);
-            ghost.move(ghost.getAlternateDirection() * delta.asSeconds() * 50.f);
+            ghost.move(ghost.getAlternateDirection() * delta.asSeconds() * GHOST_SPEED);
         }
     }
     else
@@ -179,14 +146,14 @@ void PacmanState::alternateMove(Ghost &ghost, sf::Time delta)
             ghost.setAlternatePosition(sf::Vector2f({ ghost.getPosition().x, ghost.getPosition().y + ghost.getSize().y * 1.2f }));
             ghost.setAlternateDirection(DOWN);
             ghost.setDirection(DOWN);
-            ghost.move(ghost.getAlternateDirection() * delta.asSeconds() * 50.f);
+            ghost.move(ghost.getAlternateDirection() * delta.asSeconds() * GHOST_SPEED);
         }
         else
         {
             ghost.setAlternatePosition(sf::Vector2f({ ghost.getPosition().x, ghost.getPosition().y - ghost.getSize().y * 1.2f }));
             ghost.setAlternateDirection(UP);
             ghost.setDirection(UP);
-            ghost.move(ghost.getAlternateDirection() * delta.asSeconds() * 50.f);
+            ghost.move(ghost.getAlternateDirection() * delta.asSeconds() * GHOST_SPEED);
         }
     }
 
@@ -202,14 +169,14 @@ void PacmanState::randMove(Ghost & ghost,sf::Time delta)
             ghost.setAlternatePosition(sf::Vector2f({ ghost.getPosition().x + ghost.getSize().x * 1.2f, ghost.getPosition().y }));
             ghost.setAlternateDirection(RIGHT);
             ghost.setDirection(RIGHT);
-            ghost.move(ghost.getAlternateDirection() * delta.asSeconds() * 50.f);
+            ghost.move(ghost.getAlternateDirection() * delta.asSeconds() * GHOST_SPEED);
         }
         else
         {
             ghost.setAlternatePosition(sf::Vector2f({ ghost.getPosition().x - ghost.getSize().x * 1.2f, ghost.getPosition().y }));
             ghost.setAlternateDirection(LEFT);
             ghost.setDirection(LEFT);
-            ghost.move(ghost.getAlternateDirection() * delta.asSeconds() * 50.f);
+            ghost.move(ghost.getAlternateDirection() * delta.asSeconds() * GHOST_SPEED);
         }
     }
     else
@@ -219,14 +186,14 @@ void PacmanState::randMove(Ghost & ghost,sf::Time delta)
             ghost.setAlternatePosition(sf::Vector2f({ ghost.getPosition().x, ghost.getPosition().y + ghost.getSize().y * 1.2f }));
             ghost.setAlternateDirection(DOWN);
             ghost.setDirection(DOWN);
-            ghost.move(ghost.getAlternateDirection() * delta.asSeconds() * 50.f);
+            ghost.move(ghost.getAlternateDirection() * delta.asSeconds() * GHOST_SPEED);
         }
         else
         {
             ghost.setAlternatePosition(sf::Vector2f({ ghost.getPosition().x, ghost.getPosition().y - ghost.getSize().y * 1.2f }));
             ghost.setAlternateDirection(UP);
             ghost.setDirection(UP);
-            ghost.move(ghost.getAlternateDirection() * delta.asSeconds() * 50.f);
+            ghost.move(ghost.getAlternateDirection() * delta.asSeconds() * GHOST_SPEED);
         }
     }
 }
@@ -297,5 +264,5 @@ void PacmanState::goHome(Ghost& ghost, sf::Time delta) const
     sf::Vector2f direction;
     direction = minDistanceDirection(ghost, ghost.getStartPoint());
 
-    ghost.move(direction * delta.asSeconds() * 65.f);
+    ghost.move(direction * delta.asSeconds() * GHOST_SPEED * 1.5f);
 }

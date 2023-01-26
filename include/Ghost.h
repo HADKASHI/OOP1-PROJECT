@@ -40,33 +40,28 @@ public:
 	using Ghost::Ghost;
 	void moveGhost(sf::Time delta, sf::Vector2f pacmanPosition, sf::Vector2f pacmanDirection) override;
 	virtual void revive() override;
-	//	void move(Controller& controller) override;
 };
 //----------------------------------------------------
 class GreenGhost : public Ghost
 {
 public:
 	using Ghost::Ghost;
-	void moveGhost(sf::Time delta, sf::Vector2f pacmanPosition, sf::Vector2f pacmanDirection);
+	void moveGhost(sf::Time delta, sf::Vector2f pacmanPosition, sf::Vector2f pacmanDirection) override;
 	virtual void revive() override;
-
-	//	void move(Controller& controller) override;
-};//----------------------------------------------------
+};
+//----------------------------------------------------
 class PinkGhost : public Ghost
 {
 public:
 	using Ghost::Ghost;
 	void moveGhost(sf::Time delta, sf::Vector2f pacmanPosition, sf::Vector2f pacmanDirection) override;
 	virtual void revive() override;
-
-	//	void move(Controller& controller) override;
-};//----------------------------------------------------
+};
+//----------------------------------------------------
 class OrangeGhost : public Ghost
 {
 public:
 	using Ghost::Ghost;
-	void moveGhost(sf::Time delta, sf::Vector2f pacmanPosition, sf::Vector2f pacmanDirection);
+	void moveGhost(sf::Time delta, sf::Vector2f pacmanPosition, sf::Vector2f pacmanDirection) override;;
 	virtual void revive() override;
-
-	//	void move(Controller& controller) override;
 };

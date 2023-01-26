@@ -1,3 +1,4 @@
+#pragma once
 #include "Board.h"
 #include "Collisions.h"
 #include <iostream>
@@ -5,7 +6,7 @@
 #include <random>
 
 Board::Board(std::fstream& file, sf::Vector2f maxSize, sf::Vector2f position)
-	:m_position(position), m_tileEdgeSize(40)
+	:m_position(position), m_tileEdgeSize(TILE_SIZE)
 {	
 	loadBoard(file, maxSize);
 	auto rng = std::default_random_engine{};
@@ -19,7 +20,7 @@ void Board::drawBoard(sf::RenderWindow &window)
 	boardWindow.setOrigin(boardWindow.getSize() / 2.f);
 	boardWindow.setPosition(m_position);
 	boardWindow.setOutlineThickness(8);
-	boardWindow.setOutlineColor(sf::Color(19, 43, 209));
+	boardWindow.setOutlineColor(BOARD_OUTLINE_COLOR);
 	boardWindow.setFillColor(sf::Color::Black);
 	window.draw(boardWindow);
 
@@ -209,7 +210,7 @@ void Board::update(Pacman &pacman, sf::Time delta)
 		{
 			processCollision(pacman, *m_ghosts[i]);
 
-			if (!PacmanState::instance().isSuper())
+			if (!PacmanState::instance().isSuper() && !PacmanState::instance().isFreeze())
 				this->resetGhosts();
 		}
 	}

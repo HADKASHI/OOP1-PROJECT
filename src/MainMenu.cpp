@@ -1,3 +1,4 @@
+#pragma once
 #include "MainMenu.h"
 #include "Board.h"
 #include "HUD.h"
@@ -15,7 +16,7 @@ MainMenu::MainMenu()
 {
     m_logoTexture.loadFromFile("logo1.png");
     m_logo.setTexture(&m_logoTexture);
-    m_logo.setPosition({ 445, 170 });
+    m_logo.setPosition(MENU_LOGO_POSITION);
     m_logo.setOrigin(m_logo.getSize() / 2.f);
 
     float y = 320;
@@ -36,10 +37,17 @@ void MainMenu::menuLoop(Render* render)
     auto window = render->getP2Window();
     Resources::instance().playBackGround();
 
+    sf::Clock spawnTimer;
+    sf::Clock moveTimer;
     while (window->isOpen())
     {
 
         window->clear(sf::Color::Black);
+        auto timer = spawnTimer.getElapsedTime();
+        if (timer.asSeconds() > SPAWN_TIME) spawnTimer.restart();
+
+        auto delta = moveTimer.restart();
+        drawBackGroundCharacters(window, delta, timer);
         window->draw(m_logo);
 
         auto cursorLocation = sf::Vector2f({ sf::Mouse::getPosition(*window).x * 1.f,
@@ -49,7 +57,7 @@ void MainMenu::menuLoop(Render* render)
 
         window->display();
 
-        if (auto event = sf::Event{}; window->waitEvent(event))
+        for (auto event = sf::Event{}; window->pollEvent(event); )
         {
             switch (event.type)
             {
@@ -86,6 +94,79 @@ void MainMenu::menuLoop(Render* render)
     }
 }
 
+void MainMenu::drawBackGroundCharacters(sf::RenderWindow* window, sf::Time delta, sf::Time timer)
+{
+    if (timer.asSeconds() >= SPAWN_TIME)
+        addRandomCharacter();
+
+    for (size_t i = 0; i < m_backGroundCharacters.size(); i++)
+    {
+        if (m_backGroundCharacters[i]->getPosition().x < - BACKGROUND_CHAR_SIZE*2 || m_backGroundCharacters[i]->getPosition().x > WINDOW_SIZE.x + BACKGROUND_CHAR_SIZE*2)
+            m_backGroundCharacters.erase(m_backGroundCharacters.begin() + i);
+
+        else
+        {
+            m_backGroundCharacters[i]->
+                move(m_backGroundCharacters[i]->getDirection() * delta.asSeconds() * float(rand() % 200 + 30));
+            window->draw(*m_backGroundCharacters[i]);
+        }
+    }
+}
+
+void MainMenu::addRandomCharacter()
+{
+    auto num = rand() % 4;
+    float xAxis;
+    if (rand() % 2 == 0)
+        xAxis = -BACKGROUND_CHAR_SIZE;
+    else
+        xAxis = WINDOW_SIZE.x + BACKGROUND_CHAR_SIZE;
+
+    auto yAxis = rand() % int(WINDOW_SIZE.y);
+
+    sf::Vector2f direction;
+
+    if (xAxis < 0)
+        direction = RIGHT;
+    else
+        direction = LEFT;
+
+    switch (num)
+    {
+    case 0:
+    {
+        m_backGroundCharacters.push_back
+        (std::make_unique<GreenGhost>(BACKGROUND_CHAR_SIZE + rand()%30 , sf::Vector2f{1.f * xAxis, 1.f * yAxis}, 'g'));
+
+        m_backGroundCharacters[m_backGroundCharacters.size() - 1]->setDirection(direction);
+        break;
+    }
+    case 1:
+    {
+        m_backGroundCharacters.push_back
+        (std::make_unique<RedGhost>(BACKGROUND_CHAR_SIZE + rand() % 30, sf::Vector2f{ 1.f * xAxis, 1.f * yAxis }, 'r'));
+
+        m_backGroundCharacters[m_backGroundCharacters.size() -1]->setDirection(direction);
+        break;
+    }
+    case 2:
+    {
+        m_backGroundCharacters.push_back
+        (std::make_unique<OrangeGhost>(BACKGROUND_CHAR_SIZE + rand() % 30, sf::Vector2f{ 1.f * xAxis, 1.f * yAxis }, 'o'));
+
+        m_backGroundCharacters[m_backGroundCharacters.size() -1]->setDirection(direction);
+        break;
+    }
+    case 3:
+    {
+        m_backGroundCharacters.push_back
+        (std::make_unique<PinkGhost>(BACKGROUND_CHAR_SIZE + rand() % 30, sf::Vector2f{ 1.f * xAxis, 1.f * yAxis }, 'p'));
+
+        m_backGroundCharacters[m_backGroundCharacters.size() -1]->setDirection(direction);
+        break;
+    }
+    }
+}
 
 
 void MainMenu::checkMouseOnButton(sf::RenderWindow* window, sf::Vector2f cursorLocation)
@@ -108,7 +189,7 @@ void MainMenu::checkMouseOnButton(sf::RenderWindow* window, sf::Vector2f cursorL
 
 void MainMenu::handleClickOnPlayGame(Render* render)
 {
-    auto hud = HUD({ 40 + 40 * 15 + 40 + 60, 40 + 300 });
+    auto hud = HUD(HUD_POSITION);
 
     bool finished = false;
 

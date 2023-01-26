@@ -1,10 +1,11 @@
+#pragma once
 #include "HUD.h"
 #include <iostream>
 #include "Resources.h"
 
 
 HUD::HUD(const sf::Vector2f& postion) :
-	m_position(postion), m_size(180, 600),
+	m_position(postion), m_size(HUD_SIZE),
 	m_titles({ sf::Text("LEVEL", Resources::instance().getFont()),
 			   sf::Text("LIVES", Resources::instance().getFont()),
 			   sf::Text("SCORE", Resources::instance().getFont()),
@@ -12,14 +13,14 @@ HUD::HUD(const sf::Vector2f& postion) :
 	m_level(" ", Resources::instance().getFont()),
 	m_score(" ", Resources::instance().getFont()),
 	m_time(" ", Resources::instance().getFont()),
-	m_lives({ 25, 25 })
+	m_lives(HUD_LIVES_ICON_SIZE)
 {
 	initBackGround();
 	initLives();
 	initTitles();
-	initHudShow(&m_level, 110, 120);
-	initHudShow(&m_score, 376, 120);
-	initHudShow(&m_time, 509, 120);
+	initHudShow(&m_level, HUD_LIVES_HEIGHT, HUD_COLOR);
+	initHudShow(&m_score, HUD_SCORE_HEIGHT, HUD_COLOR);
+	initHudShow(&m_time, HUD_TIME_HEIGHT, HUD_COLOR);
 }
 
 

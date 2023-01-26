@@ -25,26 +25,3 @@ private:
 	bool m_freeze;
 	sf::Clock m_freezeTimer;
 };
-
-
-//class SuperState : public PacmanState
-//{
-//public:
-//	using PacmanState::PacmanState;
-//	SuperState(SuperState&) = delete;
-//	void operator = (const SuperState&) = delete;
-//	virtual void move(Ghost& ghost, sf::Time delta, sf::Vector2f targetPosition) override;
-//private:
-//};
-//
-//class RegularState : public PacmanState
-//{
-//public:
-//	using PacmanState::PacmanState;
-//	RegularState(RegularState&) = delete;
-//	void operator = (const RegularState&) = delete;
-//	virtual void move(Ghost& ghost, sf::Time delta, sf::Vector2f targetPosition) override;
-//
-//private:
-//	static RegularState& instance(Ghost& ghost);
-//};

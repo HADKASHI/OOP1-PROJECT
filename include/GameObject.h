@@ -1,6 +1,6 @@
 #pragma once
+#include "Macros.h"
 #include <SFML/Graphics.hpp>
-#include <Macros.h>
 
 class GameObject : public sf::RectangleShape
 {
@@ -38,7 +38,6 @@ private:
 	sf::Vector2f m_direction;
 	sf::Vector2f m_startPoint;
 	bool m_alive;
-//	void move() = 0;
 };
 //---------------------------------------------------
 class Pacman: public MovingObjects
@@ -52,7 +51,7 @@ public:
 	void gotEaten() { m_lives--; this->reset(); this->died(); }
 	void addLives() { m_lives++; }
 	void addTime() { m_bonusTime = true; }
-	unsigned int getBonusTime() const { return (m_bonusTime ? TIMEBONUS : 0); }
+	unsigned int getBonusTime() const { if (m_bonusTime) return TIMEBONUS; return 0; }
 	unsigned int getScore() const { return m_score; }
 	unsigned int getLives() const { return m_lives; }
 
@@ -108,16 +107,19 @@ public:
 };
 class FreezePresent : public Present
 {
+public:
 	using Present::Present;
 	virtual unsigned int pointsReward() const override { return 30; }
 };
 class TimePresent : public Present
 {
+public:
 	using Present::Present;
 	virtual unsigned int pointsReward() const override { return 10; }
 };
 class LivesPresent : public Present
 {
+public:
 	using Present::Present;
 	virtual unsigned int pointsReward() const override { return 20; }
 };

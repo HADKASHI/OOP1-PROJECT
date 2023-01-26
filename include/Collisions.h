@@ -8,7 +8,6 @@
 #include "Resources.h"
 
 
-
 namespace { // unnamed namespace — the standard way to make function "static"
     // primary collision-processing functions
     float getOverLap(sf::Vector2f direction, sf::FloatRect rect1, sf::FloatRect rect2);
@@ -135,6 +134,7 @@ namespace { // unnamed namespace — the standard way to make function "static"
         Pacman& c_pacman = dynamic_cast<Pacman&>(pacman);
         TimePresent& c_present = dynamic_cast<TimePresent&>(present);
         c_pacman.addPoints(c_present.pointsReward());
+        c_pacman.addTime();
         c_present.isEaten();
     }
 
@@ -183,7 +183,7 @@ namespace { // unnamed namespace — the standard way to make function "static"
 
         else if (PacmanState::instance().isFreeze())
             return;
-        
+
         else
         {
             Resources::instance().playMusic(PACMAN_DEAD, 50);
@@ -192,10 +192,69 @@ namespace { // unnamed namespace — the standard way to make function "static"
         }
     }
 
-    void GhostWithPacman(GameObject& ghost,
+    void pacmanWithRedGhost(GameObject& pacman,
+        GameObject& ghost)
+    {
+        RedGhost& c_redGhost = dynamic_cast<RedGhost&>(ghost);
+        if (c_redGhost.isDead())
+            return;
+        else
+            pacmanWithGhost(pacman, ghost);
+    }
+
+    
+    void pacmanWithPinkGhost(GameObject& pacman,
+        GameObject& ghost)
+    {
+        PinkGhost& c_pinkGhost = dynamic_cast<PinkGhost&>(ghost);
+        if (c_pinkGhost.isDead())
+            return;
+
+        pacmanWithGhost(pacman, ghost);
+    }
+
+    void pacmanWithGreenGhost(GameObject& pacman,
+        GameObject& ghost)
+    {
+        GreenGhost& c_greenGhost = dynamic_cast<GreenGhost&>(ghost);
+        if (c_greenGhost.isDead())
+            return;
+
+        pacmanWithGhost(pacman, ghost);
+    }
+
+    void pacmanWithOrangeGhost(GameObject& pacman,
+        GameObject& ghost)
+    {
+        OrangeGhost& c_orangeGhost = dynamic_cast<OrangeGhost&>(ghost);
+        if (c_orangeGhost.isDead())
+            return;
+
+        pacmanWithGhost(pacman, ghost);
+    }
+
+    void redGhostWithPacman(GameObject& ghost,
         GameObject& pacman)
     {
-        pacmanWithGhost(pacman, ghost);
+        pacmanWithRedGhost(pacman, ghost);
+    }
+
+    void pinkGhostWithPacman(GameObject& ghost,
+        GameObject& pacman)
+    {
+        pacmanWithPinkGhost(pacman, ghost);
+    }
+
+    void orangeGhostWithPacman(GameObject& ghost,
+        GameObject& pacman)
+    {
+        pacmanWithOrangeGhost(pacman, ghost);
+    }
+
+    void greenGhostWithPacman(GameObject& ghost,
+        GameObject& pacman)
+    {
+        pacmanWithGreenGhost(pacman, ghost);
     }
 
     void redGhostWithWall(GameObject& redGhost,
@@ -349,14 +408,14 @@ namespace { // unnamed namespace — the standard way to make function "static"
         (*cm)[std::string(typeid(Pacman).name()) + std::string(typeid(FreezePresent).name())] = pacmanWithFreezePresent;
 
         (*cm)[std::string(typeid(Pacman).name()) + std::string(typeid(Cookie).name())] = pacmanWithCookie;
-        (*cm)[std::string(typeid(Pacman).name()) + std::string(typeid(RedGhost).name())] = pacmanWithGhost;
-        (*cm)[std::string(typeid(Pacman).name()) + std::string(typeid(PinkGhost).name())] = pacmanWithGhost;
-        (*cm)[std::string(typeid(Pacman).name()) + std::string(typeid(OrangeGhost).name())] = pacmanWithGhost;
-        (*cm)[std::string(typeid(Pacman).name()) + std::string(typeid(GreenGhost).name())] = pacmanWithGhost;
-        (*cm)[std::string(typeid(RedGhost).name()) + std::string(typeid(Pacman).name())] = GhostWithPacman;
-        (*cm)[std::string(typeid(PinkGhost).name()) + std::string(typeid(Pacman).name())] = GhostWithPacman;
-        (*cm)[std::string(typeid(GreenGhost).name()) + std::string(typeid(Pacman).name())] = GhostWithPacman;
-        (*cm)[std::string(typeid(OrangeGhost).name()) + std::string(typeid(Pacman).name())] = GhostWithPacman;
+        (*cm)[std::string(typeid(Pacman).name()) + std::string(typeid(RedGhost).name())] = pacmanWithRedGhost;
+        (*cm)[std::string(typeid(Pacman).name()) + std::string(typeid(PinkGhost).name())] = pacmanWithPinkGhost;
+        (*cm)[std::string(typeid(Pacman).name()) + std::string(typeid(OrangeGhost).name())] = pacmanWithOrangeGhost;
+        (*cm)[std::string(typeid(Pacman).name()) + std::string(typeid(GreenGhost).name())] = pacmanWithGreenGhost;
+        (*cm)[std::string(typeid(RedGhost).name()) + std::string(typeid(Pacman).name())] = redGhostWithPacman;
+        (*cm)[std::string(typeid(PinkGhost).name()) + std::string(typeid(Pacman).name())] = pinkGhostWithPacman;
+        (*cm)[std::string(typeid(GreenGhost).name()) + std::string(typeid(Pacman).name())] = greenGhostWithPacman;
+        (*cm)[std::string(typeid(OrangeGhost).name()) + std::string(typeid(Pacman).name())] = orangeGhostWithPacman;
         (*cm)[std::string(typeid(RedGhost).name()) + std::string(typeid(Wall).name())] = redGhostWithWall;
         (*cm)[std::string(typeid(PinkGhost).name()) + std::string(typeid(Wall).name())] = pinkGhostWithWall;
         (*cm)[std::string(typeid(GreenGhost).name()) + std::string(typeid(Wall).name())] = greenGhostWithWall;

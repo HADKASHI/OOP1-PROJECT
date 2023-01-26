@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include "Macros.h"
 
 class Board;
 class Pacman;
@@ -14,8 +15,8 @@ public:
 	sf::RenderWindow* getP2Window() { return &m_window; }
 	void gameLoop(HUD& hud, bool& finished);
 	void setIcon();
-	sf::Vector2f getBoardSize() { return { 15 * 40, 15 * 40 }; }
-	sf::Vector2f getBoardPosition() { return { 40.f + 20 * 15, 40.f + 20 * 15 }; }
+	sf::Vector2f getBoardSize() { return BOARD_SIZE; }
+	sf::Vector2f getBoardPosition() { return BOARD_POSITION; }
 
 private:
 	void drawWindow(Board& board, HUD& hud, Pacman& pacman, int level, int time);

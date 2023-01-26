@@ -3,8 +3,8 @@
 #include <map>
 #include "SFML/Graphics.hpp"
 #include <SFML/audio.hpp>
-#include "Macros.h"
 
+class MovingObjects;
 
 class Resources
 {
@@ -17,7 +17,7 @@ public:
 	void playMusic(enum Sounds i, int vol = 100);
 	void playBackGround();
 	void volumeBackGround(int vol);
-
+	
 private:
 	Resources();
 	void loadGraphics();
