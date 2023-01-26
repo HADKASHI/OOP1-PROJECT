@@ -1,8 +1,8 @@
-# Install script for directory: C:/Users/kashi/Documents/oop1/project/oop1_project-basefiles/resources
+# Install script for directory: C:/Users/kashi/Documents/oop1/merge_to_hadar/oop1_project-basefiles/resources
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "C:/Users/kashi/Documents/oop1/project/oop1_project-basefiles/out/install/x64-Debug")
+  set(CMAKE_INSTALL_PREFIX "C:/Users/kashi/Documents/oop1/merge_to_hadar/oop1_project-basefiles/out/install/x64-Debug")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 

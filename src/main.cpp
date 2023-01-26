@@ -1,6 +1,6 @@
+#include "Macros.h"
 #include "Controller.h"
 #include "Graphics.h"
-#include "MainMenu.h"
 #include "Board.h"
 
 int main()

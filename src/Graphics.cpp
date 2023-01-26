@@ -3,6 +3,7 @@
 //
 //Graphics ::Graphics()
 //{
+//	loadSounds();
 //	loadGraphics();
 //}
 //
@@ -37,12 +38,15 @@
 //		return m_textures[c];
 //}
 
+
+
 #include "Graphics.h"
 #include <vector>
 
 Graphics::Graphics()
 {
 	loadGraphics();
+	loadSounds();
 }
 
 Graphics& Graphics::instance()
@@ -146,3 +150,40 @@ sf::Texture& Graphics::getTexture(char c)
 	if (auto search = m_textures.find(c); search != m_textures.end())
 		return m_textures[c];
 }
+
+
+void Graphics::loadSounds()
+{
+	char sounds[][20] = { "timer.wav", "finish_level.wav", "game_over.wav", "pacman_dead.wav", 
+		                  "ghost_eaten.wav", "present.wav", "eat_cookie.wav", "door_open.wav"};
+
+	for (int i = 0; i < 8 ; i++)
+	{
+		sf::SoundBuffer sound;
+		sound.loadFromFile(sounds[i]);
+		m_sounds.push_back(sound);
+	}
+
+	m_backGround.openFromFile("background.wav");
+}
+
+
+void Graphics::playMusic(enum Sounds i, int vol)
+{
+	m_backGround.setVolume(0);
+	m_sound.setBuffer(m_sounds[i]);
+	m_sound.setVolume(vol);
+	m_sound.play();
+}
+
+void Graphics::playBackGround()
+{
+	m_backGround.setVolume(50);
+	m_backGround.play();
+}
+
+void Graphics::volumeBackGround(int vol)
+{
+	m_backGround.setVolume(vol);
+}
+

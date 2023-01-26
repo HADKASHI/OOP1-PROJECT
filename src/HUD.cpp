@@ -6,9 +6,9 @@
 HUD::HUD(const sf::Vector2f& postion) :
 	m_position(postion), m_size(180, 600),
 	m_titles({ sf::Text("LEVEL", Graphics::instance().getFont()),
-		       sf::Text("LIVES", Graphics::instance().getFont()),
-		       sf::Text("SCORE", Graphics::instance().getFont()),
-		       sf::Text("TIME", Graphics::instance().getFont()) }),
+			   sf::Text("LIVES", Graphics::instance().getFont()),
+			   sf::Text("SCORE", Graphics::instance().getFont()),
+			   sf::Text("TIME", Graphics::instance().getFont()) }),
 	m_level(" ", Graphics::instance().getFont()),
 	m_score(" ", Graphics::instance().getFont()),
 	m_time(" ", Graphics::instance().getFont()),
@@ -51,11 +51,11 @@ void HUD::initTitles()
 }
 
 
-void HUD::initHudShow(sf::Text *text, float y, int color)
+void HUD::initHudShow(sf::Text* text, float y, int color)
 {
 	text->setPosition({ m_position.x , 40 + y });
 	text->setOrigin(text->getLocalBounds().width / 2.f,
-		            text->getLocalBounds().height / 2.f);
+		text->getLocalBounds().height / 2.f);
 	text->setFillColor(sf::Color(0, 0, 0, color));
 
 }
@@ -68,7 +68,7 @@ void HUD::drawHUD(sf::RenderWindow& window, unsigned int lives, unsigned int sco
 
 	// Draw other text elements
 //	window.draw(m_title);
-	for(int i = 0 ; i < m_titles.size() ; i++)
+	for (int i = 0; i < m_titles.size(); i++)
 		window.draw(m_titles[i]);
 
 	// Update and draw other data
@@ -93,11 +93,11 @@ void HUD::drawTime(sf::Text* text, unsigned int time, sf::RenderWindow& window)
 {
 	int min = (time / 60), sec = (time % 60);
 
-	if(min < 10 && sec < 10)
+	if (min < 10 && sec < 10)
 		text->setString("0" + std::to_string(min) + ":0" + (std::to_string(sec)));
-	else if(min < 10)
+	else if (min < 10)
 		text->setString("0" + std::to_string(min) + ":" + (std::to_string(sec)));
-	else if(sec < 10)
+	else if (sec < 10)
 		text->setString(std::to_string(min) + ":0" + (std::to_string(sec)));
 	else
 		text->setString(std::to_string(min) + ":" + (std::to_string(sec)));

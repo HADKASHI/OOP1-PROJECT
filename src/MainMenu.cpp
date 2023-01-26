@@ -3,6 +3,7 @@
 #include "HUD.h"
 #include "Graphics.h"
 #include <SFML/Graphics.hpp>
+#include <SFML/audio.hpp>
 #include <fstream>
 
 
@@ -33,9 +34,11 @@ MainMenu::MainMenu()
 void MainMenu::menuLoop(Render* render)
 {
     auto window = render->getP2Window();
+    Graphics::instance().playBackGround();
 
     while (window->isOpen())
     {
+
         window->clear(sf::Color::Black);
         window->draw(m_logo);
 
@@ -63,7 +66,11 @@ void MainMenu::menuLoop(Render* render)
                 case sf::Mouse::Left:
                 {
                     if (m_buttons[0].getGlobalBounds().contains(cursorLocation))
+                    {
+                //        Graphics::instance().volumeBackGround(0);
                         handleClickOnPlayGame(render);
+                        Graphics::instance().playBackGround();
+                    }
 
                     else if (m_buttons[1].getGlobalBounds().contains(cursorLocation))
                         handleClickOnHelp(window);
@@ -91,7 +98,7 @@ void MainMenu::checkMouseOnButton(sf::RenderWindow* window, sf::Vector2f cursorL
         if (m_buttons[i].getGlobalBounds().contains(cursorLocation))
             m_buttons[i].setScale(2.0, 2.0);
 
-       
+
         m_buttons[i].setOrigin(m_buttons[i].getLocalBounds().width / 2.f,
             m_buttons[i].getLocalBounds().height / 2.f);
         window->draw(m_buttons[i]);

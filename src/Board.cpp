@@ -1,12 +1,15 @@
 #include "Board.h"
+#include "Collisions.h"
 #include <iostream>
 #include <cstdlib>
-
+#include <random>
 
 Board::Board(std::fstream& file, sf::Vector2f maxSize, sf::Vector2f position)
 	:m_position(position), m_tileEdgeSize(40)
 {	
 	loadBoard(file, maxSize);
+	auto rng = std::default_random_engine{};
+	std::shuffle(m_statics.begin(), m_statics.end(), rng);
 }
 //-----------------------------------------------
 void Board::drawBoard(sf::RenderWindow &window)
@@ -47,8 +50,6 @@ void Board::loadBoard(std::fstream& file, sf::Vector2f maxSize)
 	m_height = rows * m_tileEdgeSize;
 	m_width = cols * m_tileEdgeSize;
 
-	char c;
-
 	sf::Vector2f boardStartPoint = { m_position.x - float(0.5) * m_width,
 									m_position.y - float(0.5) * m_height };
 
@@ -65,7 +66,7 @@ void Board::loadBoard(std::fstream& file, sf::Vector2f maxSize)
 		file.ignore();
 	}
 
-	if(!file.eof()) file.ignore();
+	if (!file.eof()) file.ignore();
 
 	for (int row = 0; row < rows; row++)
 	{
@@ -162,3 +163,120 @@ float Board::getTileSize() const
 	return m_tileEdgeSize;
 }
 
+sf::FloatRect Board::getGlobalBounds() const
+{
+	sf::Vector2f boardStartPoint = { m_position.x - float(0.5) * m_width,
+									m_position.y - float(0.5) * m_height };
+
+	return sf::FloatRect(boardStartPoint.x, boardStartPoint.y, m_width, m_height);
+}
+
+bool toDelete(std::unique_ptr<StaticObjects> & object); 
+void Board::update(Pacman &pacman, sf::Time delta)
+{
+	moveGhosts(delta, pacman.getPosition(), pacman.getDirection());
+
+	if (!inBounds(pacman.getGlobalBounds()))
+		pacmanWithBoard(pacman, *this);
+
+	/*for (size_t i=0; i < m_ghosts.size(); i++)
+		if (!inBounds(m_ghosts[i]->getGlobalBounds()))
+			ghostWithBoard(*m_ghosts[i], *this);*/
+
+	for (size_t i = 0; i < m_ghosts.size(); i++)
+	{
+		if (pacman.getGlobalBounds().intersects(m_ghosts[i]->getGlobalBounds()))
+			processCollision(pacman, *m_ghosts[i]);
+	}
+
+	for (size_t i = 0 ; i < m_statics.size(); i++)
+	{
+		if(pacman.getGlobalBounds().intersects(m_statics[i]->getGlobalBounds()))
+			processCollision(pacman, *m_statics[i]);
+	}
+
+	for (size_t i = 0; i < m_ghosts.size(); i++)
+		for (size_t j = 0; j < m_statics.size(); j++)
+		{
+			if (std::string(typeid(*m_statics[i]).name()) == "class Wall" ||
+				std::string(typeid(*m_statics[i]).name()) == "class Door")
+			{
+				if (m_ghosts[i]->getGlobalBounds().intersects(m_statics[j]->getGlobalBounds()))
+					processCollision(*m_ghosts[i], *m_statics[j]);
+			}
+			else
+				m_ghosts[i]->setMomentum(m_ghosts[i]->getDirection());
+		}
+
+	for (size_t i = 0; i < m_statics.size(); i++)
+	{
+		if (m_statics[i]->beenEaten())
+			handleCollisions(typeid(*m_statics[i]).name());
+	}
+
+	m_statics.erase(
+		std::remove_if(m_statics.begin(), m_statics.end(), &toDelete),
+		m_statics.end());
+}
+
+void Board::moveGhosts(sf::Time delta, sf::Vector2f pacmanPosition, sf::Vector2f pacmanDirection)
+{
+	for (size_t i = 0; i < m_ghosts.size(); i++)
+		m_ghosts[i]->moveGhost(delta, pacmanPosition, pacmanDirection);
+}
+
+bool Board::inBounds(sf::FloatRect rect) const
+{
+	auto bounds = this->getGlobalBounds();
+	bool topLeft = bounds.contains(rect.left, rect.top);
+	bool bottomLeft = bounds.contains(rect.left , rect.top + rect.height);
+	bool topRight = bounds.contains(rect.left + rect.width , rect.top);
+	bool bottomRight = bounds.contains(rect.left + rect.width, rect.top + rect.height);
+
+	return (topLeft && topRight && bottomLeft && bottomRight);
+}
+
+bool toDelete(std::unique_ptr<StaticObjects> & object)
+{
+	return object->beenEaten();
+}
+
+bool isDoor(std::unique_ptr<StaticObjects>& object)
+{
+	return std::string(typeid(*object).name()) == "class Door";
+}
+
+void Board::deleteDoor()
+{
+	auto index = std::find_if(m_statics.begin(), m_statics.end(), isDoor);
+	if (index == m_statics.end())
+	{
+		return;
+	}
+	
+	index->get()->isEaten();
+}
+
+void Board::handleCollisions(const std::string& object)
+{
+	if (object == "class Key")
+		deleteDoor();
+	//else if (object == "class Door")
+		//deleteDoor();
+}
+
+bool isCookie(const std::unique_ptr<StaticObjects>& object)
+{
+	return std::string(typeid(*object).name()) == "class Cookie";
+}
+
+bool Board::noCookiesLeft() const
+{
+	auto index = std::find_if(m_statics.begin(), m_statics.end(), isCookie);
+	if (index == m_statics.end())
+	{
+		return true;
+	}
+
+	return false;
+}

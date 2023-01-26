@@ -1,6 +1,7 @@
 #pragma once
 
 #include "GameObject.h"
+#include "Ghost.h"
 #include <vector>
 #include <fstream>
 
@@ -14,12 +15,19 @@ public:
 	void drawBoard(sf::RenderWindow & window);
 	sf::Vector2f getPacmanPosition() const;
 	float getTileSize() const;
+	void update(Pacman& pacman, sf::Time delta);
+	sf::FloatRect getGlobalBounds() const;
+	bool inBounds(sf::FloatRect rect) const;
 	unsigned int getGhostsNumber() const { return m_ghosts.size(); }
-	bool noCookiesLeft() const { return false; } ///////////////////////////////////////////
+	bool noCookiesLeft() const;
+
 
 private:
 	void addNewObject(char objectType, sf::Vector2f position, bool height = false, bool width = false);
 	void loadBoard(std::fstream& file, sf::Vector2f maxSize);
+	void handleCollisions(const std::string& object);
+	void deleteDoor();
+	void moveGhosts(sf::Time delta, sf::Vector2f pacmanPosition, sf::Vector2f pacmanDirection);
 
 	float m_height;
 	float m_width;

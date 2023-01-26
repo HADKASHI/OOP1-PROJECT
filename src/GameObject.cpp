@@ -11,12 +11,18 @@ GameObject::GameObject(float edgeSize, sf::Vector2f position, char c)
 
 
 MovingObjects::MovingObjects(float edgeSize, sf::Vector2f position, char c) :
-    GameObject(edgeSize, position, c)
+    GameObject(edgeSize, position, c), m_direction({ 0 , 0 })
 {
     setOrigin(getSize() / 2.f);
     setPosition({ getPosition().x + 0.5f * edgeSize,
         getPosition().y + 0.5f * edgeSize });
+
+    setScale({ 0.9f, 0.9f });
 }
+
+StaticObjects::StaticObjects(float edgeSize, sf::Vector2f position, char c) :
+    GameObject(edgeSize, position, c), m_beenEaten(false)
+{ }
 
 
 Cookie::Cookie(float edgeSize, sf::Vector2f position, char c):
@@ -40,10 +46,10 @@ Wall::Wall(float edgeSize, sf::Vector2f position, char c, bool height, bool widt
 }
 
 Pacman :: Pacman(float edgeSize, sf::Vector2f position, char c, unsigned int score):
-    MovingObjects(edgeSize, position, c), m_isKeyPressed(false), m_lives(3), m_score(score) {}
+    MovingObjects(edgeSize, position, c), m_isKeyPressed(false), m_lives(LIVES), m_score(score) {}
 
 
-void Pacman::setDirection(sf::Keyboard::Key key)
+void Pacman::keyDirection(sf::Keyboard::Key key)
 {
     if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && key != sf::Keyboard::Up) ||
         (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && key != sf::Keyboard::Down) ||
@@ -56,32 +62,32 @@ void Pacman::setDirection(sf::Keyboard::Key key)
         {
         case sf::Keyboard::Left:
         {
-            m_direction = { -1, 0 };
+            setDirection(LEFT);
             setRotation(0);
-            setScale(-1, 1);
+            setScale(-0.9f, 0.9f);
             break;
         }
         case sf::Keyboard::Right:
         {
-            m_direction = { 1, 0 };
+            setDirection(RIGHT);
             setRotation(0);
-            setScale(1, 1);
+            setScale(0.9f, 0.9f);
             break;
         }
         case sf::Keyboard::Up:
         {
-            m_direction = { 0, -1 };
-            setScale(1, 1);
+            setDirection(UP);
+            setScale(0.9f, 0.9f);
             setRotation(270);
             break;
         }
         case sf::Keyboard::Down:
-            m_direction = { 0, 1 };
-            setScale(1, 1);
+            setDirection(DOWN);
+            setScale(0.9f, 0.9f);
             setRotation(90);
             break;
         case sf::Keyboard::Space:
-            m_direction = { 0, 0 };
+            setDirection({ 0, 0 });
             break;
         }
     }
@@ -91,39 +97,40 @@ void Pacman::setDirection(sf::Keyboard::Key key)
 //---------------------------------------
 void Pacman::update(sf::Time delta)
 {
-    auto PacmanSpeed = 60.f;
-
     if(!m_isKeyPressed)
     {
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
         {
-            m_direction = { -1, 0 };
+            setDirection(LEFT);
             setRotation(0);
-            setScale(-1, 1);
+            setScale(-0.9f, 0.9f);
         }
         else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
         {
-            m_direction = { 1, 0 };
+            setDirection(RIGHT);
             setRotation(0);
-            setScale(1, 1);
+            setScale(0.9f, 0.9f);
         }
         else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
         {
-            m_direction = { 0, -1 };
-            setScale(1, 1);
+            setDirection(UP);
+            setScale(0.9f, 0.9f);
             setRotation(270);
         }
         else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
         {
-            m_direction = { 0, 1 };
-            setScale(1, 1);
+            setDirection(DOWN);
+            setScale(0.9f, 0.9f);
             setRotation(90);
         }
         else
+        {
+            setDirection({ 0 , 0 });
             return;
+        }
     }
 
-    move (m_direction * delta.asSeconds() * PacmanSpeed);
+    move (getDirection() * delta.asSeconds() * PACMANSPEED);
 }
 //--------------------------------------
 void Pacman::notMoving(sf::Keyboard::Key key)
@@ -134,6 +141,3 @@ void Pacman::notMoving(sf::Keyboard::Key key)
         key == sf::Keyboard::Right)
         m_isKeyPressed = false;
 }
-
-
-

@@ -39,7 +39,7 @@ include CMakeFiles\rules.ninja
 #############################################
 # Logical path to working directory; prefix for absolute paths.
 
-cmake_ninja_workdir = C$:\Users\kashi\Documents\oop1\project\oop1_project-basefiles\out\build\x64-Debug\
+cmake_ninja_workdir = C$:\Users\kashi\Documents\oop1\merge_to_hadar\oop1_project-basefiles\out\build\x64-Debug\
 # =============================================================================
 # Object build statements for EXECUTABLE target oop1_project
 
@@ -49,65 +49,73 @@ cmake_ninja_workdir = C$:\Users\kashi\Documents\oop1\project\oop1_project-basefi
 
 build cmake_object_order_depends_target_oop1_project: phony || CMakeFiles\oop1_project.dir
 
-build CMakeFiles\oop1_project.dir\src\Board.cpp.obj: CXX_COMPILER__oop1_project_Debug C$:\Users\kashi\Documents\oop1\project\oop1_project-basefiles\src\Board.cpp || cmake_object_order_depends_target_oop1_project
+build CMakeFiles\oop1_project.dir\src\Board.cpp.obj: CXX_COMPILER__oop1_project_Debug C$:\Users\kashi\Documents\oop1\merge_to_hadar\oop1_project-basefiles\src\Board.cpp || cmake_object_order_depends_target_oop1_project
   FLAGS = /DWIN32 /D_WINDOWS /EHsc /Zi /Ob0 /Od /RTC1 -MDd /W4 /permissive- /Zc:externConstexpr /Zc:inline /analyze /w14242 /w14263 /w14265 /w14287 /w14296 /w14545 /w14546 /w14547 /w14549 /w14555 /w14826 /w14905 /w14906 /w14928 /we4996 -fsanitize=address -std:c++20
-  INCLUDES = -IC:\Users\kashi\Documents\oop1\project\oop1_project-basefiles\include -IC:\Users\kashi\Documents\oop1\project\oop1_project-basefiles\resources -external:IC:\SFML\SFML-2.5.1\include -external:W0
+  INCLUDES = -IC:\Users\kashi\Documents\oop1\merge_to_hadar\oop1_project-basefiles\include -IC:\Users\kashi\Documents\oop1\merge_to_hadar\oop1_project-basefiles\resources -external:IC:\SFML\SFML-2.5.1\include -external:W0
   OBJECT_DIR = CMakeFiles\oop1_project.dir
   OBJECT_FILE_DIR = CMakeFiles\oop1_project.dir\src
   TARGET_COMPILE_PDB = CMakeFiles\oop1_project.dir\
   TARGET_PDB = oop1_project.pdb
 
-build CMakeFiles\oop1_project.dir\src\Controller.cpp.obj: CXX_COMPILER__oop1_project_Debug C$:\Users\kashi\Documents\oop1\project\oop1_project-basefiles\src\Controller.cpp || cmake_object_order_depends_target_oop1_project
+build CMakeFiles\oop1_project.dir\src\Controller.cpp.obj: CXX_COMPILER__oop1_project_Debug C$:\Users\kashi\Documents\oop1\merge_to_hadar\oop1_project-basefiles\src\Controller.cpp || cmake_object_order_depends_target_oop1_project
   FLAGS = /DWIN32 /D_WINDOWS /EHsc /Zi /Ob0 /Od /RTC1 -MDd /W4 /permissive- /Zc:externConstexpr /Zc:inline /analyze /w14242 /w14263 /w14265 /w14287 /w14296 /w14545 /w14546 /w14547 /w14549 /w14555 /w14826 /w14905 /w14906 /w14928 /we4996 -fsanitize=address -std:c++20
-  INCLUDES = -IC:\Users\kashi\Documents\oop1\project\oop1_project-basefiles\include -IC:\Users\kashi\Documents\oop1\project\oop1_project-basefiles\resources -external:IC:\SFML\SFML-2.5.1\include -external:W0
+  INCLUDES = -IC:\Users\kashi\Documents\oop1\merge_to_hadar\oop1_project-basefiles\include -IC:\Users\kashi\Documents\oop1\merge_to_hadar\oop1_project-basefiles\resources -external:IC:\SFML\SFML-2.5.1\include -external:W0
   OBJECT_DIR = CMakeFiles\oop1_project.dir
   OBJECT_FILE_DIR = CMakeFiles\oop1_project.dir\src
   TARGET_COMPILE_PDB = CMakeFiles\oop1_project.dir\
   TARGET_PDB = oop1_project.pdb
 
-build CMakeFiles\oop1_project.dir\src\GameObject.cpp.obj: CXX_COMPILER__oop1_project_Debug C$:\Users\kashi\Documents\oop1\project\oop1_project-basefiles\src\GameObject.cpp || cmake_object_order_depends_target_oop1_project
+build CMakeFiles\oop1_project.dir\src\GameObject.cpp.obj: CXX_COMPILER__oop1_project_Debug C$:\Users\kashi\Documents\oop1\merge_to_hadar\oop1_project-basefiles\src\GameObject.cpp || cmake_object_order_depends_target_oop1_project
   FLAGS = /DWIN32 /D_WINDOWS /EHsc /Zi /Ob0 /Od /RTC1 -MDd /W4 /permissive- /Zc:externConstexpr /Zc:inline /analyze /w14242 /w14263 /w14265 /w14287 /w14296 /w14545 /w14546 /w14547 /w14549 /w14555 /w14826 /w14905 /w14906 /w14928 /we4996 -fsanitize=address -std:c++20
-  INCLUDES = -IC:\Users\kashi\Documents\oop1\project\oop1_project-basefiles\include -IC:\Users\kashi\Documents\oop1\project\oop1_project-basefiles\resources -external:IC:\SFML\SFML-2.5.1\include -external:W0
+  INCLUDES = -IC:\Users\kashi\Documents\oop1\merge_to_hadar\oop1_project-basefiles\include -IC:\Users\kashi\Documents\oop1\merge_to_hadar\oop1_project-basefiles\resources -external:IC:\SFML\SFML-2.5.1\include -external:W0
   OBJECT_DIR = CMakeFiles\oop1_project.dir
   OBJECT_FILE_DIR = CMakeFiles\oop1_project.dir\src
   TARGET_COMPILE_PDB = CMakeFiles\oop1_project.dir\
   TARGET_PDB = oop1_project.pdb
 
-build CMakeFiles\oop1_project.dir\src\Graphics.cpp.obj: CXX_COMPILER__oop1_project_Debug C$:\Users\kashi\Documents\oop1\project\oop1_project-basefiles\src\Graphics.cpp || cmake_object_order_depends_target_oop1_project
+build CMakeFiles\oop1_project.dir\src\Ghost.cpp.obj: CXX_COMPILER__oop1_project_Debug C$:\Users\kashi\Documents\oop1\merge_to_hadar\oop1_project-basefiles\src\Ghost.cpp || cmake_object_order_depends_target_oop1_project
   FLAGS = /DWIN32 /D_WINDOWS /EHsc /Zi /Ob0 /Od /RTC1 -MDd /W4 /permissive- /Zc:externConstexpr /Zc:inline /analyze /w14242 /w14263 /w14265 /w14287 /w14296 /w14545 /w14546 /w14547 /w14549 /w14555 /w14826 /w14905 /w14906 /w14928 /we4996 -fsanitize=address -std:c++20
-  INCLUDES = -IC:\Users\kashi\Documents\oop1\project\oop1_project-basefiles\include -IC:\Users\kashi\Documents\oop1\project\oop1_project-basefiles\resources -external:IC:\SFML\SFML-2.5.1\include -external:W0
+  INCLUDES = -IC:\Users\kashi\Documents\oop1\merge_to_hadar\oop1_project-basefiles\include -IC:\Users\kashi\Documents\oop1\merge_to_hadar\oop1_project-basefiles\resources -external:IC:\SFML\SFML-2.5.1\include -external:W0
   OBJECT_DIR = CMakeFiles\oop1_project.dir
   OBJECT_FILE_DIR = CMakeFiles\oop1_project.dir\src
   TARGET_COMPILE_PDB = CMakeFiles\oop1_project.dir\
   TARGET_PDB = oop1_project.pdb
 
-build CMakeFiles\oop1_project.dir\src\HUD.cpp.obj: CXX_COMPILER__oop1_project_Debug C$:\Users\kashi\Documents\oop1\project\oop1_project-basefiles\src\HUD.cpp || cmake_object_order_depends_target_oop1_project
+build CMakeFiles\oop1_project.dir\src\Graphics.cpp.obj: CXX_COMPILER__oop1_project_Debug C$:\Users\kashi\Documents\oop1\merge_to_hadar\oop1_project-basefiles\src\Graphics.cpp || cmake_object_order_depends_target_oop1_project
   FLAGS = /DWIN32 /D_WINDOWS /EHsc /Zi /Ob0 /Od /RTC1 -MDd /W4 /permissive- /Zc:externConstexpr /Zc:inline /analyze /w14242 /w14263 /w14265 /w14287 /w14296 /w14545 /w14546 /w14547 /w14549 /w14555 /w14826 /w14905 /w14906 /w14928 /we4996 -fsanitize=address -std:c++20
-  INCLUDES = -IC:\Users\kashi\Documents\oop1\project\oop1_project-basefiles\include -IC:\Users\kashi\Documents\oop1\project\oop1_project-basefiles\resources -external:IC:\SFML\SFML-2.5.1\include -external:W0
+  INCLUDES = -IC:\Users\kashi\Documents\oop1\merge_to_hadar\oop1_project-basefiles\include -IC:\Users\kashi\Documents\oop1\merge_to_hadar\oop1_project-basefiles\resources -external:IC:\SFML\SFML-2.5.1\include -external:W0
   OBJECT_DIR = CMakeFiles\oop1_project.dir
   OBJECT_FILE_DIR = CMakeFiles\oop1_project.dir\src
   TARGET_COMPILE_PDB = CMakeFiles\oop1_project.dir\
   TARGET_PDB = oop1_project.pdb
 
-build CMakeFiles\oop1_project.dir\src\MainMenu.cpp.obj: CXX_COMPILER__oop1_project_Debug C$:\Users\kashi\Documents\oop1\project\oop1_project-basefiles\src\MainMenu.cpp || cmake_object_order_depends_target_oop1_project
+build CMakeFiles\oop1_project.dir\src\HUD.cpp.obj: CXX_COMPILER__oop1_project_Debug C$:\Users\kashi\Documents\oop1\merge_to_hadar\oop1_project-basefiles\src\HUD.cpp || cmake_object_order_depends_target_oop1_project
   FLAGS = /DWIN32 /D_WINDOWS /EHsc /Zi /Ob0 /Od /RTC1 -MDd /W4 /permissive- /Zc:externConstexpr /Zc:inline /analyze /w14242 /w14263 /w14265 /w14287 /w14296 /w14545 /w14546 /w14547 /w14549 /w14555 /w14826 /w14905 /w14906 /w14928 /we4996 -fsanitize=address -std:c++20
-  INCLUDES = -IC:\Users\kashi\Documents\oop1\project\oop1_project-basefiles\include -IC:\Users\kashi\Documents\oop1\project\oop1_project-basefiles\resources -external:IC:\SFML\SFML-2.5.1\include -external:W0
+  INCLUDES = -IC:\Users\kashi\Documents\oop1\merge_to_hadar\oop1_project-basefiles\include -IC:\Users\kashi\Documents\oop1\merge_to_hadar\oop1_project-basefiles\resources -external:IC:\SFML\SFML-2.5.1\include -external:W0
   OBJECT_DIR = CMakeFiles\oop1_project.dir
   OBJECT_FILE_DIR = CMakeFiles\oop1_project.dir\src
   TARGET_COMPILE_PDB = CMakeFiles\oop1_project.dir\
   TARGET_PDB = oop1_project.pdb
 
-build CMakeFiles\oop1_project.dir\src\Render.cpp.obj: CXX_COMPILER__oop1_project_Debug C$:\Users\kashi\Documents\oop1\project\oop1_project-basefiles\src\Render.cpp || cmake_object_order_depends_target_oop1_project
+build CMakeFiles\oop1_project.dir\src\MainMenu.cpp.obj: CXX_COMPILER__oop1_project_Debug C$:\Users\kashi\Documents\oop1\merge_to_hadar\oop1_project-basefiles\src\MainMenu.cpp || cmake_object_order_depends_target_oop1_project
   FLAGS = /DWIN32 /D_WINDOWS /EHsc /Zi /Ob0 /Od /RTC1 -MDd /W4 /permissive- /Zc:externConstexpr /Zc:inline /analyze /w14242 /w14263 /w14265 /w14287 /w14296 /w14545 /w14546 /w14547 /w14549 /w14555 /w14826 /w14905 /w14906 /w14928 /we4996 -fsanitize=address -std:c++20
-  INCLUDES = -IC:\Users\kashi\Documents\oop1\project\oop1_project-basefiles\include -IC:\Users\kashi\Documents\oop1\project\oop1_project-basefiles\resources -external:IC:\SFML\SFML-2.5.1\include -external:W0
+  INCLUDES = -IC:\Users\kashi\Documents\oop1\merge_to_hadar\oop1_project-basefiles\include -IC:\Users\kashi\Documents\oop1\merge_to_hadar\oop1_project-basefiles\resources -external:IC:\SFML\SFML-2.5.1\include -external:W0
   OBJECT_DIR = CMakeFiles\oop1_project.dir
   OBJECT_FILE_DIR = CMakeFiles\oop1_project.dir\src
   TARGET_COMPILE_PDB = CMakeFiles\oop1_project.dir\
   TARGET_PDB = oop1_project.pdb
 
-build CMakeFiles\oop1_project.dir\src\main.cpp.obj: CXX_COMPILER__oop1_project_Debug C$:\Users\kashi\Documents\oop1\project\oop1_project-basefiles\src\main.cpp || cmake_object_order_depends_target_oop1_project
+build CMakeFiles\oop1_project.dir\src\Render.cpp.obj: CXX_COMPILER__oop1_project_Debug C$:\Users\kashi\Documents\oop1\merge_to_hadar\oop1_project-basefiles\src\Render.cpp || cmake_object_order_depends_target_oop1_project
   FLAGS = /DWIN32 /D_WINDOWS /EHsc /Zi /Ob0 /Od /RTC1 -MDd /W4 /permissive- /Zc:externConstexpr /Zc:inline /analyze /w14242 /w14263 /w14265 /w14287 /w14296 /w14545 /w14546 /w14547 /w14549 /w14555 /w14826 /w14905 /w14906 /w14928 /we4996 -fsanitize=address -std:c++20
-  INCLUDES = -IC:\Users\kashi\Documents\oop1\project\oop1_project-basefiles\include -IC:\Users\kashi\Documents\oop1\project\oop1_project-basefiles\resources -external:IC:\SFML\SFML-2.5.1\include -external:W0
+  INCLUDES = -IC:\Users\kashi\Documents\oop1\merge_to_hadar\oop1_project-basefiles\include -IC:\Users\kashi\Documents\oop1\merge_to_hadar\oop1_project-basefiles\resources -external:IC:\SFML\SFML-2.5.1\include -external:W0
+  OBJECT_DIR = CMakeFiles\oop1_project.dir
+  OBJECT_FILE_DIR = CMakeFiles\oop1_project.dir\src
+  TARGET_COMPILE_PDB = CMakeFiles\oop1_project.dir\
+  TARGET_PDB = oop1_project.pdb
+
+build CMakeFiles\oop1_project.dir\src\main.cpp.obj: CXX_COMPILER__oop1_project_Debug C$:\Users\kashi\Documents\oop1\merge_to_hadar\oop1_project-basefiles\src\main.cpp || cmake_object_order_depends_target_oop1_project
+  FLAGS = /DWIN32 /D_WINDOWS /EHsc /Zi /Ob0 /Od /RTC1 -MDd /W4 /permissive- /Zc:externConstexpr /Zc:inline /analyze /w14242 /w14263 /w14265 /w14287 /w14296 /w14545 /w14546 /w14547 /w14549 /w14555 /w14826 /w14905 /w14906 /w14928 /we4996 -fsanitize=address -std:c++20
+  INCLUDES = -IC:\Users\kashi\Documents\oop1\merge_to_hadar\oop1_project-basefiles\include -IC:\Users\kashi\Documents\oop1\merge_to_hadar\oop1_project-basefiles\resources -external:IC:\SFML\SFML-2.5.1\include -external:W0
   OBJECT_DIR = CMakeFiles\oop1_project.dir
   OBJECT_FILE_DIR = CMakeFiles\oop1_project.dir\src
   TARGET_COMPILE_PDB = CMakeFiles\oop1_project.dir\
@@ -121,12 +129,12 @@ build CMakeFiles\oop1_project.dir\src\main.cpp.obj: CXX_COMPILER__oop1_project_D
 #############################################
 # Link the executable oop1_project.exe
 
-build oop1_project.exe: CXX_EXECUTABLE_LINKER__oop1_project_Debug CMakeFiles\oop1_project.dir\src\Board.cpp.obj CMakeFiles\oop1_project.dir\src\Controller.cpp.obj CMakeFiles\oop1_project.dir\src\GameObject.cpp.obj CMakeFiles\oop1_project.dir\src\Graphics.cpp.obj CMakeFiles\oop1_project.dir\src\HUD.cpp.obj CMakeFiles\oop1_project.dir\src\MainMenu.cpp.obj CMakeFiles\oop1_project.dir\src\Render.cpp.obj CMakeFiles\oop1_project.dir\src\main.cpp.obj | C$:\SFML\SFML-2.5.1\lib\sfml-graphics-d.lib C$:\SFML\SFML-2.5.1\lib\sfml-audio-d.lib C$:\SFML\SFML-2.5.1\lib\sfml-main-d.lib C$:\SFML\SFML-2.5.1\lib\sfml-window-d.lib C$:\SFML\SFML-2.5.1\lib\sfml-system-d.lib
+build oop1_project.exe: CXX_EXECUTABLE_LINKER__oop1_project_Debug CMakeFiles\oop1_project.dir\src\Board.cpp.obj CMakeFiles\oop1_project.dir\src\Controller.cpp.obj CMakeFiles\oop1_project.dir\src\GameObject.cpp.obj CMakeFiles\oop1_project.dir\src\Ghost.cpp.obj CMakeFiles\oop1_project.dir\src\Graphics.cpp.obj CMakeFiles\oop1_project.dir\src\HUD.cpp.obj CMakeFiles\oop1_project.dir\src\MainMenu.cpp.obj CMakeFiles\oop1_project.dir\src\Render.cpp.obj CMakeFiles\oop1_project.dir\src\main.cpp.obj | C$:\SFML\SFML-2.5.1\lib\sfml-graphics-d.lib C$:\SFML\SFML-2.5.1\lib\sfml-audio-d.lib C$:\SFML\SFML-2.5.1\lib\sfml-main-d.lib C$:\SFML\SFML-2.5.1\lib\sfml-window-d.lib C$:\SFML\SFML-2.5.1\lib\sfml-system-d.lib
   FLAGS = /DWIN32 /D_WINDOWS /EHsc /Zi /Ob0 /Od /RTC1 -MDd
   LINK_FLAGS = /machine:x64 /debug /INCREMENTAL /subsystem:windows  -fsanitize=address
   LINK_LIBRARIES = C:\SFML\SFML-2.5.1\lib\sfml-graphics-d.lib  C:\SFML\SFML-2.5.1\lib\sfml-audio-d.lib  C:\SFML\SFML-2.5.1\lib\sfml-main-d.lib  C:\SFML\SFML-2.5.1\lib\sfml-window-d.lib  C:\SFML\SFML-2.5.1\lib\sfml-system-d.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
   OBJECT_DIR = CMakeFiles\oop1_project.dir
-  POST_BUILD = cmd.exe /C "cd /D C:\Users\kashi\Documents\oop1\project\oop1_project-basefiles\out\build\x64-Debug && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E copy_if_different C:/SFML/SFML-2.5.1/bin/sfml-graphics-d-2.dll C:/SFML/SFML-2.5.1/bin/sfml-audio-d-2.dll C:/SFML/SFML-2.5.1/bin/sfml-window-d-2.dll C:/SFML/SFML-2.5.1/bin/sfml-system-d-2.dll C:/Users/kashi/Documents/oop1/project/oop1_project-basefiles/out/build/x64-Debug"
+  POST_BUILD = cmd.exe /C "cd /D C:\Users\kashi\Documents\oop1\merge_to_hadar\oop1_project-basefiles\out\build\x64-Debug && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E copy_if_different C:/SFML/SFML-2.5.1/bin/sfml-graphics-d-2.dll C:/SFML/SFML-2.5.1/bin/sfml-audio-d-2.dll C:/SFML/SFML-2.5.1/bin/sfml-window-d-2.dll C:/SFML/SFML-2.5.1/bin/sfml-system-d-2.dll C:/Users/kashi/Documents/oop1/merge_to_hadar/oop1_project-basefiles/out/build/x64-Debug"
   PRE_LINK = cd .
   TARGET_COMPILE_PDB = CMakeFiles\oop1_project.dir\
   TARGET_FILE = oop1_project.exe
@@ -150,7 +158,7 @@ build ZipBackup: phony CMakeFiles\ZipBackup
 # Utility command for package
 
 build CMakeFiles\package.util: CUSTOM_COMMAND all
-  COMMAND = cmd.exe /C "cd /D C:\Users\kashi\Documents\oop1\project\oop1_project-basefiles\out\build\x64-Debug && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cpack.exe" --config ./CPackConfig.cmake"
+  COMMAND = cmd.exe /C "cd /D C:\Users\kashi\Documents\oop1\merge_to_hadar\oop1_project-basefiles\out\build\x64-Debug && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cpack.exe" --config ./CPackConfig.cmake"
   DESC = Run CPack packaging tool...
   pool = console
   restat = 1
@@ -162,7 +170,7 @@ build package: phony CMakeFiles\package.util
 # Utility command for package_source
 
 build CMakeFiles\package_source.util: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D C:\Users\kashi\Documents\oop1\project\oop1_project-basefiles\out\build\x64-Debug && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cpack.exe" --config ./CPackSourceConfig.cmake C:/Users/kashi/Documents/oop1/project/oop1_project-basefiles/out/build/x64-Debug/CPackSourceConfig.cmake"
+  COMMAND = cmd.exe /C "cd /D C:\Users\kashi\Documents\oop1\merge_to_hadar\oop1_project-basefiles\out\build\x64-Debug && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cpack.exe" --config ./CPackSourceConfig.cmake C:/Users/kashi/Documents/oop1/merge_to_hadar/oop1_project-basefiles/out/build/x64-Debug/CPackSourceConfig.cmake"
   DESC = Run CPack packaging tool for source...
   pool = console
   restat = 1
@@ -174,7 +182,7 @@ build package_source: phony CMakeFiles\package_source.util
 # Utility command for edit_cache
 
 build CMakeFiles\edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D C:\Users\kashi\Documents\oop1\project\oop1_project-basefiles\out\build\x64-Debug && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
+  COMMAND = cmd.exe /C "cd /D C:\Users\kashi\Documents\oop1\merge_to_hadar\oop1_project-basefiles\out\build\x64-Debug && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
   DESC = No interactive CMake dialog available...
   restat = 1
 
@@ -185,7 +193,7 @@ build edit_cache: phony CMakeFiles\edit_cache.util
 # Utility command for rebuild_cache
 
 build CMakeFiles\rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D C:\Users\kashi\Documents\oop1\project\oop1_project-basefiles\out\build\x64-Debug && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" --regenerate-during-build -SC:\Users\kashi\Documents\oop1\project\oop1_project-basefiles -BC:\Users\kashi\Documents\oop1\project\oop1_project-basefiles\out\build\x64-Debug"
+  COMMAND = cmd.exe /C "cd /D C:\Users\kashi\Documents\oop1\merge_to_hadar\oop1_project-basefiles\out\build\x64-Debug && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" --regenerate-during-build -SC:\Users\kashi\Documents\oop1\merge_to_hadar\oop1_project-basefiles -BC:\Users\kashi\Documents\oop1\merge_to_hadar\oop1_project-basefiles\out\build\x64-Debug"
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -197,18 +205,18 @@ build rebuild_cache: phony CMakeFiles\rebuild_cache.util
 # Custom command for CMakeFiles\Zip
 
 build CMakeFiles\Zip | ${cmake_ninja_workdir}CMakeFiles\Zip: CUSTOM_COMMAND || oop1_project.exe
-  COMMAND = cmd.exe /C "cd /D C:\Users\kashi\Documents\oop1\project\oop1_project-basefiles\out\build\x64-Debug && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" --build C:/Users/kashi/Documents/oop1/project/oop1_project-basefiles/out/build/x64-Debug --target package_source && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E copy C:/Users/kashi/Documents/oop1/project/oop1_project-basefiles/out/build/x64-Debug/oop1_project-your_name_here.zip C:/Users/kashi/Documents/oop1/project && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E echo  && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E echo "*** C:/Users/kashi/Documents/oop1/project/oop1_project-your_name_here.zip file created ***""
+  COMMAND = cmd.exe /C "cd /D C:\Users\kashi\Documents\oop1\merge_to_hadar\oop1_project-basefiles\out\build\x64-Debug && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" --build C:/Users/kashi/Documents/oop1/merge_to_hadar/oop1_project-basefiles/out/build/x64-Debug --target package_source && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E copy C:/Users/kashi/Documents/oop1/merge_to_hadar/oop1_project-basefiles/out/build/x64-Debug/oop1_project-your_name_here.zip C:/Users/kashi/Documents/oop1/merge_to_hadar && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E echo  && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E echo "*** C:/Users/kashi/Documents/oop1/merge_to_hadar/oop1_project-your_name_here.zip file created ***""
 
 
 #############################################
 # Custom command for CMakeFiles\ZipBackup
 
 build CMakeFiles\ZipBackup | ${cmake_ninja_workdir}CMakeFiles\ZipBackup: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D C:\Users\kashi\Documents\oop1\project\oop1_project-basefiles\out\build\x64-Debug && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -P C:/Users/kashi/Documents/oop1/project/oop1_project-basefiles/out/build/x64-Debug/ZipBackup.cmake"
+  COMMAND = cmd.exe /C "cd /D C:\Users\kashi\Documents\oop1\merge_to_hadar\oop1_project-basefiles\out\build\x64-Debug && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -P C:/Users/kashi/Documents/oop1/merge_to_hadar/oop1_project-basefiles/out/build/x64-Debug/ZipBackup.cmake"
 
 # =============================================================================
 # Write statements declared in CMakeLists.txt:
-# C:/Users/kashi/Documents/oop1/project/oop1_project-basefiles/CMakeLists.txt
+# C:/Users/kashi/Documents/oop1/merge_to_hadar/oop1_project-basefiles/CMakeLists.txt
 # =============================================================================
 
 
@@ -216,7 +224,7 @@ build CMakeFiles\ZipBackup | ${cmake_ninja_workdir}CMakeFiles\ZipBackup: CUSTOM_
 # Utility command for package
 
 build include\CMakeFiles\package.util: CUSTOM_COMMAND include\all
-  COMMAND = cmd.exe /C "cd /D C:\Users\kashi\Documents\oop1\project\oop1_project-basefiles\out\build\x64-Debug && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cpack.exe" --config ./CPackConfig.cmake"
+  COMMAND = cmd.exe /C "cd /D C:\Users\kashi\Documents\oop1\merge_to_hadar\oop1_project-basefiles\out\build\x64-Debug && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cpack.exe" --config ./CPackConfig.cmake"
   DESC = Run CPack packaging tool...
   pool = console
   restat = 1
@@ -228,7 +236,7 @@ build include\package: phony include\CMakeFiles\package.util
 # Utility command for package_source
 
 build include\CMakeFiles\package_source.util: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D C:\Users\kashi\Documents\oop1\project\oop1_project-basefiles\out\build\x64-Debug && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cpack.exe" --config ./CPackSourceConfig.cmake C:/Users/kashi/Documents/oop1/project/oop1_project-basefiles/out/build/x64-Debug/CPackSourceConfig.cmake"
+  COMMAND = cmd.exe /C "cd /D C:\Users\kashi\Documents\oop1\merge_to_hadar\oop1_project-basefiles\out\build\x64-Debug && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cpack.exe" --config ./CPackSourceConfig.cmake C:/Users/kashi/Documents/oop1/merge_to_hadar/oop1_project-basefiles/out/build/x64-Debug/CPackSourceConfig.cmake"
   DESC = Run CPack packaging tool for source...
   pool = console
   restat = 1
@@ -240,7 +248,7 @@ build include\package_source: phony include\CMakeFiles\package_source.util
 # Utility command for edit_cache
 
 build include\CMakeFiles\edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D C:\Users\kashi\Documents\oop1\project\oop1_project-basefiles\out\build\x64-Debug\include && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
+  COMMAND = cmd.exe /C "cd /D C:\Users\kashi\Documents\oop1\merge_to_hadar\oop1_project-basefiles\out\build\x64-Debug\include && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
   DESC = No interactive CMake dialog available...
   restat = 1
 
@@ -251,7 +259,7 @@ build include\edit_cache: phony include\CMakeFiles\edit_cache.util
 # Utility command for rebuild_cache
 
 build include\CMakeFiles\rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D C:\Users\kashi\Documents\oop1\project\oop1_project-basefiles\out\build\x64-Debug\include && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" --regenerate-during-build -SC:\Users\kashi\Documents\oop1\project\oop1_project-basefiles -BC:\Users\kashi\Documents\oop1\project\oop1_project-basefiles\out\build\x64-Debug"
+  COMMAND = cmd.exe /C "cd /D C:\Users\kashi\Documents\oop1\merge_to_hadar\oop1_project-basefiles\out\build\x64-Debug\include && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" --regenerate-during-build -SC:\Users\kashi\Documents\oop1\merge_to_hadar\oop1_project-basefiles -BC:\Users\kashi\Documents\oop1\merge_to_hadar\oop1_project-basefiles\out\build\x64-Debug"
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -260,7 +268,7 @@ build include\rebuild_cache: phony include\CMakeFiles\rebuild_cache.util
 
 # =============================================================================
 # Write statements declared in CMakeLists.txt:
-# C:/Users/kashi/Documents/oop1/project/oop1_project-basefiles/CMakeLists.txt
+# C:/Users/kashi/Documents/oop1/merge_to_hadar/oop1_project-basefiles/CMakeLists.txt
 # =============================================================================
 
 
@@ -268,7 +276,7 @@ build include\rebuild_cache: phony include\CMakeFiles\rebuild_cache.util
 # Utility command for package
 
 build src\CMakeFiles\package.util: CUSTOM_COMMAND src\all
-  COMMAND = cmd.exe /C "cd /D C:\Users\kashi\Documents\oop1\project\oop1_project-basefiles\out\build\x64-Debug && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cpack.exe" --config ./CPackConfig.cmake"
+  COMMAND = cmd.exe /C "cd /D C:\Users\kashi\Documents\oop1\merge_to_hadar\oop1_project-basefiles\out\build\x64-Debug && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cpack.exe" --config ./CPackConfig.cmake"
   DESC = Run CPack packaging tool...
   pool = console
   restat = 1
@@ -280,7 +288,7 @@ build src\package: phony src\CMakeFiles\package.util
 # Utility command for package_source
 
 build src\CMakeFiles\package_source.util: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D C:\Users\kashi\Documents\oop1\project\oop1_project-basefiles\out\build\x64-Debug && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cpack.exe" --config ./CPackSourceConfig.cmake C:/Users/kashi/Documents/oop1/project/oop1_project-basefiles/out/build/x64-Debug/CPackSourceConfig.cmake"
+  COMMAND = cmd.exe /C "cd /D C:\Users\kashi\Documents\oop1\merge_to_hadar\oop1_project-basefiles\out\build\x64-Debug && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cpack.exe" --config ./CPackSourceConfig.cmake C:/Users/kashi/Documents/oop1/merge_to_hadar/oop1_project-basefiles/out/build/x64-Debug/CPackSourceConfig.cmake"
   DESC = Run CPack packaging tool for source...
   pool = console
   restat = 1
@@ -292,7 +300,7 @@ build src\package_source: phony src\CMakeFiles\package_source.util
 # Utility command for edit_cache
 
 build src\CMakeFiles\edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D C:\Users\kashi\Documents\oop1\project\oop1_project-basefiles\out\build\x64-Debug\src && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
+  COMMAND = cmd.exe /C "cd /D C:\Users\kashi\Documents\oop1\merge_to_hadar\oop1_project-basefiles\out\build\x64-Debug\src && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
   DESC = No interactive CMake dialog available...
   restat = 1
 
@@ -303,7 +311,7 @@ build src\edit_cache: phony src\CMakeFiles\edit_cache.util
 # Utility command for rebuild_cache
 
 build src\CMakeFiles\rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D C:\Users\kashi\Documents\oop1\project\oop1_project-basefiles\out\build\x64-Debug\src && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" --regenerate-during-build -SC:\Users\kashi\Documents\oop1\project\oop1_project-basefiles -BC:\Users\kashi\Documents\oop1\project\oop1_project-basefiles\out\build\x64-Debug"
+  COMMAND = cmd.exe /C "cd /D C:\Users\kashi\Documents\oop1\merge_to_hadar\oop1_project-basefiles\out\build\x64-Debug\src && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" --regenerate-during-build -SC:\Users\kashi\Documents\oop1\merge_to_hadar\oop1_project-basefiles -BC:\Users\kashi\Documents\oop1\merge_to_hadar\oop1_project-basefiles\out\build\x64-Debug"
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -312,7 +320,7 @@ build src\rebuild_cache: phony src\CMakeFiles\rebuild_cache.util
 
 # =============================================================================
 # Write statements declared in CMakeLists.txt:
-# C:/Users/kashi/Documents/oop1/project/oop1_project-basefiles/CMakeLists.txt
+# C:/Users/kashi/Documents/oop1/merge_to_hadar/oop1_project-basefiles/CMakeLists.txt
 # =============================================================================
 
 
@@ -320,7 +328,7 @@ build src\rebuild_cache: phony src\CMakeFiles\rebuild_cache.util
 # Utility command for package
 
 build resources\CMakeFiles\package.util: CUSTOM_COMMAND resources\all
-  COMMAND = cmd.exe /C "cd /D C:\Users\kashi\Documents\oop1\project\oop1_project-basefiles\out\build\x64-Debug && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cpack.exe" --config ./CPackConfig.cmake"
+  COMMAND = cmd.exe /C "cd /D C:\Users\kashi\Documents\oop1\merge_to_hadar\oop1_project-basefiles\out\build\x64-Debug && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cpack.exe" --config ./CPackConfig.cmake"
   DESC = Run CPack packaging tool...
   pool = console
   restat = 1
@@ -332,7 +340,7 @@ build resources\package: phony resources\CMakeFiles\package.util
 # Utility command for package_source
 
 build resources\CMakeFiles\package_source.util: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D C:\Users\kashi\Documents\oop1\project\oop1_project-basefiles\out\build\x64-Debug && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cpack.exe" --config ./CPackSourceConfig.cmake C:/Users/kashi/Documents/oop1/project/oop1_project-basefiles/out/build/x64-Debug/CPackSourceConfig.cmake"
+  COMMAND = cmd.exe /C "cd /D C:\Users\kashi\Documents\oop1\merge_to_hadar\oop1_project-basefiles\out\build\x64-Debug && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cpack.exe" --config ./CPackSourceConfig.cmake C:/Users/kashi/Documents/oop1/merge_to_hadar/oop1_project-basefiles/out/build/x64-Debug/CPackSourceConfig.cmake"
   DESC = Run CPack packaging tool for source...
   pool = console
   restat = 1
@@ -344,7 +352,7 @@ build resources\package_source: phony resources\CMakeFiles\package_source.util
 # Utility command for edit_cache
 
 build resources\CMakeFiles\edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D C:\Users\kashi\Documents\oop1\project\oop1_project-basefiles\out\build\x64-Debug\resources && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
+  COMMAND = cmd.exe /C "cd /D C:\Users\kashi\Documents\oop1\merge_to_hadar\oop1_project-basefiles\out\build\x64-Debug\resources && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
   DESC = No interactive CMake dialog available...
   restat = 1
 
@@ -355,7 +363,7 @@ build resources\edit_cache: phony resources\CMakeFiles\edit_cache.util
 # Utility command for rebuild_cache
 
 build resources\CMakeFiles\rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D C:\Users\kashi\Documents\oop1\project\oop1_project-basefiles\out\build\x64-Debug\resources && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" --regenerate-during-build -SC:\Users\kashi\Documents\oop1\project\oop1_project-basefiles -BC:\Users\kashi\Documents\oop1\project\oop1_project-basefiles\out\build\x64-Debug"
+  COMMAND = cmd.exe /C "cd /D C:\Users\kashi\Documents\oop1\merge_to_hadar\oop1_project-basefiles\out\build\x64-Debug\resources && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" --regenerate-during-build -SC:\Users\kashi\Documents\oop1\merge_to_hadar\oop1_project-basefiles -BC:\Users\kashi\Documents\oop1\merge_to_hadar\oop1_project-basefiles\out\build\x64-Debug"
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -373,28 +381,28 @@ build oop1_project: phony oop1_project.exe
 # =============================================================================
 
 #############################################
-# Folder: C:/Users/kashi/Documents/oop1/project/oop1_project-basefiles/out/build/x64-Debug
+# Folder: C:/Users/kashi/Documents/oop1/merge_to_hadar/oop1_project-basefiles/out/build/x64-Debug
 
 build all: phony oop1_project.exe include\all src\all resources\all
 
 # =============================================================================
 
 #############################################
-# Folder: C:/Users/kashi/Documents/oop1/project/oop1_project-basefiles/out/build/x64-Debug/include
+# Folder: C:/Users/kashi/Documents/oop1/merge_to_hadar/oop1_project-basefiles/out/build/x64-Debug/include
 
 build include\all: phony
 
 # =============================================================================
 
 #############################################
-# Folder: C:/Users/kashi/Documents/oop1/project/oop1_project-basefiles/out/build/x64-Debug/resources
+# Folder: C:/Users/kashi/Documents/oop1/merge_to_hadar/oop1_project-basefiles/out/build/x64-Debug/resources
 
 build resources\all: phony
 
 # =============================================================================
 
 #############################################
-# Folder: C:/Users/kashi/Documents/oop1/project/oop1_project-basefiles/out/build/x64-Debug/src
+# Folder: C:/Users/kashi/Documents/oop1/merge_to_hadar/oop1_project-basefiles/out/build/x64-Debug/src
 
 build src\all: phony
 
@@ -405,13 +413,13 @@ build src\all: phony
 #############################################
 # Phony target to force glob verification run.
 
-build C$:\Users\kashi\Documents\oop1\project\oop1_project-basefiles\out\build\x64-Debug\CMakeFiles\VerifyGlobs.cmake_force: phony
+build C$:\Users\kashi\Documents\oop1\merge_to_hadar\oop1_project-basefiles\out\build\x64-Debug\CMakeFiles\VerifyGlobs.cmake_force: phony
 
 
 #############################################
 # Re-run CMake to check if globbed directories changed.
 
-build C$:\Users\kashi\Documents\oop1\project\oop1_project-basefiles\out\build\x64-Debug\CMakeFiles\cmake.verify_globs: VERIFY_GLOBS | C$:\Users\kashi\Documents\oop1\project\oop1_project-basefiles\out\build\x64-Debug\CMakeFiles\VerifyGlobs.cmake_force
+build C$:\Users\kashi\Documents\oop1\merge_to_hadar\oop1_project-basefiles\out\build\x64-Debug\CMakeFiles\cmake.verify_globs: VERIFY_GLOBS | C$:\Users\kashi\Documents\oop1\merge_to_hadar\oop1_project-basefiles\out\build\x64-Debug\CMakeFiles\VerifyGlobs.cmake_force
   pool = console
   restat = 1
 
@@ -419,14 +427,14 @@ build C$:\Users\kashi\Documents\oop1\project\oop1_project-basefiles\out\build\x6
 #############################################
 # Re-run CMake if any of its inputs changed.
 
-build build.ninja: RERUN_CMAKE C$:\Users\kashi\Documents\oop1\project\oop1_project-basefiles\out\build\x64-Debug\CMakeFiles\cmake.verify_globs | ..\..\..\CMakeLists.txt ..\..\..\cmake\CompilerSettings.cmake ..\..\..\cmake\SFML.cmake ..\..\..\cmake\Zip.cmake ..\..\..\include\CMakeLists.txt ..\..\..\resources\CMakeLists.txt ..\..\..\resources\cleanPage.png ..\..\..\resources\cookie.png ..\..\..\resources\digger.png ..\..\..\resources\door.png ..\..\..\resources\eraser.png ..\..\..\resources\greenGhost.png ..\..\..\resources\help.png ..\..\..\resources\key.png ..\..\..\resources\logo1.png ..\..\..\resources\orangeGhost.png ..\..\..\resources\pacman.png ..\..\..\resources\pinkGhost.png ..\..\..\resources\present.png ..\..\..\resources\redGhost.png ..\..\..\resources\save.png ..\..\..\resources\wall.png ..\..\..\src\CMakeLists.txt C$:\Users\kashi\Documents\oop1\project\oop1_project-basefiles\out\build\x64-Debug\CMakeFiles\VerifyGlobs.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.23\Modules\CMakeCInformation.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.23\Modules\CMakeCXXInformation.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.23\Modules\CMakeCommonLanguageInclude.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.23\Modules\CMakeGenericSystem.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.23\Modules\CMakeInitializeConfigs.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.23\Modules\CMakeLanguageInformation.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.23\Modules\CMakeRCInformation.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.23\Modules\CMakeSystemSpecificInformation.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.23\Modules\CMakeSystemSpecificInitialize.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.23\Modules\CPack.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.23\Modules\CPackComponent.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.23\Modules\Compiler\CMakeCommonCompilerMacros.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.23\Modules\Compiler\MSVC-C.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.23\Modules\Compiler\MSVC-CXX.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.23\Modules\Platform\Windows-MSVC-C.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.23\Modules\Platform\Windows-MSVC-CXX.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.23\Modules\Platform\Windows-MSVC.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.23\Modules\Platform\Windows.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.23\Modules\Platform\WindowsPaths.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.23\Templates\CPackConfig.cmake.in C$:\SFML\SFML-2.5.1\bin\openal32.dll C$:\SFML\SFML-2.5.1\lib\cmake\SFML\SFMLConfig.cmake C$:\SFML\SFML-2.5.1\lib\cmake\SFML\SFMLConfigDependencies.cmake C$:\SFML\SFML-2.5.1\lib\cmake\SFML\SFMLConfigVersion.cmake C$:\SFML\SFML-2.5.1\lib\cmake\SFML\SFMLSharedTargets-debug.cmake C$:\SFML\SFML-2.5.1\lib\cmake\SFML\SFMLSharedTargets-release.cmake C$:\SFML\SFML-2.5.1\lib\cmake\SFML\SFMLSharedTargets.cmake CMakeCache.txt CMakeFiles\3.23.22060601-MSVC_2\CMakeCCompiler.cmake CMakeFiles\3.23.22060601-MSVC_2\CMakeCXXCompiler.cmake CMakeFiles\3.23.22060601-MSVC_2\CMakeRCCompiler.cmake CMakeFiles\3.23.22060601-MSVC_2\CMakeSystem.cmake
+build build.ninja: RERUN_CMAKE C$:\Users\kashi\Documents\oop1\merge_to_hadar\oop1_project-basefiles\out\build\x64-Debug\CMakeFiles\cmake.verify_globs | ..\..\..\CMakeLists.txt ..\..\..\cmake\CompilerSettings.cmake ..\..\..\cmake\SFML.cmake ..\..\..\cmake\Zip.cmake ..\..\..\include\CMakeLists.txt ..\..\..\resources\CMakeLists.txt ..\..\..\resources\background.wav ..\..\..\resources\cleanPage.png ..\..\..\resources\cookie.png ..\..\..\resources\digger.png ..\..\..\resources\door.png ..\..\..\resources\door_open.wav ..\..\..\resources\eat_cookie.wav ..\..\..\resources\eraser.png ..\..\..\resources\finish_level.wav ..\..\..\resources\game_over.wav ..\..\..\resources\ghost_eaten.wav ..\..\..\resources\greenGhost.png ..\..\..\resources\help.png ..\..\..\resources\key.png ..\..\..\resources\logo1.png ..\..\..\resources\orangeGhost.png ..\..\..\resources\pacman.png ..\..\..\resources\pacman_dead.wav ..\..\..\resources\pinkGhost.png ..\..\..\resources\present.png ..\..\..\resources\present.wav ..\..\..\resources\redGhost.png ..\..\..\resources\save.png ..\..\..\resources\timer.wav ..\..\..\resources\wall.png ..\..\..\src\CMakeLists.txt C$:\Users\kashi\Documents\oop1\merge_to_hadar\oop1_project-basefiles\out\build\x64-Debug\CMakeFiles\VerifyGlobs.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.23\Modules\CMakeCInformation.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.23\Modules\CMakeCXXInformation.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.23\Modules\CMakeCommonLanguageInclude.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.23\Modules\CMakeGenericSystem.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.23\Modules\CMakeInitializeConfigs.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.23\Modules\CMakeLanguageInformation.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.23\Modules\CMakeRCInformation.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.23\Modules\CMakeSystemSpecificInformation.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.23\Modules\CMakeSystemSpecificInitialize.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.23\Modules\CPack.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.23\Modules\CPackComponent.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.23\Modules\Compiler\CMakeCommonCompilerMacros.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.23\Modules\Compiler\MSVC-C.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.23\Modules\Compiler\MSVC-CXX.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.23\Modules\Platform\Windows-MSVC-C.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.23\Modules\Platform\Windows-MSVC-CXX.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.23\Modules\Platform\Windows-MSVC.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.23\Modules\Platform\Windows.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.23\Modules\Platform\WindowsPaths.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.23\Templates\CPackConfig.cmake.in C$:\SFML\SFML-2.5.1\bin\openal32.dll C$:\SFML\SFML-2.5.1\lib\cmake\SFML\SFMLConfig.cmake C$:\SFML\SFML-2.5.1\lib\cmake\SFML\SFMLConfigDependencies.cmake C$:\SFML\SFML-2.5.1\lib\cmake\SFML\SFMLConfigVersion.cmake C$:\SFML\SFML-2.5.1\lib\cmake\SFML\SFMLSharedTargets-debug.cmake C$:\SFML\SFML-2.5.1\lib\cmake\SFML\SFMLSharedTargets-release.cmake C$:\SFML\SFML-2.5.1\lib\cmake\SFML\SFMLSharedTargets.cmake CMakeCache.txt CMakeFiles\3.23.22060601-MSVC_2\CMakeCCompiler.cmake CMakeFiles\3.23.22060601-MSVC_2\CMakeCXXCompiler.cmake CMakeFiles\3.23.22060601-MSVC_2\CMakeRCCompiler.cmake CMakeFiles\3.23.22060601-MSVC_2\CMakeSystem.cmake
   pool = console
 
 
 #############################################
 # A missing CMake input file is not an error.
 
-build ..\..\..\CMakeLists.txt ..\..\..\cmake\CompilerSettings.cmake ..\..\..\cmake\SFML.cmake ..\..\..\cmake\Zip.cmake ..\..\..\include\CMakeLists.txt ..\..\..\resources\CMakeLists.txt ..\..\..\resources\cleanPage.png ..\..\..\resources\cookie.png ..\..\..\resources\digger.png ..\..\..\resources\door.png ..\..\..\resources\eraser.png ..\..\..\resources\greenGhost.png ..\..\..\resources\help.png ..\..\..\resources\key.png ..\..\..\resources\logo1.png ..\..\..\resources\orangeGhost.png ..\..\..\resources\pacman.png ..\..\..\resources\pinkGhost.png ..\..\..\resources\present.png ..\..\..\resources\redGhost.png ..\..\..\resources\save.png ..\..\..\resources\wall.png ..\..\..\src\CMakeLists.txt C$:\Users\kashi\Documents\oop1\project\oop1_project-basefiles\out\build\x64-Debug\CMakeFiles\VerifyGlobs.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.23\Modules\CMakeCInformation.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.23\Modules\CMakeCXXInformation.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.23\Modules\CMakeCommonLanguageInclude.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.23\Modules\CMakeGenericSystem.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.23\Modules\CMakeInitializeConfigs.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.23\Modules\CMakeLanguageInformation.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.23\Modules\CMakeRCInformation.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.23\Modules\CMakeSystemSpecificInformation.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.23\Modules\CMakeSystemSpecificInitialize.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.23\Modules\CPack.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.23\Modules\CPackComponent.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.23\Modules\Compiler\CMakeCommonCompilerMacros.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.23\Modules\Compiler\MSVC-C.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.23\Modules\Compiler\MSVC-CXX.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.23\Modules\Platform\Windows-MSVC-C.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.23\Modules\Platform\Windows-MSVC-CXX.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.23\Modules\Platform\Windows-MSVC.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.23\Modules\Platform\Windows.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.23\Modules\Platform\WindowsPaths.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.23\Templates\CPackConfig.cmake.in C$:\SFML\SFML-2.5.1\bin\openal32.dll C$:\SFML\SFML-2.5.1\lib\cmake\SFML\SFMLConfig.cmake C$:\SFML\SFML-2.5.1\lib\cmake\SFML\SFMLConfigDependencies.cmake C$:\SFML\SFML-2.5.1\lib\cmake\SFML\SFMLConfigVersion.cmake C$:\SFML\SFML-2.5.1\lib\cmake\SFML\SFMLSharedTargets-debug.cmake C$:\SFML\SFML-2.5.1\lib\cmake\SFML\SFMLSharedTargets-release.cmake C$:\SFML\SFML-2.5.1\lib\cmake\SFML\SFMLSharedTargets.cmake CMakeCache.txt CMakeFiles\3.23.22060601-MSVC_2\CMakeCCompiler.cmake CMakeFiles\3.23.22060601-MSVC_2\CMakeCXXCompiler.cmake CMakeFiles\3.23.22060601-MSVC_2\CMakeRCCompiler.cmake CMakeFiles\3.23.22060601-MSVC_2\CMakeSystem.cmake: phony
+build ..\..\..\CMakeLists.txt ..\..\..\cmake\CompilerSettings.cmake ..\..\..\cmake\SFML.cmake ..\..\..\cmake\Zip.cmake ..\..\..\include\CMakeLists.txt ..\..\..\resources\CMakeLists.txt ..\..\..\resources\background.wav ..\..\..\resources\cleanPage.png ..\..\..\resources\cookie.png ..\..\..\resources\digger.png ..\..\..\resources\door.png ..\..\..\resources\door_open.wav ..\..\..\resources\eat_cookie.wav ..\..\..\resources\eraser.png ..\..\..\resources\finish_level.wav ..\..\..\resources\game_over.wav ..\..\..\resources\ghost_eaten.wav ..\..\..\resources\greenGhost.png ..\..\..\resources\help.png ..\..\..\resources\key.png ..\..\..\resources\logo1.png ..\..\..\resources\orangeGhost.png ..\..\..\resources\pacman.png ..\..\..\resources\pacman_dead.wav ..\..\..\resources\pinkGhost.png ..\..\..\resources\present.png ..\..\..\resources\present.wav ..\..\..\resources\redGhost.png ..\..\..\resources\save.png ..\..\..\resources\timer.wav ..\..\..\resources\wall.png ..\..\..\src\CMakeLists.txt C$:\Users\kashi\Documents\oop1\merge_to_hadar\oop1_project-basefiles\out\build\x64-Debug\CMakeFiles\VerifyGlobs.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.23\Modules\CMakeCInformation.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.23\Modules\CMakeCXXInformation.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.23\Modules\CMakeCommonLanguageInclude.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.23\Modules\CMakeGenericSystem.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.23\Modules\CMakeInitializeConfigs.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.23\Modules\CMakeLanguageInformation.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.23\Modules\CMakeRCInformation.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.23\Modules\CMakeSystemSpecificInformation.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.23\Modules\CMakeSystemSpecificInitialize.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.23\Modules\CPack.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.23\Modules\CPackComponent.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.23\Modules\Compiler\CMakeCommonCompilerMacros.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.23\Modules\Compiler\MSVC-C.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.23\Modules\Compiler\MSVC-CXX.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.23\Modules\Platform\Windows-MSVC-C.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.23\Modules\Platform\Windows-MSVC-CXX.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.23\Modules\Platform\Windows-MSVC.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.23\Modules\Platform\Windows.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.23\Modules\Platform\WindowsPaths.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.23\Templates\CPackConfig.cmake.in C$:\SFML\SFML-2.5.1\bin\openal32.dll C$:\SFML\SFML-2.5.1\lib\cmake\SFML\SFMLConfig.cmake C$:\SFML\SFML-2.5.1\lib\cmake\SFML\SFMLConfigDependencies.cmake C$:\SFML\SFML-2.5.1\lib\cmake\SFML\SFMLConfigVersion.cmake C$:\SFML\SFML-2.5.1\lib\cmake\SFML\SFMLSharedTargets-debug.cmake C$:\SFML\SFML-2.5.1\lib\cmake\SFML\SFMLSharedTargets-release.cmake C$:\SFML\SFML-2.5.1\lib\cmake\SFML\SFMLSharedTargets.cmake CMakeCache.txt CMakeFiles\3.23.22060601-MSVC_2\CMakeCCompiler.cmake CMakeFiles\3.23.22060601-MSVC_2\CMakeCXXCompiler.cmake CMakeFiles\3.23.22060601-MSVC_2\CMakeRCCompiler.cmake CMakeFiles\3.23.22060601-MSVC_2\CMakeSystem.cmake: phony
 
 
 #############################################
