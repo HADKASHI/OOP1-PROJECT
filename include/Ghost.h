@@ -7,7 +7,6 @@ class Ghost : public MovingObjects
 {
 public:
 	Ghost(float edgeSize, sf::Vector2f position, char c);
-	//void update(sf::Time delta, sf::Vector2f targetPosition);
 	virtual void moveGhost(sf::Time delta, sf::Vector2f pacmanPosition, sf::Vector2f pacmanDirection) = 0;
 	void gotStuck() { m_stuck = true; }
 	bool isStuck() const { return m_stuck; }

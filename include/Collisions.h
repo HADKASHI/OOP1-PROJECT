@@ -5,6 +5,7 @@
 #include <algorithm>
 #include <memory>
 #include "GameObject.h"
+#include "Resources.h"
 
 
 
@@ -95,7 +96,10 @@ namespace { // unnamed namespace — the standard way to make function "static"
     {
         Door& c_door = dynamic_cast<Door&>(door);
         if (PacmanState::instance().isSuper())
+        {
+            Resources::instance().playMusic(DOOR_OPEN);
             c_door.isEaten();
+        }
         else
         {
             auto wall = Wall(c_door.getSize().x, c_door.getPosition(), '#');
@@ -106,25 +110,60 @@ namespace { // unnamed namespace — the standard way to make function "static"
     void pacmanWithCookie(GameObject& pacman,
         GameObject& cookie)
     {
+        Resources::instance().playMusic(EAT_COOKIE);
         Pacman& c_pacman = dynamic_cast<Pacman&>(pacman);
         Cookie& c_cookie = dynamic_cast<Cookie&>(cookie);
         c_pacman.addPoints(c_cookie.pointsReward());
         c_cookie.isEaten();
     }
 
-    void pacmanWithPresent(GameObject& pacman,
+    void pacmanWithSuperPresent(GameObject& pacman,
         GameObject& present)
     {
+        Resources::instance().playMusic(PRESENT);
         Pacman& c_pacman = dynamic_cast<Pacman&>(pacman);
-        Present& c_present = dynamic_cast<Present&>(present);
+        SuperPresent& c_present = dynamic_cast<SuperPresent&>(present);
         c_pacman.addPoints(c_present.pointsReward());
         c_present.isEaten();
         PacmanState::instance().superState();
     }
 
+    void pacmanWithTimePresent(GameObject& pacman,
+        GameObject& present)
+    {
+        Resources::instance().playMusic(PRESENT);
+        Pacman& c_pacman = dynamic_cast<Pacman&>(pacman);
+        TimePresent& c_present = dynamic_cast<TimePresent&>(present);
+        c_pacman.addPoints(c_present.pointsReward());
+        c_present.isEaten();
+    }
+
+    void pacmanWithLivesPresent(GameObject& pacman,
+        GameObject& present)
+    {
+        Resources::instance().playMusic(PRESENT);
+        Pacman& c_pacman = dynamic_cast<Pacman&>(pacman);
+        LivesPresent& c_present = dynamic_cast<LivesPresent&>(present);
+        c_pacman.addPoints(c_present.pointsReward());
+        c_present.isEaten();
+        c_pacman.addLives();
+    }
+
+    void pacmanWithFreezePresent(GameObject& pacman,
+        GameObject& present)
+    {
+        Resources::instance().playMusic(PRESENT);
+        Pacman& c_pacman = dynamic_cast<Pacman&>(pacman);
+        FreezePresent& c_present = dynamic_cast<FreezePresent&>(present);
+        c_pacman.addPoints(c_present.pointsReward());
+        c_present.isEaten();
+        PacmanState::instance().freezeGhosts();
+    }
+
     void pacmanWithKey(GameObject& pacman,
         GameObject& key)
     {
+        Resources::instance().playMusic(DOOR_OPEN);
         Pacman& c_pacman = dynamic_cast<Pacman&>(pacman);
         Key& c_key = dynamic_cast<Key&>(key);
         c_pacman.addPoints(c_key.pointsReward());
@@ -136,6 +175,7 @@ namespace { // unnamed namespace — the standard way to make function "static"
     {
         if (PacmanState::instance().isSuper())
         {
+            Resources::instance().playMusic(GHOST_EATEN);
             PacmanState::instance().handleCollision(dynamic_cast<Ghost&>(ghost));
             Pacman& c_pacman = dynamic_cast<Pacman&>(pacman);
             c_pacman.addPoints(GHOSTPOINTS);
@@ -146,6 +186,7 @@ namespace { // unnamed namespace — the standard way to make function "static"
         
         else
         {
+            Resources::instance().playMusic(PACMAN_DEAD, 50);
             Pacman& c_pacman = dynamic_cast<Pacman&>(pacman);
             c_pacman.gotEaten();
         }
@@ -302,7 +343,11 @@ namespace { // unnamed namespace — the standard way to make function "static"
         (*cm)[std::string(typeid(Pacman).name()) + std::string(typeid(Wall).name())] = pacmanWithWall;
         (*cm)[std::string(typeid(Pacman).name()) + std::string(typeid(Door).name())] = pacmanWithDoor;
         (*cm)[std::string(typeid(Pacman).name()) + std::string(typeid(Key).name())] = pacmanWithKey;
-        (*cm)[std::string(typeid(Pacman).name()) + std::string(typeid(Present).name())] = pacmanWithPresent;
+        (*cm)[std::string(typeid(Pacman).name()) + std::string(typeid(SuperPresent).name())] = pacmanWithSuperPresent;
+        (*cm)[std::string(typeid(Pacman).name()) + std::string(typeid(TimePresent).name())] = pacmanWithTimePresent;
+        (*cm)[std::string(typeid(Pacman).name()) + std::string(typeid(LivesPresent).name())] = pacmanWithLivesPresent;
+        (*cm)[std::string(typeid(Pacman).name()) + std::string(typeid(FreezePresent).name())] = pacmanWithFreezePresent;
+
         (*cm)[std::string(typeid(Pacman).name()) + std::string(typeid(Cookie).name())] = pacmanWithCookie;
         (*cm)[std::string(typeid(Pacman).name()) + std::string(typeid(RedGhost).name())] = pacmanWithGhost;
         (*cm)[std::string(typeid(Pacman).name()) + std::string(typeid(PinkGhost).name())] = pacmanWithGhost;

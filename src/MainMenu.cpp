@@ -1,16 +1,17 @@
 #include "MainMenu.h"
 #include "Board.h"
 #include "HUD.h"
-#include "Graphics.h"
+#include "Resources.h"
 #include <SFML/Graphics.hpp>
+#include <SFML/audio.hpp>
 #include <fstream>
 
 
 MainMenu::MainMenu()
     :m_logo(sf::RectangleShape({ 400, 150 })),
-    m_buttons({ sf::Text("PLAY GAME", Graphics::instance().getFont()),
-                sf::Text("HELP", Graphics::instance().getFont()),
-                sf::Text("EXIT", Graphics::instance().getFont()) })
+    m_buttons({ sf::Text("PLAY GAME", Resources::instance().getFont()),
+                sf::Text("HELP", Resources::instance().getFont()),
+                sf::Text("EXIT", Resources::instance().getFont()) })
 {
     m_logoTexture.loadFromFile("logo1.png");
     m_logo.setTexture(&m_logoTexture);
@@ -33,9 +34,11 @@ MainMenu::MainMenu()
 void MainMenu::menuLoop(Render* render)
 {
     auto window = render->getP2Window();
+    Resources::instance().playBackGround();
 
     while (window->isOpen())
     {
+
         window->clear(sf::Color::Black);
         window->draw(m_logo);
 
@@ -63,7 +66,10 @@ void MainMenu::menuLoop(Render* render)
                 case sf::Mouse::Left:
                 {
                     if (m_buttons[0].getGlobalBounds().contains(cursorLocation))
+                    {
                         handleClickOnPlayGame(render);
+                        Resources::instance().playBackGround();
+                    }
 
                     else if (m_buttons[1].getGlobalBounds().contains(cursorLocation))
                         handleClickOnHelp(window);
@@ -156,4 +162,3 @@ void MainMenu::handleClickOnHelp(sf::RenderWindow* window)
         }
     }
 }
-

@@ -10,12 +10,12 @@ set(OLD_GLOB
   "Controller.h"
   "GameObject.h"
   "Ghost.h"
-  "Graphics.h"
   "HUD.h"
   "Macros.h"
   "MainMenu.h"
   "PacmanState.h"
   "Render.h"
+  "Resources.h"
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
   message("-- GLOB mismatch!")
@@ -38,11 +38,11 @@ set(OLD_GLOB
   "Controller.cpp"
   "GameObject.cpp"
   "Ghost.cpp"
-  "Graphics.cpp"
   "HUD.cpp"
   "MainMenu.cpp"
   "PacmanState.cpp"
   "Render.cpp"
+  "Resources.cpp"
   "main.cpp"
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")

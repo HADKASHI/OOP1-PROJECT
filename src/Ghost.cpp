@@ -1,5 +1,5 @@
 #include "Ghost.h"
-#include "Graphics.h"
+#include "Resources.h"
 
 Ghost::Ghost(float edgeSize, sf::Vector2f position, char c) :
     MovingObjects(edgeSize, position, c),
@@ -204,30 +204,30 @@ void GreenGhost::moveGhost(sf::Time delta, sf::Vector2f pacmanPosition, sf::Vect
 
 void Ghost::gotEaten()
 {
-    this->setTexture(&Graphics::instance().getTexture('e'));
+    this->setTexture(&Resources::instance().getTexture('e'));
     this->died();
 }
 
 void RedGhost::revive()
 {
-    this->setTexture(&Graphics::instance().getTexture('r'));
+    this->setTexture(&Resources::instance().getTexture('r'));
     this->alive();
 }
 
 void PinkGhost::revive()
 {
-    this->setTexture(&Graphics::instance().getTexture('p'));
+    this->setTexture(&Resources::instance().getTexture('p'));
     this->alive();
 }
 
 void OrangeGhost::revive()
 {
-    this->setTexture(&Graphics::instance().getTexture('o'));
+    this->setTexture(&Resources::instance().getTexture('o'));
     this->alive();
 }
 
 void GreenGhost::revive()
 {
-    this->setTexture(&Graphics::instance().getTexture('g'));
+    this->setTexture(&Resources::instance().getTexture('g'));
     this->alive();
 }

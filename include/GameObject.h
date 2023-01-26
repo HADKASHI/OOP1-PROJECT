@@ -50,12 +50,15 @@ public:
 	void notMoving(sf::Keyboard::Key key);
 	void addPoints(unsigned int points) { m_score += points; }
 	void gotEaten() { m_lives--; this->reset(); this->died(); }
+	void addLives() { m_lives++; }
+	void addTime() { m_bonusTime = true; }
+	unsigned int getBonusTime() const { return (m_bonusTime ? TIMEBONUS : 0); }
 	unsigned int getScore() const { return m_score; }
 	unsigned int getLives() const { return m_lives; }
 
 
 private:
-
+	unsigned int m_bonusTime;
 	bool m_isKeyPressed;
 	unsigned int m_lives;
 	unsigned int m_score;
@@ -94,23 +97,28 @@ class Present : public StaticObjects
 {
 public:
 	using StaticObjects::StaticObjects;
-	unsigned int pointsReward() { return 5; }
+	virtual unsigned int pointsReward() const = 0;
 };
 //----------------------------------------------------
 class SuperPresent : public Present
 {
-
+public:
+	using Present::Present;
+	virtual unsigned int pointsReward() const override { return 50; }
 };
 class FreezePresent : public Present
 {
-
+	using Present::Present;
+	virtual unsigned int pointsReward() const override { return 30; }
 };
 class TimePresent : public Present
 {
-
+	using Present::Present;
+	virtual unsigned int pointsReward() const override { return 10; }
 };
 class LivesPresent : public Present
 {
-
+	using Present::Present;
+	virtual unsigned int pointsReward() const override { return 20; }
 };
 

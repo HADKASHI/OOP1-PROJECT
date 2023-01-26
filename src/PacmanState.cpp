@@ -1,6 +1,6 @@
 #include "PacmanState.h"
 #include "Ghost.h"
-#include "Graphics.h"
+#include "Resources.h"
 
 PacmanState& PacmanState:: instance()
 {
@@ -17,23 +17,23 @@ void PacmanState::superState()
 void PacmanState::setTexture(Ghost& ghost)
 {
     if (m_superPacman)
-        ghost.setTexture(&Graphics::instance().getTexture('f'));
+        ghost.setTexture(&Resources::instance().getTexture('f'));
 
     else if (m_freeze)
     {
-        ghost.setTexture(&Graphics::instance().getTexture('F'));
+        ghost.setTexture(&Resources::instance().getTexture('F'));
     }
 
     else
     {
         if (std::string(typeid(ghost).name()) == "class RedGhost")
-            ghost.setTexture(&Graphics::instance().getTexture('r'));
+            ghost.setTexture(&Resources::instance().getTexture('r'));
         else if (std::string(typeid(ghost).name()) == "class PinkGhost")
-            ghost.setTexture(&Graphics::instance().getTexture('p'));
+            ghost.setTexture(&Resources::instance().getTexture('p'));
         else if (std::string(typeid(ghost).name()) == "class GreenGhost")
-            ghost.setTexture(&Graphics::instance().getTexture('g'));
+            ghost.setTexture(&Resources::instance().getTexture('g'));
         else if (std::string(typeid(ghost).name()) == "class OrangeGhost")
-            ghost.setTexture(&Graphics::instance().getTexture('o'));
+            ghost.setTexture(&Resources::instance().getTexture('o'));
     }
 }
 

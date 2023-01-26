@@ -35,7 +35,6 @@ private:
 	float m_tileEdgeSize;
 	sf::Vector2f m_position;
 	sf::Vector2f m_pacmanPosition;
-	// std::unique_ptr<Pacman> m_pacman; ///////////////////////////////////
 	std::vector<std::unique_ptr<StaticObjects>> m_statics;
 	std::vector<std::unique_ptr<Ghost>> m_ghosts;
 	

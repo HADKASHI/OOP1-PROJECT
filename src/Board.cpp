@@ -130,7 +130,22 @@ void Board::addNewObject(char objectType, sf::Vector2f position, bool height, bo
 	}
 	case '$':
 	{
-		m_statics.push_back(std::make_unique<Present>(m_tileEdgeSize, position, objectType));
+		m_statics.push_back(std::make_unique<SuperPresent>(m_tileEdgeSize, position, objectType));
+		break;
+	}
+	case 'I':
+	{
+		m_statics.push_back(std::make_unique<FreezePresent>(m_tileEdgeSize, position, objectType));
+		break;
+	}
+	case 'T':
+	{
+		m_statics.push_back(std::make_unique<TimePresent>(m_tileEdgeSize, position, objectType));
+		break;
+	}
+	case 'L':
+	{
+		m_statics.push_back(std::make_unique<LivesPresent>(m_tileEdgeSize, position, objectType));
 		break;
 	}
 	case '*':
@@ -191,7 +206,12 @@ void Board::update(Pacman &pacman, sf::Time delta)
 	for (size_t i = 0; i < m_ghosts.size(); i++)
 	{
 		if (pacman.getGlobalBounds().intersects(m_ghosts[i]->getGlobalBounds()))
+		{
 			processCollision(pacman, *m_ghosts[i]);
+
+			if (!PacmanState::instance().isSuper())
+				this->resetGhosts();
+		}
 	}
 
 	//pacman and static objects
@@ -281,11 +301,6 @@ void Board::handleCollisions(const std::string& object, sf::Vector2f pacmanLocat
 		deleteDoor();
 	else if (object == "class Door")
 		deleteDoor(pacmanLocation);
-	/*
-	else if (object == "class FreezePresent")
-
-	else if (object == "class TimePresent")
-	*/
 }
 
 bool isCookie(const std::unique_ptr<StaticObjects>& object)

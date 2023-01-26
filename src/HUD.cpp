@@ -1,19 +1,18 @@
 #include "HUD.h"
 #include <iostream>
-#include "Graphics.h"
+#include "Resources.h"
 
 
 HUD::HUD(const sf::Vector2f& postion) :
 	m_position(postion), m_size(180, 600),
-	m_titles({ sf::Text("LEVEL", Graphics::instance().getFont()),
-			   sf::Text("LIVES", Graphics::instance().getFont()),
-			   sf::Text("SCORE", Graphics::instance().getFont()),
-			   sf::Text("TIME", Graphics::instance().getFont()) }),
-	m_level(" ", Graphics::instance().getFont()),
-	m_score(" ", Graphics::instance().getFont()),
-	m_time(" ", Graphics::instance().getFont()),
+	m_titles({ sf::Text("LEVEL", Resources::instance().getFont()),
+			   sf::Text("LIVES", Resources::instance().getFont()),
+			   sf::Text("SCORE", Resources::instance().getFont()),
+			   sf::Text("TIME", Resources::instance().getFont()) }),
+	m_level(" ", Resources::instance().getFont()),
+	m_score(" ", Resources::instance().getFont()),
+	m_time(" ", Resources::instance().getFont()),
 	m_lives({ 25, 25 })
-	/*m_livesTexture(Graphics::instance().getPacmanTexture())*/ // fix graphics 
 {
 	initBackGround();
 	initLives();
