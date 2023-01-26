@@ -27,12 +27,15 @@ void Board::drawBoard(sf::RenderWindow &window)
 	// draw static objects on board
 	for (int i = 0; i < m_statics.size(); i++)
 	{
-		window.draw(*m_statics[i]/*->draw()*/);
+		window.draw(*m_statics[i]);
 	}
 
 	// draw ghosts on board
 	for (int i = 0; i < m_ghosts.size(); i++)
 	{
+		if(!m_ghosts[i]->isDead())
+			PacmanState::instance().setTexture(*m_ghosts[i]);
+
 		window.draw(*m_ghosts[i]);
 	}
 }
@@ -50,23 +53,30 @@ void Board::loadBoard(std::fstream& file, sf::Vector2f maxSize)
 	m_height = rows * m_tileEdgeSize;
 	m_width = cols * m_tileEdgeSize;
 
-	sf::Vector2f boardStartPoint = { m_position.x - float(0.5) * m_width,
-									m_position.y - float(0.5) * m_height };
+	m_maze.resize(rows);
+	for (size_t i = 0; i < m_maze.size(); i++)
+		m_maze[i].resize(cols);
 
-	std::vector<std::vector<char>> maze;
-	maze.resize(rows);
-	for (size_t i = 0; i < maze.size(); i++)
-		maze[i].resize(cols);
-
-	for (int row = 0; row < maze.size(); row++)
+	for (int row = 0; row < m_maze.size(); row++)
 	{
-		for (int col = 0; col < maze[row].size(); col++)
-			maze[row][col] = file.get();
+		for (int col = 0; col < m_maze[row].size(); col++)
+			m_maze[row][col] = file.get();
 
 		file.ignore();
 	}
 
 	if (!file.eof()) file.ignore();
+
+	loadMaze(rows, cols);
+}
+
+
+
+void Board::loadMaze(int rows, int cols)
+{
+
+	sf::Vector2f boardStartPoint = { m_position.x - float(0.5) * m_width,
+									m_position.y - float(0.5) * m_height };
 
 	for (int row = 0; row < rows; row++)
 	{
@@ -75,22 +85,23 @@ void Board::loadBoard(std::fstream& file, sf::Vector2f maxSize)
 			sf::Vector2f position({ boardStartPoint.x + col * m_tileEdgeSize,
 				boardStartPoint.y + row * m_tileEdgeSize });
 
-			if (maze[row][col] == '#')
+			if (m_maze[row][col] == '#')
 			{
 				bool height = true;
 				bool width = true;
-				if ((row > 0 && (maze[row - 1][col] == '#')) || (row < rows - 1 && (maze[row + 1][col] == '#')))
+				if ((row > 0 && (m_maze[row - 1][col] == '#')) || (row < rows - 1 && (m_maze[row + 1][col] == '#')))
 					height = false;
-				if ((col > 0 && (maze[row][col - 1] == '#')) || (col < cols - 1 && (maze[row][col + 1] == '#')))
+				if ((col > 0 && (m_maze[row][col - 1] == '#')) || (col < cols - 1 && (m_maze[row][col + 1] == '#')))
 					width = false;
 
-				addNewObject(maze[row][col], position, height, width);
+				addNewObject(m_maze[row][col], position, height, width);
 			}
 			else
-				addNewObject(maze[row][col], position);
+				addNewObject(m_maze[row][col], position);
 		}
 	}
 }
+
 
 //--------------------------------------------
 // This function adds a new tile to the board, by insert new cell
@@ -127,7 +138,22 @@ void Board::addNewObject(char objectType, sf::Vector2f position, bool height, bo
 	}
 	case '$':
 	{
-		m_statics.push_back(std::make_unique<Present>(m_tileEdgeSize, position, objectType));
+		m_statics.push_back(std::make_unique<SuperPresent>(m_tileEdgeSize, position, objectType));
+		break;
+	}
+	case 'I':
+	{
+		m_statics.push_back(std::make_unique<FreezePresent>(m_tileEdgeSize, position, objectType));
+		break;
+	}
+	case 'T':
+	{
+		m_statics.push_back(std::make_unique<TimePresent>(m_tileEdgeSize, position, objectType));
+		break;
+	}
+	case 'L':
+	{
+		m_statics.push_back(std::make_unique<LivesPresent>(m_tileEdgeSize, position, objectType));
 		break;
 	}
 	case '*':
@@ -171,7 +197,8 @@ sf::FloatRect Board::getGlobalBounds() const
 	return sf::FloatRect(boardStartPoint.x, boardStartPoint.y, m_width, m_height);
 }
 
-bool toDelete(std::unique_ptr<StaticObjects> & object); 
+bool toDelete(std::unique_ptr<StaticObjects> & object);
+
 void Board::update(Pacman &pacman, sf::Time delta)
 {
 	moveGhosts(delta, pacman.getPosition(), pacman.getDirection());
@@ -179,39 +206,43 @@ void Board::update(Pacman &pacman, sf::Time delta)
 	if (!inBounds(pacman.getGlobalBounds()))
 		pacmanWithBoard(pacman, *this);
 
-	/*for (size_t i=0; i < m_ghosts.size(); i++)
+	//ghosts and borad bounds collisions
+	for (size_t i=0; i < m_ghosts.size(); i++)
 		if (!inBounds(m_ghosts[i]->getGlobalBounds()))
-			ghostWithBoard(*m_ghosts[i], *this);*/
+			ghostWithBoard(*m_ghosts[i], *this);
 
+	//pacman and ghost collisions
 	for (size_t i = 0; i < m_ghosts.size(); i++)
 	{
 		if (pacman.getGlobalBounds().intersects(m_ghosts[i]->getGlobalBounds()))
+		{
 			processCollision(pacman, *m_ghosts[i]);
+
+			if (!PacmanState::instance().isSuper())
+				this->resetGhosts();
+		}
 	}
 
+	//pacman and static objects
 	for (size_t i = 0 ; i < m_statics.size(); i++)
 	{
 		if(pacman.getGlobalBounds().intersects(m_statics[i]->getGlobalBounds()))
 			processCollision(pacman, *m_statics[i]);
 	}
 
+	//ghosts and static objects collisions
 	for (size_t i = 0; i < m_ghosts.size(); i++)
 		for (size_t j = 0; j < m_statics.size(); j++)
 		{
-			if (std::string(typeid(*m_statics[i]).name()) == "class Wall" ||
-				std::string(typeid(*m_statics[i]).name()) == "class Door")
-			{
-				if (m_ghosts[i]->getGlobalBounds().intersects(m_statics[j]->getGlobalBounds()))
-					processCollision(*m_ghosts[i], *m_statics[j]);
-			}
-			else
-				m_ghosts[i]->setMomentum(m_ghosts[i]->getDirection());
+			if (m_ghosts[i]->getGlobalBounds().intersects(m_statics[j]->getGlobalBounds()))
+				processCollision(*m_ghosts[i], *m_statics[j]);
 		}
 
+	//checks whats been eaten
 	for (size_t i = 0; i < m_statics.size(); i++)
 	{
 		if (m_statics[i]->beenEaten())
-			handleCollisions(typeid(*m_statics[i]).name());
+			handleCollisions(typeid(*m_statics[i]).name(), pacman.getPosition());
 	}
 
 	m_statics.erase(
@@ -223,6 +254,12 @@ void Board::moveGhosts(sf::Time delta, sf::Vector2f pacmanPosition, sf::Vector2f
 {
 	for (size_t i = 0; i < m_ghosts.size(); i++)
 		m_ghosts[i]->moveGhost(delta, pacmanPosition, pacmanDirection);
+}
+
+void Board::resetGhosts()
+{
+	for (size_t i = 0; i < m_ghosts.size(); i++)
+		m_ghosts[i]->reset();
 }
 
 bool Board::inBounds(sf::FloatRect rect) const
@@ -246,23 +283,33 @@ bool isDoor(std::unique_ptr<StaticObjects>& object)
 	return std::string(typeid(*object).name()) == "class Door";
 }
 
-void Board::deleteDoor()
+void Board::deleteDoor(sf::Vector2f pacmanLocation)
 {
-	auto index = std::find_if(m_statics.begin(), m_statics.end(), isDoor);
-	if (index == m_statics.end())
+	if(pacmanLocation == sf::Vector2f{ 0 , 0 })
 	{
-		return;
+		auto index = std::find_if(m_statics.begin(), m_statics.end(), isDoor);
+		if (index == m_statics.end())
+		{
+			return;
+		}
+
+		index->get()->isEaten();
 	}
-	
-	index->get()->isEaten();
+	else
+	{
+		for (size_t i = 0; i < m_statics.size(); i++)
+			if (std::string(typeid(*m_statics[i]).name()) == "class Door" &&
+				m_statics[i]->getGlobalBounds().contains(pacmanLocation))
+				m_statics[i]->isEaten();
+	}
 }
 
-void Board::handleCollisions(const std::string& object)
+void Board::handleCollisions(const std::string& object, sf::Vector2f pacmanLocation)
 {
 	if (object == "class Key")
 		deleteDoor();
-	//else if (object == "class Door")
-		//deleteDoor();
+	else if (object == "class Door")
+		deleteDoor(pacmanLocation);
 }
 
 bool isCookie(const std::unique_ptr<StaticObjects>& object)
@@ -279,4 +326,10 @@ bool Board::noCookiesLeft() const
 	}
 
 	return false;
+}
+
+
+void Board::resetLevel()
+{
+	loadMaze(m_height / m_tileEdgeSize, m_width / m_tileEdgeSize);
 }

@@ -27,9 +27,17 @@ public:
 	MovingObjects(float edgeSize, sf::Vector2f position, char c);
 	sf::Vector2f getDirection() const { return m_direction; }
 	void setDirection(sf::Vector2f direction) { m_direction = direction; }
+	void reset() { setPosition(m_startPoint); }
+	sf::Vector2f getStartPoint() const { return m_startPoint; }
+	bool isDead() const { return !m_alive; }
+	void alive() { m_alive = true; }
+	virtual void gotEaten() = 0;
+	void died() { m_alive = false; }
 
 private:
 	sf::Vector2f m_direction;
+	sf::Vector2f m_startPoint;
+	bool m_alive;
 //	void move() = 0;
 };
 //---------------------------------------------------
@@ -37,22 +45,26 @@ class Pacman: public MovingObjects
 {
 public:
 	Pacman(float edgeSize, sf::Vector2f position, char c, unsigned int score);
-	//using MovingObjects::MovingObjects;
 	void keyDirection(sf::Keyboard::Key key);
 	void update(sf::Time delta);
 	void notMoving(sf::Keyboard::Key key);
 	void addPoints(unsigned int points) { m_score += points; }
-	void gotEaten() { m_lives--; }
+	void setScore(int score) { m_score = score; }
+	void gotEaten() { m_lives--; this->reset(); this->died(); }
+	void addLives() { m_lives++; }
+	void setLives(int lives) { m_lives = lives; }
+	void addTime() { m_bonusTime = true; }
+	unsigned int getBonusTime() const { return (m_bonusTime ? TIMEBONUS : 0); }
 	unsigned int getScore() const { return m_score; }
 	unsigned int getLives() const { return m_lives; }
 
-private:
 
+
+private:
+	unsigned int m_bonusTime;
 	bool m_isKeyPressed;
 	unsigned int m_lives;
 	unsigned int m_score;
-
-
 };
 
 //----------------------------------------------------
@@ -88,8 +100,31 @@ class Present : public StaticObjects
 {
 public:
 	using StaticObjects::StaticObjects;
-	unsigned int pointsReward() { return 5; }
+	virtual unsigned int pointsReward() const = 0;
 };
 //----------------------------------------------------
-
+class SuperPresent : public Present
+{
+public:
+	using Present::Present;
+	virtual unsigned int pointsReward() const override { return 50; }
+};
+class FreezePresent : public Present
+{
+public:
+	using Present::Present;
+	virtual unsigned int pointsReward() const override { return 30; }
+};
+class TimePresent : public Present
+{
+public:
+	using Present::Present;
+	virtual unsigned int pointsReward() const override { return 10; }
+};
+class LivesPresent : public Present
+{
+public:
+	using Present::Present;
+	virtual unsigned int pointsReward() const override { return 20; }
+};
 

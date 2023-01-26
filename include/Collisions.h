@@ -5,6 +5,7 @@
 #include <algorithm>
 #include <memory>
 #include "GameObject.h"
+#include "Resources.h"
 
 
 
@@ -78,47 +79,91 @@ namespace { // unnamed namespace — the standard way to make function "static"
             c_pacman.move(reverseDirection * 0.1f);
     }
 
-    void redGhostWithBoard(GameObject& redGhost,
+    void ghostWithBoard(Ghost& ghost,
         const Board& board)
     {
-        RedGhost& c_redGhost = dynamic_cast<RedGhost&>(redGhost);
+        ghost.gotStuck();
 
-        auto reverseDirection = c_redGhost.getDirection() * -1.f;
+        auto reverseDirection = ghost.getDirection() * -1.f;
 
         //moves back till gets out of wall bounds
-        while (!board.inBounds(redGhost.getGlobalBounds()))
-            redGhost.move(reverseDirection * 0.1f);
+        while (!board.inBounds(ghost.getGlobalBounds()))
+            ghost.move(reverseDirection * 0.1f);
     }
 
     void pacmanWithDoor(GameObject& pacman,
         GameObject& door)
     {
         Door& c_door = dynamic_cast<Door&>(door);
-        auto wall = Wall(c_door.getSize().x, c_door.getPosition(), '#');
-        pacmanWithWall(pacman, wall);
+        if (PacmanState::instance().isSuper())
+        {
+            Resources::instance().playMusic(DOOR_OPEN);
+            c_door.isEaten();
+        }
+        else
+        {
+            auto wall = Wall(c_door.getSize().x, c_door.getPosition(), '#');
+            pacmanWithWall(pacman, wall);
+        }
     }
 
     void pacmanWithCookie(GameObject& pacman,
         GameObject& cookie)
     {
+        Resources::instance().playMusic(EAT_COOKIE);
         Pacman& c_pacman = dynamic_cast<Pacman&>(pacman);
         Cookie& c_cookie = dynamic_cast<Cookie&>(cookie);
         c_pacman.addPoints(c_cookie.pointsReward());
         c_cookie.isEaten();
     }
 
-    void pacmanWithPresent(GameObject& pacman,
+    void pacmanWithSuperPresent(GameObject& pacman,
         GameObject& present)
     {
+        Resources::instance().playMusic(PRESENT);
         Pacman& c_pacman = dynamic_cast<Pacman&>(pacman);
-        Present& c_present = dynamic_cast<Present&>(present);
+        SuperPresent& c_present = dynamic_cast<SuperPresent&>(present);
         c_pacman.addPoints(c_present.pointsReward());
         c_present.isEaten();
+        PacmanState::instance().superState();
+    }
+
+    void pacmanWithTimePresent(GameObject& pacman,
+        GameObject& present)
+    {
+        Resources::instance().playMusic(PRESENT);
+        Pacman& c_pacman = dynamic_cast<Pacman&>(pacman);
+        TimePresent& c_present = dynamic_cast<TimePresent&>(present);
+        c_pacman.addPoints(c_present.pointsReward());
+        c_present.isEaten();
+    }
+
+    void pacmanWithLivesPresent(GameObject& pacman,
+        GameObject& present)
+    {
+        Resources::instance().playMusic(PRESENT);
+        Pacman& c_pacman = dynamic_cast<Pacman&>(pacman);
+        LivesPresent& c_present = dynamic_cast<LivesPresent&>(present);
+        c_pacman.addPoints(c_present.pointsReward());
+        c_present.isEaten();
+        c_pacman.addLives();
+    }
+
+    void pacmanWithFreezePresent(GameObject& pacman,
+        GameObject& present)
+    {
+        Resources::instance().playMusic(PRESENT);
+        Pacman& c_pacman = dynamic_cast<Pacman&>(pacman);
+        FreezePresent& c_present = dynamic_cast<FreezePresent&>(present);
+        c_pacman.addPoints(c_present.pointsReward());
+        c_present.isEaten();
+        PacmanState::instance().freezeGhosts();
     }
 
     void pacmanWithKey(GameObject& pacman,
         GameObject& key)
     {
+        Resources::instance().playMusic(DOOR_OPEN);
         Pacman& c_pacman = dynamic_cast<Pacman&>(pacman);
         Key& c_key = dynamic_cast<Key&>(key);
         c_pacman.addPoints(c_key.pointsReward());
@@ -128,9 +173,24 @@ namespace { // unnamed namespace — the standard way to make function "static"
     void pacmanWithGhost(GameObject& pacman,
         GameObject& ghost)
     {
-        Pacman& c_pacman = dynamic_cast<Pacman&>(pacman);
-        c_pacman.setPosition({ 400, 400 });
-        c_pacman.gotEaten();
+        if (PacmanState::instance().isSuper())
+        {
+            Resources::instance().playMusic(GHOST_EATEN);
+            PacmanState::instance().handleCollision(dynamic_cast<Ghost&>(ghost));
+            Pacman& c_pacman = dynamic_cast<Pacman&>(pacman);
+            c_pacman.addPoints(GHOSTPOINTS);
+        }
+
+        else if (PacmanState::instance().isFreeze())
+            return;
+        
+        else
+        {
+            Resources::instance().playMusic(PACMAN_DEAD, 50);
+            sf::sleep(sf::seconds(1));
+            Pacman& c_pacman = dynamic_cast<Pacman&>(pacman);
+            c_pacman.gotEaten();
+        }
     }
 
     void GhostWithPacman(GameObject& ghost,
@@ -144,6 +204,9 @@ namespace { // unnamed namespace — the standard way to make function "static"
     {
         RedGhost& c_redGhost = dynamic_cast<RedGhost&>(redGhost);
         Wall& c_wall = dynamic_cast<Wall&>(wall);
+
+        if (c_redGhost.isDead())
+            return;
 
         auto pacmanBounds = c_redGhost.getGlobalBounds();
         auto wallBounds = c_wall.getGlobalBounds();
@@ -161,9 +224,6 @@ namespace { // unnamed namespace — the standard way to make function "static"
         }
         else
         {
-            if (c_redGhost.getDirection() == RIGHT)
-                auto s = c_wall.getGlobalBounds();
-
             c_redGhost.gotStuck();
 
             auto reverseDirection = c_redGhost.getDirection() * -1.f;
@@ -178,6 +238,9 @@ namespace { // unnamed namespace — the standard way to make function "static"
         GameObject& wall)
     {
         PinkGhost& c_pinkGhost = dynamic_cast<PinkGhost&>(pinkGhost);
+        if (c_pinkGhost.isDead())
+            return;
+
         auto position = sf::Vector2f({ c_pinkGhost.getPosition().x - 0.5f * c_pinkGhost.getSize().x,
             c_pinkGhost.getPosition().y - 0.5f * c_pinkGhost.getSize().y });
         RedGhost redGhost(c_pinkGhost.getSize().x, position , 'r');
@@ -185,14 +248,17 @@ namespace { // unnamed namespace — the standard way to make function "static"
         redGhostWithWall(redGhost, wall);
 
         c_pinkGhost.setPosition(redGhost.getPosition());
-        /*if (redGhost.isStuck(c_pinkGhost.getDirection()))
-            c_pinkGhost.gotStuck(c_pinkGhost.getDirection());*/
+        if (redGhost.isStuck())
+            c_pinkGhost.gotStuck();
     }
 
     void greenGhostWithWall(GameObject& greenGhost,
         GameObject& wall)
     {
         GreenGhost& c_greenGhost = dynamic_cast<GreenGhost&>(greenGhost);
+        if (c_greenGhost.isDead())
+            return;
+
         auto position = sf::Vector2f({ c_greenGhost.getPosition().x - 0.5f * c_greenGhost.getSize().x,
             c_greenGhost.getPosition().y - 0.5f * c_greenGhost.getSize().y });
         RedGhost redGhost(c_greenGhost.getSize().x, position, 'r');
@@ -200,12 +266,17 @@ namespace { // unnamed namespace — the standard way to make function "static"
         redGhostWithWall(redGhost, wall);
 
         c_greenGhost.setPosition(redGhost.getPosition());
+        if (redGhost.isStuck())
+            c_greenGhost.gotStuck();
     }
 
     void orangeGhostWithWall(GameObject& orangeGhost,
         GameObject& wall)
     {
         OrangeGhost& c_orangeGhost = dynamic_cast<OrangeGhost&>(orangeGhost);
+        if (c_orangeGhost.isDead())
+            return;
+
         auto position = sf::Vector2f({ c_orangeGhost.getPosition().x - 0.5f * c_orangeGhost.getSize().x,
             c_orangeGhost.getPosition().y - 0.5f * c_orangeGhost.getSize().y });
         RedGhost redGhost(c_orangeGhost.getSize().x, position, 'r');
@@ -213,15 +284,55 @@ namespace { // unnamed namespace — the standard way to make function "static"
         redGhostWithWall(redGhost, wall);
 
         c_orangeGhost.setPosition(redGhost.getPosition());
+        if (redGhost.isStuck())
+            c_orangeGhost.gotStuck();
     }
-    // secondary collision-processing functions that just
-    // implement symmetry: swap the parameters and call a
-    // primary function
-    /*void (GameObject& spaceStation,
-        GameObject& spaceShip)
+
+    void redGhostWithDoor(GameObject& redGhost,
+        GameObject& door)
     {
-        shipStation(spaceShip, spaceStation);
-    }*/
+        Door& c_door = dynamic_cast<Door&>(door);
+        RedGhost& c_redGhost = dynamic_cast<RedGhost&>(redGhost);
+
+        auto wall = Wall(c_door.getSize().x, c_door.getPosition(), '#');
+        redGhostWithWall(c_redGhost, wall);
+    }
+
+    void pinkGhostWithDoor(GameObject& pinkGhost,
+        GameObject& door)
+    {
+        Door& c_door = dynamic_cast<Door&>(door);
+        PinkGhost& c_pinkGhost = dynamic_cast<PinkGhost&>(pinkGhost);
+        if (c_pinkGhost.isDead())
+            return;
+
+        auto wall = Wall(c_door.getSize().x, c_door.getPosition(), '#');
+        pinkGhostWithWall(c_pinkGhost, wall);
+    }
+
+    void greenGhostWithDoor(GameObject& greenGhost,
+        GameObject& door)
+    {
+        Door& c_door = dynamic_cast<Door&>(door);
+        GreenGhost& c_greenGhost = dynamic_cast<GreenGhost&>(greenGhost);
+        if (c_greenGhost.isDead())
+            return;
+
+        auto wall = Wall(c_door.getSize().x, c_door.getPosition(), '#');
+        greenGhostWithWall(c_greenGhost, wall);
+    }
+
+    void orangeGhostWithDoor(GameObject& orangeGhost,
+        GameObject& door)
+    {
+        Door& c_door = dynamic_cast<Door&>(door);
+        OrangeGhost& c_orangeGhost = dynamic_cast<OrangeGhost&>(orangeGhost);
+        if (c_orangeGhost.isDead())
+            return;
+
+        auto wall = Wall(c_door.getSize().x, c_door.getPosition(), '#');
+        orangeGhostWithWall(c_orangeGhost, wall);
+    }
 
     using collisionFunc = void (*) (GameObject& object1, GameObject& object2);
     using CollisionMap = std::unordered_map<std::string, collisionFunc>;
@@ -233,7 +344,11 @@ namespace { // unnamed namespace — the standard way to make function "static"
         (*cm)[std::string(typeid(Pacman).name()) + std::string(typeid(Wall).name())] = pacmanWithWall;
         (*cm)[std::string(typeid(Pacman).name()) + std::string(typeid(Door).name())] = pacmanWithDoor;
         (*cm)[std::string(typeid(Pacman).name()) + std::string(typeid(Key).name())] = pacmanWithKey;
-        (*cm)[std::string(typeid(Pacman).name()) + std::string(typeid(Present).name())] = pacmanWithPresent;
+        (*cm)[std::string(typeid(Pacman).name()) + std::string(typeid(SuperPresent).name())] = pacmanWithSuperPresent;
+        (*cm)[std::string(typeid(Pacman).name()) + std::string(typeid(TimePresent).name())] = pacmanWithTimePresent;
+        (*cm)[std::string(typeid(Pacman).name()) + std::string(typeid(LivesPresent).name())] = pacmanWithLivesPresent;
+        (*cm)[std::string(typeid(Pacman).name()) + std::string(typeid(FreezePresent).name())] = pacmanWithFreezePresent;
+
         (*cm)[std::string(typeid(Pacman).name()) + std::string(typeid(Cookie).name())] = pacmanWithCookie;
         (*cm)[std::string(typeid(Pacman).name()) + std::string(typeid(RedGhost).name())] = pacmanWithGhost;
         (*cm)[std::string(typeid(Pacman).name()) + std::string(typeid(PinkGhost).name())] = pacmanWithGhost;
@@ -247,6 +362,10 @@ namespace { // unnamed namespace — the standard way to make function "static"
         (*cm)[std::string(typeid(PinkGhost).name()) + std::string(typeid(Wall).name())] = pinkGhostWithWall;
         (*cm)[std::string(typeid(GreenGhost).name()) + std::string(typeid(Wall).name())] = greenGhostWithWall;
         (*cm)[std::string(typeid(OrangeGhost).name()) + std::string(typeid(Wall).name())] = orangeGhostWithWall;
+        (*cm)[std::string(typeid(RedGhost).name()) + std::string(typeid(Door).name())] = redGhostWithDoor;
+        (*cm)[std::string(typeid(PinkGhost).name()) + std::string(typeid(Door).name())] = pinkGhostWithDoor;
+        (*cm)[std::string(typeid(GreenGhost).name()) + std::string(typeid(Door).name())] = greenGhostWithDoor;
+        (*cm)[std::string(typeid(OrangeGhost).name()) + std::string(typeid(Door).name())] = orangeGhostWithDoor;
 
         return cm;
     }
@@ -270,13 +389,5 @@ namespace { // unnamed namespace — the standard way to make function "static"
             typeid(object2).name());
         if (p2f)
             p2f(object1, object2);
-        // else
-             //throw UnknownCollision(object1, object2);
     }
-
-
-    //void checkForCollision(GameObject& object1, GameObject& object2)
-    //{
-    //    processCollision(object1, object2);
-    //}
 }

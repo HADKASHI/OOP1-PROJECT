@@ -1,21 +1,23 @@
 #include "GameObject.h"
-#include "Graphics.h"
+#include "Resources.h"
 #include <iostream>
 
 GameObject::GameObject(float edgeSize, sf::Vector2f position, char c)
 	:sf::RectangleShape({ edgeSize, edgeSize })
 {
 	setPosition(position);
-	setTexture(&Graphics::instance().getTexture(c));
+	setTexture(&Resources::instance().getTexture(c));
 }
 
 
 MovingObjects::MovingObjects(float edgeSize, sf::Vector2f position, char c) :
-    GameObject(edgeSize, position, c), m_direction({ 0 , 0 })
+    GameObject(edgeSize, position, c), m_direction({ 0 , 0 }), m_alive(true)
 {
     setOrigin(getSize() / 2.f);
     setPosition({ getPosition().x + 0.5f * edgeSize,
         getPosition().y + 0.5f * edgeSize });
+
+    m_startPoint = this->getPosition();
 
     setScale({ 0.9f, 0.9f });
 }
@@ -46,7 +48,8 @@ Wall::Wall(float edgeSize, sf::Vector2f position, char c, bool height, bool widt
 }
 
 Pacman :: Pacman(float edgeSize, sf::Vector2f position, char c, unsigned int score):
-    MovingObjects(edgeSize, position, c), m_isKeyPressed(false), m_lives(LIVES), m_score(score) {}
+    MovingObjects(edgeSize, position, c), m_isKeyPressed(false), m_lives(LIVES),
+    m_score(score), m_bonusTime(false) {}
 
 
 void Pacman::keyDirection(sf::Keyboard::Key key)
@@ -97,6 +100,8 @@ void Pacman::keyDirection(sf::Keyboard::Key key)
 //---------------------------------------
 void Pacman::update(sf::Time delta)
 {
+    m_bonusTime = false;
+
     if(!m_isKeyPressed)
     {
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
