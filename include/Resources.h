@@ -6,6 +6,10 @@
 
 class MovingObjects;
 
+//
+// this is a static singleton class. it provides and handles
+// all game graphics and sounds
+//
 class Resources
 {
 public:
@@ -17,6 +21,7 @@ public:
 	void playMusic(enum Sounds i, int vol = 100);
 	void playBackGround();
 	void volumeBackGround(int vol);
+	void stopBackGroundMusic();
 	
 private:
 	Resources();

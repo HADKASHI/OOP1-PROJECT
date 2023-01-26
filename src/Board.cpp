@@ -1,5 +1,6 @@
 #pragma once
 #include "Board.h"
+#include "Pacman.h"
 #include "Collisions.h"
 #include <iostream>
 #include <cstdlib>
@@ -15,7 +16,7 @@ Board::Board(std::fstream& file, sf::Vector2f maxSize, sf::Vector2f position)
 //-----------------------------------------------
 void Board::drawBoard(sf::RenderWindow &window)
 {
-	//draw empty board
+	//draws board background
 	auto boardWindow = sf::RectangleShape({ float(m_width), float(m_height) });
 	boardWindow.setOrigin(boardWindow.getSize() / 2.f);
 	boardWindow.setPosition(m_position);
@@ -25,13 +26,13 @@ void Board::drawBoard(sf::RenderWindow &window)
 	window.draw(boardWindow);
 
 
-	// draw static objects on board
+	// draws static objects on board
 	for (int i = 0; i < m_statics.size(); i++)
 	{
 		window.draw(*m_statics[i]);
 	}
 
-	// draw ghosts on board
+	// draws ghosts on board
 	for (int i = 0; i < m_ghosts.size(); i++)
 	{
 		if(!m_ghosts[i]->isDead())
@@ -47,6 +48,7 @@ void Board::loadBoard(std::fstream& file, sf::Vector2f maxSize)
 	file >> rows >> cols;
 	file.ignore();
 
+	//down sizing edge size to fit in the board
 	while (rows * m_tileEdgeSize > maxSize.y ||
 		cols * m_tileEdgeSize > maxSize.x)
 		m_tileEdgeSize--;
@@ -54,23 +56,32 @@ void Board::loadBoard(std::fstream& file, sf::Vector2f maxSize)
 	m_height = rows * m_tileEdgeSize;
 	m_width = cols * m_tileEdgeSize;
 
-	sf::Vector2f boardStartPoint = { m_position.x - float(0.5) * m_width,
-									m_position.y - float(0.5) * m_height };
+	m_maze.resize(rows);
+	for (size_t i = 0; i < m_maze.size(); i++)
+		m_maze[i].resize(cols);
 
-	std::vector<std::vector<char>> maze;
-	maze.resize(rows);
-	for (size_t i = 0; i < maze.size(); i++)
-		maze[i].resize(cols);
-
-	for (int row = 0; row < maze.size(); row++)
+	for (int row = 0; row < m_maze.size(); row++)
 	{
-		for (int col = 0; col < maze[row].size(); col++)
-			maze[row][col] = file.get();
+		for (int col = 0; col < m_maze[row].size(); col++)
+			m_maze[row][col] = file.get();
 
 		file.ignore();
 	}
 
 	if (!file.eof()) file.ignore();
+
+	loadMaze(rows, cols);
+}
+
+
+
+void Board::loadMaze(int rows, int cols)
+{
+	m_ghosts.clear();
+	m_statics.clear();
+
+	sf::Vector2f boardStartPoint = { m_position.x - float(0.5) * m_width,
+									m_position.y - float(0.5) * m_height };
 
 	for (int row = 0; row < rows; row++)
 	{
@@ -79,22 +90,24 @@ void Board::loadBoard(std::fstream& file, sf::Vector2f maxSize)
 			sf::Vector2f position({ boardStartPoint.x + col * m_tileEdgeSize,
 				boardStartPoint.y + row * m_tileEdgeSize });
 
-			if (maze[row][col] == '#')
+			//stretch walls if necessary
+			if (m_maze[row][col] == '#')
 			{
 				bool height = true;
 				bool width = true;
-				if ((row > 0 && (maze[row - 1][col] == '#')) || (row < rows - 1 && (maze[row + 1][col] == '#')))
+				if ((row > 0 && (m_maze[row - 1][col] == '#')) || (row < rows - 1 && (m_maze[row + 1][col] == '#')))
 					height = false;
-				if ((col > 0 && (maze[row][col - 1] == '#')) || (col < cols - 1 && (maze[row][col + 1] == '#')))
+				if ((col > 0 && (m_maze[row][col - 1] == '#')) || (col < cols - 1 && (m_maze[row][col + 1] == '#')))
 					width = false;
 
-				addNewObject(maze[row][col], position, height, width);
+				addNewObject(m_maze[row][col], position, height, width);
 			}
 			else
-				addNewObject(maze[row][col], position);
+				addNewObject(m_maze[row][col], position);
 		}
 	}
 }
+
 
 //--------------------------------------------
 // This function adds a new tile to the board, by insert new cell
@@ -190,11 +203,13 @@ sf::FloatRect Board::getGlobalBounds() const
 	return sf::FloatRect(boardStartPoint.x, boardStartPoint.y, m_width, m_height);
 }
 
+
 bool toDelete(std::unique_ptr<StaticObjects> & object); 
 void Board::update(Pacman &pacman, sf::Time delta)
 {
 	moveGhosts(delta, pacman.getPosition(), pacman.getDirection());
 
+	//pacman and board bounds collisions
 	if (!inBounds(pacman.getGlobalBounds()))
 		pacmanWithBoard(pacman, *this);
 
@@ -277,6 +292,7 @@ bool isDoor(std::unique_ptr<StaticObjects>& object)
 
 void Board::deleteDoor(sf::Vector2f pacmanLocation)
 {
+	//deletes a random door
 	if(pacmanLocation == sf::Vector2f{ 0 , 0 })
 	{
 		auto index = std::find_if(m_statics.begin(), m_statics.end(), isDoor);
@@ -285,14 +301,14 @@ void Board::deleteDoor(sf::Vector2f pacmanLocation)
 			return;
 		}
 
-		index->get()->isEaten();
+		index->get()->gotEaten();
 	}
 	else
 	{
 		for (size_t i = 0; i < m_statics.size(); i++)
 			if (std::string(typeid(*m_statics[i]).name()) == "class Door" &&
 				m_statics[i]->getGlobalBounds().contains(pacmanLocation))
-				m_statics[i]->isEaten();
+				m_statics[i]->gotEaten();
 	}
 }
 
@@ -318,4 +334,11 @@ bool Board::noCookiesLeft() const
 	}
 
 	return false;
+}
+
+void Board::resetLevel()
+{
+	loadMaze(m_height / m_tileEdgeSize, m_width / m_tileEdgeSize);
+	m_pacmanPosition = sf::Vector2f({ m_pacmanPosition.x + 0.5f * m_tileEdgeSize,
+		m_pacmanPosition.y + 0.5f * m_tileEdgeSize });
 }

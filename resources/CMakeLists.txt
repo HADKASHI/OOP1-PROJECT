@@ -35,3 +35,5 @@ configure_file ("ghost_eaten.wav" ${CMAKE_BINARY_DIR} COPYONLY)
 configure_file ("present.wav" ${CMAKE_BINARY_DIR} COPYONLY)
 configure_file ("eat_cookie.wav" ${CMAKE_BINARY_DIR} COPYONLY)
 configure_file ("door_open.wav" ${CMAKE_BINARY_DIR} COPYONLY)
+
+configure_file ("Board.txt" ${CMAKE_BINARY_DIR} COPYONLY)

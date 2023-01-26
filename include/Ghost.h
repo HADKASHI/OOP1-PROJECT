@@ -2,7 +2,11 @@
 #include "GameObject.h"
 #include "PacmanState.h"
 
-//----------------------------------------------------
+//class hierarchy of enemys
+// each ghost chases in a different strategy and therefore they divided into different classes
+// the ghost movement is handled by PacmanState class what leads to
+// the ghost base class has a very wide and rich interface
+//
 class Ghost : public MovingObjects
 {
 public:

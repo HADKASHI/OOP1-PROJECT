@@ -1,13 +1,19 @@
 #pragma once
 #include "SFML/Graphics.hpp"
 class Ghost;
+
+
+// a singleton class that handles all whats comes with pacman different states
+// (i.e superPacman, freezing pacman and so on...)
+// this class handles mainly ghost movement, ghost textures.
+// in addition it tells to whomever interested what exactly is pacman state
 class PacmanState
 {
 public:
 	PacmanState(const PacmanState&) = delete;
 	static PacmanState& instance();
 	void operator = (const PacmanState&) = delete;
-	virtual void move(Ghost& ghost, sf::Time delta, sf::Vector2f targetPosition);
+	void move(Ghost& ghost, sf::Time delta, sf::Vector2f targetPosition);
 	void superState();
 	void setTexture(Ghost& ghost);
 	bool isSuper() const { return m_superPacman; }

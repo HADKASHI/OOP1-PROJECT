@@ -189,6 +189,8 @@ void MainMenu::checkMouseOnButton(sf::RenderWindow* window, sf::Vector2f cursorL
 
 void MainMenu::handleClickOnPlayGame(Render* render)
 {
+    Resources::instance().stopBackGroundMusic();
+
     auto hud = HUD(HUD_POSITION);
 
     bool finished = false;

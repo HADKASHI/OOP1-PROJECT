@@ -11,7 +11,7 @@ PacmanState& PacmanState:: instance()
 
 void PacmanState::superState()
 {
-    m_superPacman = !m_superPacman;
+    m_superPacman = true;
     m_superTimer.restart();
 }
 
@@ -59,6 +59,7 @@ void PacmanState::move(Ghost& ghost, sf::Time delta, sf::Vector2f targetPosition
 
     if (ghost.isDead())
     {
+        //ghost got to its home
         if (ghost.getGlobalBounds().contains(ghost.getStartPoint()))
             ghost.revive();
         else
@@ -70,8 +71,10 @@ void PacmanState::move(Ghost& ghost, sf::Time delta, sf::Vector2f targetPosition
     //ghost did NOT reached to its target location
     if (ghost.isAlternating() && !ghost.getGlobalBounds().contains(ghost.getAlternatePostion()))
     {
+        //got stuck again while trying to pass an obstacle
         if (ghost.isStuck())
             alternateMove(ghost, delta);
+        //keep trys to get around the obstacle
         else
             ghost.move(ghost.getAlternateDirection() * delta.asSeconds() * GHOST_SPEED);
     }
@@ -83,6 +86,7 @@ void PacmanState::move(Ghost& ghost, sf::Time delta, sf::Vector2f targetPosition
         alternateMove(ghost, delta);
     }
 
+    //free to choose a direction
     else
     {
         sf::Vector2f direction;
@@ -91,6 +95,7 @@ void PacmanState::move(Ghost& ghost, sf::Time delta, sf::Vector2f targetPosition
         else
             direction = minDistanceDirection(ghost, targetPosition);
 
+        //going to choosed firection iff its not reversing and not immediate turn (creates a continous motion)
         if (direction != ghost.getDirection() * -1.f && direction != ghost.getAlternateDirection() * -1.f 
             && ghost.getMomentum() >= MOMENTUM)
         {
@@ -118,10 +123,12 @@ void PacmanState::alternateMove(Ghost &ghost, sf::Time delta)
     ghost.alternating();
     ghost.freeToGo();
 
+    //if its walked for a while or stuck in a corner moves randomly
     if (ghost.getMomentum() > MOMENTUM || ghost.getMomentum() < 1)
         randMove(ghost, delta);
 
 
+    //needs to keep its momentum since it couldnt pass the obstacle
     else if (ghost.getDirection() == UP || ghost.getDirection() == DOWN)
     {
         if (ghost.getAlternateDirection() != LEFT)

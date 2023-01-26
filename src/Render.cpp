@@ -2,6 +2,7 @@
 #include "Render.h"
 #include "Board.h"
 #include "HUD.h"
+#include "Pacman.h"
 #include "Resources.h"
 #include <SFML/Graphics.hpp>
 #include <SFML/audio.hpp>
@@ -12,21 +13,21 @@ Render::Render(const sf::Vector2f& size):
     this->setIcon();
 }
 
-
 //game main loop
 void Render::gameLoop(HUD& hud, bool& finished)
 {
-    unsigned int score = 0;
+    unsigned int lives = LIVES, score = 0, endLevelScore = 0,
+                startTime, timeAsSecond, level = 1;
     std::fstream file("Board.txt", std::fstream::in);
-    unsigned int timeAsSecond, level = 1;
 
     while (m_window.isOpen() && !file.eof())
     {
-        timeAsSecond = initTimer(file);
+        startTime = timeAsSecond = initTimer(file);
         auto board = Board(file, getBoardSize(), getBoardPosition());
         auto pacman = Pacman(board.getTileSize(), board.getPacmanPosition(), 'a', score);
-        
-        startLevel(pacman, board, hud, level, timeAsSecond);
+        pacman.setLives(lives);
+
+        startLevelSlide(pacman, board, hud, level, startTime);
 
         auto gameClock = sf::Clock();
         sf::Clock timer;
@@ -34,63 +35,54 @@ void Render::gameLoop(HUD& hud, bool& finished)
 
         while (pacman.getLives() > 0 &&
             !finished &&
-            timeAsSecond - timer.getElapsedTime().asSeconds() > 0 &&
             !board.noCookiesLeft())
         {
-            drawWindow(board, hud, pacman, level, timeAsSecond - timer.getElapsedTime().asSeconds());
-
-            for (auto event = sf::Event{}; m_window.pollEvent(event); )
+            if (timeAsSecond - timer.getElapsedTime().asSeconds() <= 0)
             {
-                switch (event.type)
-                {
-                case sf::Event::Closed:
-                {
-                    m_window.close();
-                    finished = true;
-                    break;
-                }
-                case sf::Event::KeyPressed:
-                {
-                    pacman.keyDirection(event.key.code);
-                    break;
-                }
-                case sf::Event::KeyReleased:
-                    pacman.notMoving(event.key.code);
-                    break;
-                }
+                timeAsSecond = startTime;
+                handleTimeUp(pacman, board, timer, hud, level, startTime, endLevelScore);
             }
+
+            eventsLoop(pacman, finished);
+
+            //updates game
             auto delta = gameClock.restart();
             pacman.update(delta);
             board.update(pacman, delta);
-
+            drawWindow(board, hud, pacman, level, timeAsSecond - timer.getElapsedTime().asSeconds());
+            Resources::instance().volumeBackGround(50);
             timeAsSecond += pacman.getBonusTime();
-         }
-
-        int endTime = timeAsSecond - timer.getElapsedTime().asSeconds();
+        }
 
         if (board.noCookiesLeft() && !file.eof())
         {
+            lives = pacman.getLives();
+            endLevelScore = pacman.getScore();
+            drawWindow(board, hud, pacman, level, timeAsSecond - timer.getElapsedTime().asSeconds());
             Resources::instance().playMusic(FINISH_LEVEL, 50);
-            TransitionSlide("Yay! next level",
+            transitionSlide("Yay! next level",
                 60, 2, sf::Color::Black, sf::Color::White);
             score = pacman.getScore();
             score += 50 + 2 * board.getGhostsNumber();
+            endLevelScore = score;
             level++;
+            if (level == 3)
+                endLevelScore = score;
         }
 
-        else if (pacman.getLives() == 0 ||
-            endTime <= 0)
+        else if (pacman.getLives() == 0)
         {
             Resources::instance().playMusic(GAME_OVER);
-            TransitionSlide("Game Over", 100, 2, sf::Color::Red, sf::Color::Black);
+            transitionSlide("Game Over", 100, 2, sf::Color::Red, sf::Color::Black);
             break;
         }
 
         else if (file.eof())
         {
+            drawWindow(board, hud, pacman, level, timeAsSecond - timer.getElapsedTime().asSeconds());
             Resources::instance().playMusic(FINISH_LEVEL, 50);
-            TransitionSlide("You won! see you next time",
-                60, 3, sf::Color::Black, sf::Color::White);
+            transitionSlide("You won! see you next time",
+                60, 4, sf::Color::Black, sf::Color::White);
         }
 
         else if (finished)
@@ -132,7 +124,47 @@ void Render::drawWindow(Board& board, HUD& hud, Pacman& pacman, int level, int t
     m_window.display();
 }
 
-void Render::TransitionSlide(const char* str, int fontSize, double sleepTime,
+void Render::handleTimeUp(Pacman& pacman, Board& board, sf::Clock& timer,
+    HUD& hud, int level, int startTime, int endLevelScore)
+{
+    Resources::instance().playMusic(PACMAN_DEAD);
+    transitionSlide("Time up! try again", 80, 2, sf::Color::Red, sf::Color::Black);
+    pacman.setScore(endLevelScore);
+    board.resetLevel();
+    pacman.setPosition(board.getPacmanPosition());
+    timer.restart();
+    pacman.setLives(pacman.getLives() - 1);
+    if (pacman.getLives() == 0)
+        return;
+    startLevelSlide(pacman, board, hud, level, startTime);
+    Resources::instance().playBackGround();
+}
+
+void Render::eventsLoop(Pacman& pacman, bool& finished)
+{
+    for (auto event = sf::Event{}; m_window.pollEvent(event); )
+    {
+        switch (event.type)
+        {
+        case sf::Event::Closed:
+        {
+            m_window.close();
+            finished = true;
+            break;
+        }
+        case sf::Event::KeyPressed:
+        {
+            pacman.keyDirection(event.key.code);
+            break;
+        }
+        case sf::Event::KeyReleased:
+            pacman.notMoving(event.key.code);
+            break;
+        }
+    }
+}
+
+void Render::transitionSlide(const char* str, int fontSize, double sleepTime,
     sf::Color textColor, sf::Color outLineColor)
 {
     sf::RectangleShape backGround(sf::Vector2f(m_window.getSize()));
@@ -152,7 +184,7 @@ void Render::TransitionSlide(const char* str, int fontSize, double sleepTime,
 }
 
 
-void Render::startLevel(Pacman& pacman, Board& board, HUD& hud, int level, int timeAsSec)
+void Render::startLevelSlide(Pacman& pacman, Board& board, HUD& hud, int level, int timeAsSec)
 {
     sf::RectangleShape startLevelBG(sf::Vector2f(m_window.getSize()));
     startLevelBG.setFillColor(sf::Color(0, 0, 0, 150));
@@ -169,7 +201,7 @@ void Render::startLevel(Pacman& pacman, Board& board, HUD& hud, int level, int t
         startLevelText.setString(std::to_string(sec));
         startLevelText.setOrigin(startLevelText.getLocalBounds().width / 2.f,
             startLevelText.getLocalBounds().height / 2.f);
-        m_window.clear(WINDOW_COLOR);
+        m_window.clear(sf::Color(250, 211, 231));
         board.drawBoard(m_window);
         hud.drawHUD(m_window, pacman.getLives(),
             pacman.getScore(), level, timeAsSec);

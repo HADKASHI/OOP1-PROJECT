@@ -7,9 +7,9 @@
 #include "GameObject.h"
 #include "Resources.h"
 
-
-namespace { // unnamed namespace — the standard way to make function "static"
-    // primary collision-processing functions
+//this namespace handles all collisions creating double v-table
+namespace {
+    
     float getOverLap(sf::Vector2f direction, sf::FloatRect rect1, sf::FloatRect rect2);
     sf::Vector2f overLapDirection(float overLap, sf::FloatRect rect1, sf::FloatRect rect2);
 
@@ -29,7 +29,7 @@ namespace { // unnamed namespace — the standard way to make function "static"
         {
             sf::Vector2f direction = overLapDirection(overLap, pacmanBounds, wallBounds);
 
-            //'fixes' pacman to eneter to the narrow aisle
+            //'fixes' pacman to enter to the narrow aisle
             while (c_pacman.getGlobalBounds().intersects(c_wall.getGlobalBounds()))
                 c_pacman.move(direction);
         }
@@ -97,7 +97,7 @@ namespace { // unnamed namespace — the standard way to make function "static"
         if (PacmanState::instance().isSuper())
         {
             Resources::instance().playMusic(DOOR_OPEN);
-            c_door.isEaten();
+            c_door.gotEaten();
         }
         else
         {
@@ -113,7 +113,7 @@ namespace { // unnamed namespace — the standard way to make function "static"
         Pacman& c_pacman = dynamic_cast<Pacman&>(pacman);
         Cookie& c_cookie = dynamic_cast<Cookie&>(cookie);
         c_pacman.addPoints(c_cookie.pointsReward());
-        c_cookie.isEaten();
+        c_cookie.gotEaten();
     }
 
     void pacmanWithSuperPresent(GameObject& pacman,
@@ -123,7 +123,7 @@ namespace { // unnamed namespace — the standard way to make function "static"
         Pacman& c_pacman = dynamic_cast<Pacman&>(pacman);
         SuperPresent& c_present = dynamic_cast<SuperPresent&>(present);
         c_pacman.addPoints(c_present.pointsReward());
-        c_present.isEaten();
+        c_present.gotEaten();
         PacmanState::instance().superState();
     }
 
@@ -135,7 +135,7 @@ namespace { // unnamed namespace — the standard way to make function "static"
         TimePresent& c_present = dynamic_cast<TimePresent&>(present);
         c_pacman.addPoints(c_present.pointsReward());
         c_pacman.addTime();
-        c_present.isEaten();
+        c_present.gotEaten();
     }
 
     void pacmanWithLivesPresent(GameObject& pacman,
@@ -145,7 +145,7 @@ namespace { // unnamed namespace — the standard way to make function "static"
         Pacman& c_pacman = dynamic_cast<Pacman&>(pacman);
         LivesPresent& c_present = dynamic_cast<LivesPresent&>(present);
         c_pacman.addPoints(c_present.pointsReward());
-        c_present.isEaten();
+        c_present.gotEaten();
         c_pacman.addLives();
     }
 
@@ -156,7 +156,7 @@ namespace { // unnamed namespace — the standard way to make function "static"
         Pacman& c_pacman = dynamic_cast<Pacman&>(pacman);
         FreezePresent& c_present = dynamic_cast<FreezePresent&>(present);
         c_pacman.addPoints(c_present.pointsReward());
-        c_present.isEaten();
+        c_present.gotEaten();
         PacmanState::instance().freezeGhosts();
     }
 
@@ -167,7 +167,7 @@ namespace { // unnamed namespace — the standard way to make function "static"
         Pacman& c_pacman = dynamic_cast<Pacman&>(pacman);
         Key& c_key = dynamic_cast<Key&>(key);
         c_pacman.addPoints(c_key.pointsReward());
-        c_key.isEaten();
+        c_key.gotEaten();
     }
 
     void pacmanWithGhost(GameObject& pacman,
@@ -276,7 +276,7 @@ namespace { // unnamed namespace — the standard way to make function "static"
         {
             sf::Vector2f direction = overLapDirection(overLap, pacmanBounds, wallBounds);
 
-            //'fixes' pacman to eneter to the narrow aisle
+            //'fixes' ghost to eneter to the narrow aisle
             while (c_redGhost.getGlobalBounds().intersects(c_wall.getGlobalBounds()))
                 c_redGhost.move(direction);
         }
@@ -303,8 +303,11 @@ namespace { // unnamed namespace — the standard way to make function "static"
             c_pinkGhost.getPosition().y - 0.5f * c_pinkGhost.getSize().y });
         RedGhost redGhost(c_pinkGhost.getSize().x, position , 'r');
         redGhost.setDirection(c_pinkGhost.getDirection());
+        
+        //sends a self clone
         redGhostWithWall(redGhost, wall);
 
+        //updates itself by collision results
         c_pinkGhost.setPosition(redGhost.getPosition());
         if (redGhost.isStuck())
             c_pinkGhost.gotStuck();
@@ -321,8 +324,11 @@ namespace { // unnamed namespace — the standard way to make function "static"
             c_greenGhost.getPosition().y - 0.5f * c_greenGhost.getSize().y });
         RedGhost redGhost(c_greenGhost.getSize().x, position, 'r');
         redGhost.setDirection(c_greenGhost.getDirection());
+        
+        //sends a self clone
         redGhostWithWall(redGhost, wall);
 
+        //self updates itself by collision results
         c_greenGhost.setPosition(redGhost.getPosition());
         if (redGhost.isStuck())
             c_greenGhost.gotStuck();

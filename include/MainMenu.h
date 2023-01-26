@@ -3,6 +3,10 @@
 
 class MovingObjects;
 
+//
+// this class handles the main menu of the game
+// handles clicks and their effects
+//
 class MainMenu {
 public:
 	MainMenu();

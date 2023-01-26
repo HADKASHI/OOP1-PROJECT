@@ -61,8 +61,18 @@ const int TILE_SIZE = 40;
 
 const sf::Vector2f HUD_POSITION = sf::Vector2f{ TILE_SIZE + TILE_SIZE * 15 + TILE_SIZE + 60, TILE_SIZE + 300 };
 
-const float EYES_SPEED = 90.f;
+const float EYES_SPEED = 130.f;
 
 const unsigned int MOMENTUM = 500;
 
 const sf::Color WINDOW_COLOR = sf::Color(250, 211, 231);
+
+const int SUPER_POINTS = 50;
+
+const int FREEZE_POINTS = 30;
+
+const int TIME_POINTS = 10;
+
+const int LIVES_POINTS = 20;
+
+const float CHASE_DISTANCE = TILE_SIZE * 7.f;

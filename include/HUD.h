@@ -3,8 +3,8 @@
 #include <SFML/Graphics.hpp>
 #include <vector>
 
-//this class holds and handles all the menu data
-//i.e buttons and their effects, handle clicks etc
+//this class holds and handles all the HUD (Head-Up Display)
+//i.e time left, score and lives etc
 class HUD
 {
 public:

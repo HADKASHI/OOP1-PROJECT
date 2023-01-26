@@ -7,7 +7,7 @@ class Pacman;
 class HUD;
 
 //this class handles all the window presentation and rendering
-//e.g real time updates and drawings
+//e.g the game looop itself
 class Render
 {
 public:
@@ -19,9 +19,12 @@ public:
 	sf::Vector2f getBoardPosition() { return BOARD_POSITION; }
 
 private:
+	void handleTimeUp(Pacman& pacman, Board& board, sf::Clock& timer,
+		HUD& hud, int level, int startTime, int endLevelScore);
+	void eventsLoop(Pacman& pacman, bool& finished);
 	void drawWindow(Board& board, HUD& hud, Pacman& pacman, int level, int time);
-	void TransitionSlide(const char* str, int fontSize, double sleepTime, sf::Color textColor, sf::Color outLineColor);
-	void startLevel(Pacman& pacman, Board& board, HUD& hud, int level, int timeAsSec);
+	void transitionSlide(const char* str, int fontSize, double sleepTime, sf::Color textColor, sf::Color outLineColor);
+	void startLevelSlide(Pacman& pacman, Board& board, HUD& hud, int level, int timeAsSec);
 	unsigned int initTimer(std::fstream& file);
 	sf::Vector2f m_size;
 	sf::RenderWindow m_window;

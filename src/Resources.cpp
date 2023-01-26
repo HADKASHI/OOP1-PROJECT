@@ -74,3 +74,8 @@ void Resources::volumeBackGround(int vol)
 {
 	m_backGround.setVolume(vol);
 }
+
+void Resources::stopBackGroundMusic()
+{
+	m_backGround.stop();
+}
